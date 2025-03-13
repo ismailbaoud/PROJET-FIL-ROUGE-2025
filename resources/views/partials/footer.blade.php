@@ -1,10 +1,10 @@
-<footer class="bg-black text-white py-16">
+<footer class=" text-black py-16">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand Section -->
             <div>
                 <h2 class="text-2xl font-bold mb-4">HappyHunt</h2>
-                <p class="text-gray-300">
+                <p class="text-gray-800">
                     Securing the digital world, one<br>
                     vulnerability at a time.
                 </p>
@@ -14,10 +14,10 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Platform</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-300 hover:text-white">Features</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Leaderboard</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Reports</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Pricing</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Features</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Leaderboard</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Reports</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Pricing</a></li>
                 </ul>
             </div>
 
@@ -25,10 +25,10 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Company</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">About</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Blog</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Careers</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Contact</a></li>
                 </ul>
             </div>
 
@@ -36,9 +36,9 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Legal</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-300 hover:text-white">Privacy</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Terms</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Security</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Privacy</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Terms</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-white">Security</a></li>
                 </ul>
             </div>
         </div>

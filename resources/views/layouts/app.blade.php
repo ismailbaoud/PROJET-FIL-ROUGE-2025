@@ -11,7 +11,7 @@
 
     @include('partials.header')
 
-    <main>
+    <main class="h-screen">
         @yield('main')
     </main>
 

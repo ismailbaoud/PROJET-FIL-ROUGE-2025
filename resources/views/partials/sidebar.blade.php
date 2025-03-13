@@ -40,7 +40,7 @@
     </nav>
 </aside>
 {{-- admin side bar --}}
-<aside class="w-64 h-screen bg-white border-r">
+{{-- <aside class="w-64 h-screen bg-white border-r">
     <div class="p-6">
         <h1 class="text-xl font-bold">Admin Panel</h1>
     </div>
@@ -74,6 +74,6 @@
             </li>
         </ul>
     </nav>
-</aside>
+</aside> --}}
 {{-- hacker side bar --}}
 
