@@ -1,5 +1,5 @@
 
-    <header class="max-w-screen  px-4 py-4 flex items-center justify-between m-6">
+    <header class="max-w-screen  px-4 py-4 flex items-center justify-between  bg-gradient-to-none from-white via-white via-30% to-green-700 fixed z-9999 left-0 right-0 bg-white shadow-sm">
         <div class="font-bold text-2xl">
             <a href="">HappyHunt</a>
         </div>
