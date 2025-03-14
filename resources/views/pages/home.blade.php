@@ -98,6 +98,172 @@
                 </div>
             </div>
 
-           
+            <div class=" mx-20 mt-30">
+                <h1 class="text-3xl font-bold text-center mb-5 ">Rapports Bug Bounty</h1>
+                <p class="text-gray-500 text-center mb-5">Consultez et gérez les rapports de vulnérabilité</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span
+                                class="text-gray-600 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-full">Faible</span>
+                            <span
+                                class="px-3 py-1 text-gray-700 bg-gray-100 border border-gray-300 rounded-full text-xs">Résolu</span>
+                        </div>
+
+                        <h2 class="text-xl font-semibold mt-4 text-gray-800">Exposition des clés API dans le code source
+                        </h2>
+                        <p class="text-gray-500 text-sm">Signalé par <span
+                                class="font-medium text-gray-700">ethical_hacker_02</span> • il y a 2 semaines</p>
+
+                        <div class="mt-4 flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/40?img=5" alt="Hunter Avatar"
+                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <div>
+                                <p class="text-gray-800 font-semibold">ethical_hacker_02</p>
+                                <p class="text-gray-500 text-sm">Chasseur Niveau 1</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <p class="text-gray-700 font-semibold">Type de vulnérabilité</p>
+                            <p class="text-gray-600">Exposition des clés API (CWE-798)</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Sévérité</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 relative">
+                                <div class="bg-gray-300 h-2 rounded-full" style="width: 25%;"></div>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">3.0 / 10</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Impact</p>
+                            <p class="text-gray-600">Les clés API sensibles exposées dans le code source peuvent être
+                                utilisées de manière malveillante</p>
+                        </div>
+
+                         <div>
+                            <div class="mt-6 flex justify-between items-center">
+                                <p class="text-gray-600 font-semibold text-sm">Résolu</p>
+                                <button
+                                    class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-gray-700 transition">
+                                    Voir le rapport
+                                </button>
+                            </div>
+
+                            <p class="text-gray-400 text-xs mt-4">Mis à jour il y a 1 semaine</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span
+                                class="text-gray-600 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-full">Moyenne</span>
+                            <span class="px-3 py-1 text-gray-700 bg-gray-100 border border-gray-300 rounded-full text-xs">En
+                                cours</span>
+                        </div>
+
+                        <h2 class="text-xl font-semibold mt-4 text-gray-800">Injection SQL via formulaire de recherche</h2>
+                        <p class="text-gray-500 text-sm">Signalé par <span
+                                class="font-medium text-gray-700">ethical_hacker_01</span> • il y a 3 jours</p>
+
+                        <div class="mt-4 flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/40?img=3" alt="Hunter Avatar"
+                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <div>
+                                <p class="text-gray-800 font-semibold">ethical_hacker_01</p>
+                                <p class="text-gray-500 text-sm">Chasseur Niveau 2</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <p class="text-gray-700 font-semibold">Type de vulnérabilité</p>
+                            <p class="text-gray-600">Injection SQL (CWE-89)</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Sévérité</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 relative">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 50%;"></div>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">5.6 / 10</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Impact</p>
+                            <p class="text-gray-600">Exécution de requêtes malveillantes permettant d'accéder à des données
+                                sensibles</p>
+                        </div>
+
+                        <div class="mt-6 flex justify-between items-center">
+                            <p class="text-gray-600 font-semibold text-sm">En attente</p>
+                            <button
+                                class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-gray-700 transition">
+                                Voir le rapport
+                            </button>
+                        </div>
+
+                        <p class="text-gray-400 text-xs mt-4">Mis à jour il y a 2 jours</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span
+                                class="text-gray-600 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-full">Élevé</span>
+                            <span
+                                class="px-3 py-1 text-gray-700 bg-gray-100 border border-gray-300 rounded-full text-xs">En
+                                cours</span>
+                        </div>
+
+                        <h2 class="text-xl font-semibold mt-4 text-gray-800">Contournement d’authentification via OAuth
+                        </h2>
+                        <p class="text-gray-500 text-sm">Signalé par <span
+                                class="font-medium text-gray-700">ethical_hacker</span> • il y a 1 semaine</p>
+
+                        <div class="mt-4 flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/40" alt="Hunter Avatar"
+                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <div>
+                                <p class="text-gray-800 font-semibold">ethical_hacker</p>
+                                <p class="text-gray-500 text-sm">Chasseur Niveau 3</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <p class="text-gray-700 font-semibold">Type de vulnérabilité</p>
+                            <p class="text-gray-600">Contournement d’authentification (CWE-287)</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Sévérité</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 relative">
+                                <div class="bg-gray-500 h-2 rounded-full" style="width: 75%;"></div>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">7.5 / 10</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold">Impact</p>
+                            <p class="text-gray-600">Prise de contrôle du compte via manipulation OAuth</p>
+                        </div>
+
+                        <div>
+                            <div class="mt-6 flex justify-between items-center">
+                                <p class="text-gray-600 font-semibold text-sm">En attente</p>
+                                <button
+                                    class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-gray-700 transition">
+                                    Voir le rapport
+                                </button>
+                            </div>
+
+                            <p class="text-gray-400 text-xs mt-4">Mis à jour il y a 5 jours</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
     </main>
 @endsection
