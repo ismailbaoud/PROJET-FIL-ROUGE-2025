@@ -1,4 +1,4 @@
-<footer class=" text-black py-16">
+<footer class=" text-black py-16 mt-30">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand Section -->
