@@ -1,4 +1,4 @@
-<footer class=" text-black py-16 mt-30">
+<footer class=" text-black py-16 mt-30 bg-gradient-to-b from-white via-white via-30% to-green-700">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand Section -->
@@ -14,10 +14,10 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Platform</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-800 hover:text-white">Features</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Leaderboard</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Reports</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Pricing</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Features</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Leaderboard</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Reports</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Pricing</a></li>
                 </ul>
             </div>
 
@@ -25,10 +25,10 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Company</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-800 hover:text-white">About</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Blog</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Careers</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Contact</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">About</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Blog</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Careers</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Contact</a></li>
                 </ul>
             </div>
 
@@ -36,9 +36,9 @@
             <div>
                 <h2 class="text-xl font-semibold mb-4">Legal</h2>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-gray-800 hover:text-white">Privacy</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Terms</a></li>
-                    <li><a href="#" class="text-gray-800 hover:text-white">Security</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Privacy</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Terms</a></li>
+                    <li><a href="#" class="text-gray-800 hover:text-black">Security</a></li>
                 </ul>
             </div>
         </div>
