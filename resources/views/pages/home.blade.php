@@ -198,6 +198,28 @@
 
         </div>
         </div>
-       
+        <div class="bg-white shadow-lg rounded-xl p-8 text-center w-full bg-gradient-to-tr from-white via-white via-90% to-[#E8F5E9]">
+            <div class="flex justify-center items-center mb-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-green-100 text-green-600 rounded-full">
+                    ✓
+                </div>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-700 mb-20">Protecting the world's top innovators</h2>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 mt-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/512px-Salesforce.com_logo.svg.png?20210504050649"
+                    alt="Salesforce" class="h-10 mx-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/800px-Uber_logo_2018.svg.png?20180914002846"
+                    alt="Uber" class="h-10 mx-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Zoom_Communications_Logo.svg/320px-Zoom_Communications_Logo.svg.png"
+                    alt="Zoom" class="h-10 mx-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/2024_Spotify_Logo.svg/512px-2024_Spotify_Logo.svg.png?20240618230019"
+                    alt="Shopify" class="h-10 mx-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/320px-PayPal.svg.png"
+                    alt="PayPal" class="h-10 mx-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Adobe_logo_and_wordmark_%282017%29.svg/512px-Adobe_logo_and_wordmark_%282017%29.svg.png?20200221114020"
+                    alt="Adobe" class="h-10 mx-auto">
+            </div>
+        </div>
+
     </main>
 @endsection
