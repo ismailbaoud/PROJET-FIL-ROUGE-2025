@@ -1,4 +1,4 @@
-<footer class=" text-black py-16 mt-30 bg-gradient-to-b from-white via-white via-30% to-green-700">
+<footer class=" text-black py-16 bg-gradient-to-b from-white via-white via-1% to-[#E8F5E9]">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand Section -->

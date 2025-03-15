@@ -53,7 +53,7 @@ Développer une plateforme sécurisée et intuitive pour faciliter la collaborat
 ---
 
 ## 4. Technologies Utilisées
-- **Frontend** : React.js
+- **Frontend** : Blade (Laravel)
 - **Backend** : PHP (Laravel)
 - **Base de données** : PostgreSQL
 
