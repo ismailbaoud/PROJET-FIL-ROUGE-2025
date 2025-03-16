@@ -19,7 +19,8 @@
                     </button>
                     <button
                         class="border-2 border-gray-800 px-10 py-4 text-xl rounded-lg font-semibold  hover:bg-gray-800 hover:text-white transition">
-                        For Companys
+                        <a href="/register_entreprise">For Companys</a>
+                        
                     </button>
                 </div>
             </div>
@@ -128,8 +129,8 @@
 
         </div>
         <div class=" px-20 pb-20 pt-30 flex-1 bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9]">
-            <div class="mt-20">
-                <h1 class="text-3xl font-bold text-center mb-5 p-20  ">Rapports Bug Bounty</h1>
+            <div class="mt-20 p-20">
+                <h1 class="text-3xl font-bold text-center mb-5  ">Rapports Bug Bounty</h1>
                 <p class="text-gray-500 text-center mb-5 ">Consultez et gérez les rapports de vulnérabilité</p>
             </div>
 
