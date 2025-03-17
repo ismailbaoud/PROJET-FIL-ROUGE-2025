@@ -1,44 +1,43 @@
 {{-- entreprise side bar --}}
-<aside class="w-64 h-screen bg-white border-r">
+<div class="w-64 bg-white h-full flex flex-col">
     <div class="p-6">
-        <h1 class="text-xl font-bold">HappyHunt</h1>
+      <h1 class="text-xl font-bold text-[#111827]">HappyHunt</h1>
     </div>
-    
-    <nav class="mt-6">
-        <ul>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 bg-gray-100">
-                    <span class="text-gray-800">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-50">
-                    <span class="text-gray-600 hover:text-gray-800">My Programs</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-50">
-                    <span class="text-gray-600 hover:text-gray-800">Reports</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-50">
-                    <span class="text-gray-600 hover:text-gray-800">Payments</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-50">
-                    <span class="text-gray-600 hover:text-gray-800">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-6 py-4 hover:bg-gray-50">
-                    <span class="text-gray-600 hover:text-gray-800">Settings</span>
-                </a>
-            </li>
-        </ul>
+    <nav class="flex-1">
+      <div class="px-3 py-2">
+        <div class="bg-[#f3f4f6] rounded-md px-3 py-2">
+          <a href="#" class="text-[#111827] font-medium">
+            Dashboard
+          </a>
+        </div>
+        <div class="px-3 py-2">
+          <a href="#" class="text-[#6b7280]">
+            My Programs
+          </a>
+        </div>
+        <div class="px-3 py-2">
+          <a href="#" class="text-[#6b7280]">
+            Reports
+          </a>
+        </div>
+        <div class="px-3 py-2">
+          <a href="#" class="text-[#6b7280]">
+            Payments
+          </a>
+        </div>
+        <div class="px-3 py-2">
+          <a href="#" class="text-[#6b7280]">
+            Messages
+          </a>
+        </div>
+        <div class="px-3 py-2">
+          <a href="#" class="text-[#6b7280]">
+            Settings
+          </a>
+        </div>
+      </div>
     </nav>
-</aside>
+  </div>
 {{-- admin side bar --}}
 {{-- <aside class="w-64 h-screen bg-white border-r">
     <div class="p-6">

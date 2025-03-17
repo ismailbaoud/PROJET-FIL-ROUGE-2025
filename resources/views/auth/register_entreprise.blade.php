@@ -23,8 +23,9 @@
     <div class="relative w-[30%] h-full flex items-center justify-center ">
         <img src="{{ asset('images/12445723_4944409.svg') }}" alt="">
     </div>
-    <div class=" bg-white rounded-lg shadow-lg p-8">
-        <div class="mb-8">
+    <div class=" w-full bg-white rounded-lg shadow-lg p-8">
+       <div class="w-1/2">
+        <div class="mb-8 w-1/2 ">
             <h2 class="text-lg font-medium text-gray-900 mb-6">Step 1: Company Details</h2>
             
             <div class="mb-6">
@@ -89,10 +90,11 @@
                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             Create My Account
         </button>
+       </div>
     </div>
 
 </div>
-<div class=" flex items-center justify-center min-h-screen bg-gradient-to-tr from-white via-white via-90% to-[#E8F5E9]">
+<div class=" flex items-center justify-center min-h-screen ">
 
     <div class="w-[90%] mx-auto text-center p-6">
         <h2 class="text-2xl font-bold text-black mb-10">Why Choose HappyHunt?</h2>

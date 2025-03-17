@@ -6,3 +6,4 @@ use App\Http\Controllers\AuthController;
 Route::get('/', [HomeController::class , 'index']);
 Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter']);
 Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise']);
+Route::get('/loginPage', [AuthController::class , 'showLogin']);
