@@ -51,7 +51,7 @@
                         Créez votre compte et complétez votre profil de hacker éthique.
                     </p>
                     <button
-                        class="mt-6 px-6 py-3 bg-gradient-to-r from-blue-400 to-teal-400 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-teal-500 transition-all duration-300">
+                        class="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:from-blue-500 hover:to-teal-500 transition-all duration-300">
                         Commencer
                     </button>
                 </div>
@@ -70,7 +70,7 @@
                         Explorez nos programmes pour déceler les failles critiques.
                     </p>
                     <button
-                        class="mt-6 px-6 py-3 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold rounded-lg hover:from-green-500 hover:to-teal-500 transition-all duration-300">
+                        class="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:from-green-500 hover:to-teal-500 transition-all duration-300">
                         Commencer
                     </button>
                 </div>
@@ -89,7 +89,7 @@
                         Recevez des primes pour chaque vulnérabilité validée.
                     </p>
                     <button
-                        class="mt-6 px-6 py-3 bg-gradient-to-r from-purple-400 to-indigo-400 text-white font-semibold rounded-lg hover:from-purple-500 hover:to-indigo-500 transition-all duration-300">
+                        class="mt-6 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:from-purple-500 hover:to-indigo-500 transition-all duration-300">
                         Commencer
                     </button>
                 </div>
