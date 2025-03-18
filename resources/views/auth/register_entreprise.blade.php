@@ -111,7 +111,34 @@
   </div>
   
   
+  <div class=" flex items-center justify-center min-h-screen ">
   
+    <div class="w-[90%] mx-auto text-center p-6">
+        <h2 class="text-2xl font-bold text-black mb-10">Why Choose HappyHunt?</h2>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                <div class="text-left">
+                    <h3 class="font-semibold text-black">Access to Top Ethical Hackers</h3>
+                    <p class="text-gray-600 text-sm">Work with the best security researchers</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                <div class="text-left">
+                    <h3 class="font-semibold text-black">Flexible & Customizable Programs</h3>
+                    <p class="text-gray-600 text-sm">Design your ideal bounty program</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                <div class="text-left">
+                    <h3 class="font-semibold text-black">Seamless Vulnerability Reporting</h3>
+                    <p class="text-gray-600 text-sm">Manage workflow for incoming reports</p>
+                </div>
+            </div>
+        </div>
+    </div>
   
   </div>
 @endsection
