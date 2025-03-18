@@ -16,6 +16,6 @@ class AuthController extends Controller
     }
 
     public function showLogin(){
-        return view('companys.index');
+        return view('auth.login');
     }
 }

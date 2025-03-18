@@ -1,62 +1,86 @@
 @extends('layouts.app')
 
 @Section('main')
-    <div class="flex-row flex items-center justify-center h-screen p-4">
-        <div class="w-1/2 flex flex-col  bg-white rounded-lg">
-            <!-- Login Form Section -->
-            <div class="w-full w-1/2 p-8 md:p-12">
-                <div class="mx-auto">
-                    <h1 class="text-2xl md:text-3xl font-bold text-center mb-4">Secure the Web. Join the Hunt.</h1>
-                    <p class="text-gray-600 text-center mb-8">Log in to HappyHunt and start hunting or managing your security
-                        program.</p>
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="flex w-full justify-center items-center gap-20  flex-col flex-row">
+            <!-- Login Form Card -->
+            <div class="w-full max-w-md mx-auto lg:mx-0 p-8 ">
+                <div class="mb-6 text-center">
+                    <h1 class="text-2xl font-bold text-[#000000]">Secure the Web. Join the Hunt.</h1>
+                    <p class="mt-2 text-[#6b7280]">
+                        Log in to HappyHunt and start hunting or managing your security program.
+                    </p>
+                </div>
 
-                    <form>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 mb-2">Email Address</label>
-                            <input type="email" id="email"
-                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-200">
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="password" class="block text-gray-700 mb-2">Password</label>
-                            <input type="password" id="password"
-                                class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-200">
-                        </div>
-
-                        <div class="text-right mb-6">
-                            <a href="#" class="text-blue-500 hover:underline text-sm">Forgot Password?</a>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition">Log In</button>
-                    </form>
-
-                    <div class="my-6 text-center text-gray-500">Or continue with</div>
-
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <button
-                            class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded hover:bg-gray-50 transition">
-                            Google
-                        </button>
-                        <button
-                            class="flex items-center justify-center py-2 px-4 border border-gray-300 rounded hover:bg-gray-50 transition">
-                            GitHub
-                        </button>
+                <form class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-[#374151]">
+                            Email Address
+                        </label>
+                        <input id="email" type="email"
+                            class="mt-1 block w-full rounded-md border border-[#d1d5db] px-3 py-2  focus:border-[#3b82f6] focus:outline-none focus:ring-1 focus:ring-[#3b82f6]" />
                     </div>
 
-                    <p class="text-center text-gray-600 mb-6">New to HappyHunt? Start your journey today</p>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-[#374151]">
+                            Password
+                        </label>
+                        <input id="password" type="password"
+                            class="mt-1 block w-full rounded-md border border-[#d1d5db] px-3 py-2  focus:border-[#3b82f6] focus:outline-none focus:ring-1 focus:ring-[#3b82f6]" />
+                    </div>
 
-                    <div class="text-center text-gray-500 text-sm">
-                        <p class="mb-2">Your security is our priority</p>
-                        <p>GDPR Compliance | Safe Harbor Policy</p>
+                    <div class="flex justify-end">
+                        <a href="#" class="text-sm text-[#3b82f6] hover:underline">
+                            Forgot Password?
+                        </a>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full rounded-md bg-black py-2 px-4 text-white hover:bg-[#202020] focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2">
+                        Log In
+                    </button>
+                </form>
+
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-[#e5e7eb]"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="bg-white px-2 text-[#6b7280]">Or continue with</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <button type="button"
+                            class="flex w-full items-center justify-center rounded-md border border-[#374151] bg-[#202020] py-2 px-4 text-white  hover:bg-[#263238]">
+                            Sign up with GitHub
+                        </button>
+                        <button type="button"
+                            class="flex w-full items-center justify-center rounded-md border border-[#e16e52] bg-[#e16e52] py-2 px-4 text-white  hover:bg-[#e16e52]/90">
+                            Sign up with Google
+                        </button>
                     </div>
                 </div>
-               
-            </div>
-        </div>
-        <div class="relative w-[30%] h-full flex items-center justify-center ">
-            <img src="{{ asset('images/SignUp.svg') }}" alt="">
 
+                <p class="mt-6 text-center text-sm text-[#6b7280]">
+                    New to HappyHunt? <a href="#" class="text-[#3b82f6] hover:underline">Start your journey today</a>
+                </p>
+
+                <div class="mt-6 text-center text-xs text-[#6b7280]">
+                    <p>Your security is our priority</p>
+                    <p class="mt-1">
+                        <a href="#" class="text-[#3b82f6] hover:underline">GDPR Compliance</a> | <a href="#"
+                            class="text-[#3b82f6] hover:underline">Safe Harbor Policy</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Illustration -->
+                <div class="w-[40%] md:w-[30%] flex justify-center">
+                    <img src="{{ asset('images/login.svg') }}" alt="Sign Up" >
+                </div>
         </div>
+
     </div>
 @endsection
