@@ -31,6 +31,18 @@
             <div class="text-[#6b7280] mt-1">Response Rate</div>
           </div>
         </div>
+
+        <!-- Actions -->
+        <div class="flex justify-between mb-6">
+          <button class="bg-[#111827] hover:bg-[#111827]/90 text-white rounded-md px-4 py-2 flex items-center gap-2">
+            <i class="fas fa-plus text-sm"></i> Create New Program
+          </button>
+          <button class="bg-white text-[#111827] border border-[#e5e7eb] rounded-md px-4 py-2 hover:bg-gray-50">
+            View All Reports
+          </button>
+        </div>
+
+        
       </div>
     </div>
   </div>
