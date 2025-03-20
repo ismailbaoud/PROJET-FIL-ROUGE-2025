@@ -42,7 +42,34 @@
           </button>
         </div>
 
-        
+        <!-- Active Programs -->
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold text-[#111827] mb-4">Active Programs</h2>
+          <div class="bg-white rounded-md overflow-hidden">
+            <div class="grid grid-cols-4 p-4 border-b border-[#e5e7eb] text-[#6b7280]">
+              <div>Program Name</div>
+              <div class="text-right">Status</div>
+              <div class="text-right">Reports</div>
+              <div class="text-right">Rewards</div>
+            </div>
+            <div class="grid grid-cols-4 p-4 border-b border-[#e5e7eb]">
+              <div class="text-[#111827]">Web Application Security</div>
+              <div class="text-right">
+                <span class="text-success">Active</span>
+              </div>
+              <div class="text-right text-[#111827]">24</div>
+              <div class="text-right text-[#111827]">$12,000</div>
+            </div>
+            <div class="grid grid-cols-4 p-4">
+              <div class="text-[#111827]">Mobile App Security</div>
+              <div class="text-right text-[#6b7280]">In Review</div>
+              <div class="text-right text-[#111827]">18</div>
+              <div class="text-right text-[#111827]">$8,500</div>
+            </div>
+          </div>
+        </div>
+
+       
       </div>
     </div>
   </div>
