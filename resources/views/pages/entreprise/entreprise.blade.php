@@ -69,7 +69,44 @@
           </div>
         </div>
 
-       
+        <!-- Recent Reports -->
+        <div>
+          <h2 class="text-xl font-semibold text-[#111827] mb-4">Recent Reports</h2>
+          <div class="space-y-4">
+            <div class="bg-white rounded-md p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                    AS
+                  </div>
+                  <div>
+                    <div class="text-[#111827] font-medium">SQL Injection Vulnerability</div>
+                    <div class="text-[#6b7280] text-sm">Reported by Alice Smith • 2 hours ago</div>
+                  </div>
+                </div>
+                <div class="bg-[#f3f4f6] text-[#6b7280] px-3 py-1 rounded-full text-sm">
+                  Under Review
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-md p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                    BJ
+                  </div>
+                  <div>
+                    <div class="text-[#111827] font-medium">XSS in Search Function</div>
+                    <div class="text-[#6b7280] text-sm">Reported by Bob Johnson • 5 hours ago</div>
+                  </div>
+                </div>
+                <div class="bg-successLight text-success px-3 py-1 rounded-full text-sm">
+                  Approved
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
