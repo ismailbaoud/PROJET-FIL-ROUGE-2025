@@ -80,6 +80,30 @@
         <h1 class="text-2xl font-semibold text-[#111827] mb-2">Dashboard Overview</h1>
         <p class="text-[#6b7280] mb-6">System status and key metrics</p>
 
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white rounded-md p-6">
+            <div class="text-sm text-[#6b7280] mb-2">Active Users</div>
+            <div class="text-3xl font-semibold text-[#111827] mb-2">2,847</div>
+            <div class="text-sm text-success">+12% from last month</div>
+          </div>
+          <div class="bg-white rounded-md p-6">
+            <div class="text-sm text-[#6b7280] mb-2">Total Programs</div>
+            <div class="text-3xl font-semibold text-[#111827] mb-2">156</div>
+            <div class="text-sm text-success">+3 new today</div>
+          </div>
+          <div class="bg-white rounded-md p-6">
+            <div class="text-sm text-[#6b7280] mb-2">Total Payouts</div>
+            <div class="text-3xl font-semibold text-[#111827] mb-2">$1.2M</div>
+            <div class="text-sm text-[#6b7280]">This month</div>
+          </div>
+          <div class="bg-white rounded-md p-6">
+            <div class="text-sm text-[#6b7280] mb-2">System Alerts</div>
+            <div class="text-3xl font-semibold text-[#111827] mb-2">7</div>
+            <div class="text-sm text-danger">2 critical</div>
+          </div>
+        </div>
+
 
       </div>
     </div>
