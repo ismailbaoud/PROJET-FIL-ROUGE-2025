@@ -3,7 +3,7 @@
 @section('main')
 <div class="flex h-screen">
     <!-- Sidebar -->
-    <aside class="w-20 bg-white fixed h-full border-r border-gray-200">
+    <aside class="w-64 bg-white fixed h-full border-r border-gray-200">
         @include('components.sidebar')
     </aside>
 
