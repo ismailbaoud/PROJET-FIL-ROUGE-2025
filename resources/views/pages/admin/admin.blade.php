@@ -73,7 +73,16 @@
     </nav>
     </div>
 
- 
+    <!-- Main Content -->
+    <div class="flex-1 overflow-auto">
+      <div class="p-6">
+        <!-- Header -->
+        <h1 class="text-2xl font-semibold text-[#111827] mb-2">Dashboard Overview</h1>
+        <p class="text-[#6b7280] mb-6">System status and key metrics</p>
+
+
+      </div>
+    </div>
   </div>
 </body>
 </html>
