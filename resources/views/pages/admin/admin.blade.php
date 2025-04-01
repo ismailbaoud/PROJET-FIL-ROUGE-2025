@@ -163,6 +163,44 @@
           </div>
         </div>
 
+        <!-- Report Moderation Queue -->
+        <div class="bg-white rounded-md p-6">
+          <h2 class="text-xl font-semibold text-[#111827] mb-4">Report Moderation Queue</h2>
+          
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr class="border-b border-[#e5e7eb]">
+                  <th class="text-left py-3 px-4 text-[#6b7280] font-medium">Report ID</th>
+                  <th class="text-left py-3 px-4 text-[#6b7280] font-medium">Type</th>
+                  <th class="text-left py-3 px-4 text-[#6b7280] font-medium">Submitted By</th>
+                  <th class="text-left py-3 px-4 text-[#6b7280] font-medium">Status</th>
+                  <th class="text-left py-3 px-4 text-[#6b7280] font-medium">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[#e5e7eb]">
+                  <td class="py-3 px-4 text-[#111827]">#REP-2025-001</td>
+                  <td class="py-3 px-4 text-[#111827]">Vulnerability</td>
+                  <td class="py-3 px-4 text-[#111827]">security_expert</td>
+                  <td class="py-3 px-4 text-[#111827]">Pending</td>
+                  <td class="py-3 px-4">
+                    <button class="text-info hover:underline">Review</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 text-[#111827]">#REP-2025-002</td>
+                  <td class="py-3 px-4 text-[#111827]">Dispute</td>
+                  <td class="py-3 px-4 text-[#111827]">ethical_hacker</td>
+                  <td class="py-3 px-4 text-[#111827]">In Progress</td>
+                  <td class="py-3 px-4">
+                    <button class="text-info hover:underline">Review</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
