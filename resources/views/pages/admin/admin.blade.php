@@ -104,6 +104,64 @@
           </div>
         </div>
 
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <!-- Recent User Activity -->
+          <div class="bg-white rounded-md p-6">
+            <h2 class="text-xl font-semibold text-[#111827] mb-4">Recent User Activity</h2>
+            
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                    JD
+                  </div>
+                  <div>
+                    <div class="text-[#111827] font-medium">John Doe</div>
+                    <div class="text-[#6b7280] text-sm">New registration</div>
+                  </div>
+                </div>
+                <button class="text-info hover:underline">Review</button>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                    AS
+                  </div>
+                  <div>
+                    <div class="text-[#111827] font-medium">Alice Smith</div>
+                    <div class="text-[#6b7280] text-sm">Account flagged</div>
+                  </div>
+                </div>
+                <button class="text-info hover:underline">Investigate</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Alerts -->
+          <div class="bg-white rounded-md p-6">
+            <h2 class="text-xl font-semibold text-[#111827] mb-4">Security Alerts</h2>
+            
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-[#111827] font-medium">Failed Login Attempts</div>
+                  <div class="text-[#6b7280] text-sm">Multiple attempts from IP 192.168.1.1</div>
+                </div>
+                <div class="text-[#6b7280] text-sm">5 min ago</div>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-[#111827] font-medium">Suspicious Activity</div>
+                  <div class="text-[#6b7280] text-sm">Unusual API access pattern detected</div>
+                </div>
+                <div class="text-[#6b7280] text-sm">23 min ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
