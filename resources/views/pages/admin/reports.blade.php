@@ -24,7 +24,17 @@
         </div>
       </header>
 
+      <!-- Main Content Area -->
+      <main class="flex-1 p-6 overflow-auto">
+        <div class="max-w-7xl mx-auto">
+            <div class="p-6  min-h-screen">
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Paramètres de Configuration</h1>
 
+
+
+            </div>
+        </div>
+      </main>
     </div>
   </div>
 @endsection
