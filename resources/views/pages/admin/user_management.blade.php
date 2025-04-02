@@ -402,5 +402,62 @@
       </div>
     </div>
 
+    <!-- Edit User Modal (Hidden by default) -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="edit-user-modal">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Edit User</h3>
+            <button class="text-gray-400 hover:text-gray-500">
+              <span class="sr-only">Close</span>
+              ✕
+            </button>
+          </div>
+          <form>
+            <div class="space-y-4">
+              <div>
+                <label for="edit-full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="edit-full-name" name="edit-full-name" value="John Smith" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div>
+                <label for="edit-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="edit-email" name="edit-email" value="john.smith@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div>
+                <label for="edit-role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                <select id="edit-role" name="edit-role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                  <option selected>Researcher</option>
+                  <option>Company</option>
+                  <option>Moderator</option>
+                  <option>Admin</option>
+                </select>
+              </div>
+              <div>
+                <label for="edit-status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select id="edit-status" name="edit-status" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                  <option selected>Active</option>
+                  <option>Suspended</option>
+                  <option>Pending</option>
+                  <option>Deactivated</option>
+                </select>
+              </div>
+              <div>
+                <button type="button" class="text-blue-600 hover:text-blue-800 text-sm">
+                  Reset Password
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+              <button type="button" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 text-sm">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection
