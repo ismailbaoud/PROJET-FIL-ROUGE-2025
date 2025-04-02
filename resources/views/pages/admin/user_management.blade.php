@@ -345,6 +345,62 @@
       </main>
     </div>
 
+    <!-- Add User Modal (Hidden by default) -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="add-user-modal">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Add New User</h3>
+            <button class="text-gray-400 hover:text-gray-500">
+              <span class="sr-only">Close</span>
+              ✕
+            </button>
+          </div>
+          <form>
+            <div class="space-y-4">
+              <div>
+                <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="full-name" name="full-name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div>
+                <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                <select id="role" name="role" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                  <option>Researcher</option>
+                  <option>Company</option>
+                  <option>Moderator</option>
+                  <option>Admin</option>
+                </select>
+              </div>
+              <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Temporary Password</label>
+                <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="send-invite" name="send-invite" type="checkbox" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="send-invite" class="font-medium text-gray-700">Send invitation email</label>
+                  <p class="text-gray-500">The user will receive an email with login instructions.</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end space-x-3 mt-6">
+              <button type="button" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 text-sm">
+                Cancel
+              </button>
+              <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm">
+                Add User
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
   </div>
 @endsection
