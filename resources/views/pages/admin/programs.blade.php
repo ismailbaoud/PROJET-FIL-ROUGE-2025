@@ -24,6 +24,26 @@
         </div>
       </header>
 
+      <!-- Main Content Area -->
+      <main class="flex-1 p-6 overflow-auto">
+        <div class="max-w-7xl mx-auto">
+            <div class="p-6 min-h-screen">
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Programmes de Bug Bounty</h1>
+
+                <!-- Search & Filter -->
+                <div class="mb-4 flex flex-col md:flex-row md:justify-between">
+                    <input type="text" placeholder="🔍 Rechercher un programme..." class="p-2 border rounded-md w-full md:w-1/3 mb-2 md:mb-0">
+                    <select class="p-2 border rounded-md w-full md:w-1/4">
+                        <option value="">📌 Filtrer par statut</option>
+                        <option value="open">🟢 Ouvert</option>
+                        <option value="closed">🔴 Fermé</option>
+                        <option value="pending">🟡 En Attente</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+      </main>
     </div>
   </div>
 @endsection
