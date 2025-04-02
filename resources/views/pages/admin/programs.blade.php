@@ -41,6 +41,34 @@
                     </select>
                 </div>
 
+                <!-- Table -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <table class="w-full border-collapse">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="p-3 text-left">Nom</th>
+                                <th class="p-3 text-left">Entreprise</th>
+                                <th class="p-3 text-left">Récompenses</th>
+                                <th class="p-3 text-left">Statut</th>
+                                <th class="p-3 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-100">
+                                <td class="p-3">Bug Hunt 2025</td>
+                                <td class="p-3">Google</td>
+                                <td class="p-3">$10,000</td>
+                                <td class="p-3"><span class="px-2 py-1 rounded-md text-white bg-green-500">Ouvert</span></td>
+                                <td class="p-3 flex space-x-2">
+                                    <a href="#" class="text-blue-500">✏️ Modifier</a>
+                                    <button class="text-red-500">🗑️ Supprimer</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
       </main>
