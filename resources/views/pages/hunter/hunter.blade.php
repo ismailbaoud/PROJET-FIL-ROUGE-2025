@@ -95,7 +95,28 @@
           </div>
         </div>
 
-     
+        <!-- Recent Reports -->
+        <div>
+          <h2 class="text-lg font-semibold mb-4">Recent Reports</h2>
+          <div class="space-y-4">
+            <div class="bg-white rounded-lg p-4">
+              <div class="flex justify-between mb-2">
+                <h3 class="font-medium">SQL Injection in Login Form</h3>
+                <span class="text-red font-medium">Critical</span>
+              </div>
+              <p class="text-sm text-darkGray mb-2">TechCorp Inc.</p>
+              <p class="text-xs text-darkGray">Submitted 2 days ago • Under Review</p>
+            </div>
+            <div class="bg-white rounded-lg p-4">
+              <div class="flex justify-between mb-2">
+                <h3 class="font-medium">XSS Vulnerability in Profile Page</h3>
+                <span class="text-yellow font-medium">High</span>
+              </div>
+              <p class="text-sm text-darkGray mb-2">SecureBank</p>
+              <p class="text-xs text-darkGray">Submitted 5 days ago • Accepted</p>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </div>
