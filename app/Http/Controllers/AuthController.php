@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HunterRegisterRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
-{
-    public function showRegisterHunter(){
-        return view('auth.register_hunter');
-    }
+class AuthController extends Controller {
 
+    public function showRegisterHunter() {
 
-    public function showRegisterEntreprise(){
-        return view('auth.register_entreprise');
-    }
-
-    public function showLogin(){
-        return view('auth.login');
+        return view( 'auth.register_hunter' );
+        
     }
 }
