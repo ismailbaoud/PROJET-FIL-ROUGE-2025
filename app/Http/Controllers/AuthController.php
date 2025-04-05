@@ -54,5 +54,11 @@ class AuthController extends Controller {
         return $this->showLogin();
     }
 
-  
+    public function showLogin() {
+
+        return view( 'auth.login' );
+
+    }
+
+   
 }
