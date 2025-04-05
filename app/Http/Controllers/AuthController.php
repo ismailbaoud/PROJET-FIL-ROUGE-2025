@@ -60,5 +60,24 @@ class AuthController extends Controller {
 
     }
 
-   
+    public function Login(Request $request) {
+
+        $user = User::where('email' , '=' , $request['email'])->first();
+        
+        if($user && Hash::check($request["password"], $user->password)){
+
+            if($user->role == 'hunter'){
+                return to_route("hunterDashboard");
+            }elseif($user->role == 'entreprise'){
+                return to_route("entrepriseDashboard");
+            }elseif($user->role == 'admin'){
+                return to_route("adminDashboard");
+            }else{
+                return back();
+            }
+
+        }else{
+            echo $user["password"] . $request["password"];
+        }
+    }
 }
