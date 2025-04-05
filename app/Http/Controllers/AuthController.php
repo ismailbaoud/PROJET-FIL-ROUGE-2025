@@ -29,5 +29,11 @@ class AuthController extends Controller {
         }
     }
 
+    public function showRegisterEntreprise() {
+
+        return view( 'auth.register_entreprise' );
+
+    }
+
    
 }
