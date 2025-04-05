@@ -15,4 +15,19 @@ class AuthController extends Controller {
         return view( 'auth.register_hunter' );
         
     }
+
+    public function HunterRegister(HunterRegisterRequest $request ) {
+
+        if ( $request[ 'password' ] == $request[ 'confirm-password' ] ) {
+
+            User::create(['userName' => $request['userName'],
+                          'email' => $request['email'],
+                          'password' => $request['password']
+                         ]);
+
+            return $this->showLogin();
+        }
+    }
+
+   
 }
