@@ -35,5 +35,24 @@ class AuthController extends Controller {
 
     }
 
-   
+    public function EntrepriseRegister( Request $request ) {
+
+        User::create(['userName' => $request['fullName'],
+                        'email' => $request['businessEmail'],
+                        'password' => $request['password'],
+                        'role' => 'entreprise'
+                     ]);
+
+        Profile::create([
+                        'name' => $request['companyName'],
+                        'url' => $request['accountUrl'],
+                        'country' =>$request['country'],
+                        'state' =>$request['state'],
+                        'user_id' => User::latest()->first()->id
+                     ]);
+                     
+        return $this->showLogin();
+    }
+
+  
 }
