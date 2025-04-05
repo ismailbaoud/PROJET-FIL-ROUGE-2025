@@ -55,7 +55,47 @@
           </div>
         </div>
 
-       
+        <!-- Active Programs -->
+        <div class="mb-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            <h2 class="text-lg font-semibold">Active Programs</h2>
+            <button class="bg-darkBlue hover:bg-black text-white px-4 py-2 rounded-lg text-sm">
+              + Report Vulnerability
+            </button>
+          </div>
+          <div class="bg-white rounded-lg overflow-hidden">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-mediumGray">
+                  <th class="text-left p-4 text-sm font-medium text-darkGray">Company</th>
+                  <th class="text-left p-4 text-sm font-medium text-darkGray">Scope</th>
+                  <th class="text-left p-4 text-sm font-medium text-darkGray">Rewards</th>
+                  <th class="text-left p-4 text-sm font-medium text-darkGray">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-mediumGray">
+                  <td class="p-4 text-sm">TechCorp Inc.</td>
+                  <td class="p-4 text-sm">Web, API</td>
+                  <td class="p-4 text-sm">$100-$10,000</td>
+                  <td class="p-4 text-sm">
+                    <span class="text-green">Active</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="p-4 text-sm">SecureBank</td>
+                  <td class="p-4 text-sm">Mobile, API</td>
+                  <td class="p-4 text-sm">$500-$15,000</td>
+                  <td class="p-4 text-sm">
+                    <span class="text-green">Active</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+     
       </main>
     </div>
   </div>
