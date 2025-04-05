@@ -24,7 +24,39 @@
         </div>
       </header>
 
-     
+      <!-- Content -->
+      <main class="max-w-5xl mx-auto p-6">
+        <!-- Welcome Section -->
+        <div class="bg-white p-6 rounded-lg mb-6 flex items-center">
+          <div class="h-16 w-16 bg-offWhite rounded-full mr-6"></div>
+          <div>
+            <h1 class="text-xl font-semibold mb-1">Welcome back, CyberHunter</h1>
+            <p class="text-darkGray text-sm">Keep up the great work! You're in the top 5% this month.</p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <div class="bg-white p-6 rounded-lg">
+            <div class="text-sm text-darkGray mb-1">Total Reports</div>
+            <div class="text-2xl font-bold">247</div>
+          </div>
+          <div class="bg-white p-6 rounded-lg">
+            <div class="text-sm text-darkGray mb-1">Validated Reports</div>
+            <div class="text-2xl font-bold">183</div>
+          </div>
+          <div class="bg-white p-6 rounded-lg">
+            <div class="text-sm text-darkGray mb-1">Total Earnings</div>
+            <div class="text-2xl font-bold">$24,750</div>
+          </div>
+          <div class="bg-white p-6 rounded-lg">
+            <div class="text-sm text-darkGray mb-1">Global Rank</div>
+            <div class="text-2xl font-bold">#42</div>
+          </div>
+        </div>
+
+       
+      </main>
     </div>
   </div>
 @endsection
