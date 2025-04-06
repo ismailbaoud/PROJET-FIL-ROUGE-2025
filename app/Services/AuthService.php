@@ -30,5 +30,15 @@ class AuthService
         ]);
     }
 
-  
+    public function createProfile(array $data){
+        Profile::create([
+            'name' => $data['companyName'],
+            'url' => $data['accountUrl'],
+            'country' =>$data['country'],
+            'state' =>$data['state'],
+            'user_id' => User::latest()->first()->id
+        ]);
+    }
+
+
 }
