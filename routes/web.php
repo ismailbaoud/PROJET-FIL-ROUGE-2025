@@ -15,6 +15,7 @@ Route::get('/register_entreprise', [AuthController::class , 'showRegisterentrepr
 Route::post('/EntrepriseRegister', [AuthController::class , 'EntrepriseRegister']);
 Route::get('/loginPage', [AuthController::class , 'showLogin']);
 Route::post('/login', [AuthController::class , 'Login']);
+Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
 
 
 
