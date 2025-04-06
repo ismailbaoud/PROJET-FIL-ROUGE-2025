@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HunterRegisterRequest;
 use Illuminate\Http\Request;
+use App\Services\AuthService;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
+
+    protected $userService;
+
+    public function __construct(AuthService $userService)
+    {
+        $this->userService = $userService;
+    }
+
 
     public function showRegisterHunter() {
 
@@ -18,15 +27,8 @@ class AuthController extends Controller {
 
     public function HunterRegister(HunterRegisterRequest $request ) {
 
-        if ( $request[ 'password' ] == $request[ 'confirm-password' ] ) {
-
-            User::create(['userName' => $request['userName'],
-                          'email' => $request['email'],
-                          'password' => $request['password']
-                         ]);
-
-            return $this->showLogin();
-        }
+        $this->userService->createUserHunter($request);
+        return $this->showLogin();
     }
 
     public function showRegisterEntreprise() {
@@ -35,7 +37,7 @@ class AuthController extends Controller {
 
     }
 
-    public function EntrepriseRegister( Request $request ) {
+    public function EntrepriseRegister(Request $request ) {
 
         User::create(['userName' => $request['fullName'],
                         'email' => $request['businessEmail'],
