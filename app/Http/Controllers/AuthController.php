@@ -27,7 +27,7 @@ class AuthController extends Controller {
 
     public function HunterRegister(HunterRegisterRequest $request ) {
 
-        $this->userService->createUserHunter($request);
+        $this->userService->createUserHunter($request->validated());
         return $this->showLogin();
     }
 
