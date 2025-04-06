@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Models\User;
 use App\Models\Profile;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
 
@@ -53,22 +52,11 @@ class AuthController extends Controller {
 
     public function Login(Request $request) {
 
-        $user = User::where('email' , '=' , $request['email'])->first();
-        
-        if($user && Hash::check($request["password"], $user->password)){
-
-            if($user->role == 'hunter'){
-                return to_route("hunterDashboard");
-            }elseif($user->role == 'entreprise'){
-                return to_route("entrepriseDashboard");
-            }elseif($user->role == 'admin'){
-                return to_route("adminDashboard");
-            }else{
-                return back();
-            }
-
+        $route = $this->AuthService->login($request);
+        if($route){
+        return to_route($route);
         }else{
-            echo $user["password"] . $request["password"];
+            return back();
         }
     }
 
