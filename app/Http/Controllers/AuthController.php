@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HunterRegisterRequest;
+use App\Http\Requests\EntrepriseRegisterRequest;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Models\User;
@@ -11,11 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
 
-    protected $userService;
+    protected $AuthService;
 
-    public function __construct(AuthService $userService)
+    public function __construct(AuthService $AuthService)
     {
-        $this->userService = $userService;
+        $this->AuthService = $AuthService;
     }
 
 
@@ -27,7 +28,7 @@ class AuthController extends Controller {
 
     public function HunterRegister(HunterRegisterRequest $request ) {
 
-        $this->userService->createUserHunter($request->validated());
+        $this->AuthService->createUserHunter($request->validated());
         return $this->showLogin();
     }
 
@@ -37,22 +38,10 @@ class AuthController extends Controller {
 
     }
 
-    public function EntrepriseRegister(Request $request ) {
+    public function EntrepriseRegister(EntrepriseRegisterRequest $request ) {
 
-        User::create(['userName' => $request['fullName'],
-                        'email' => $request['businessEmail'],
-                        'password' => $request['password'],
-                        'role' => 'entreprise'
-                     ]);
-
-        Profile::create([
-                        'name' => $request['companyName'],
-                        'url' => $request['accountUrl'],
-                        'country' =>$request['country'],
-                        'state' =>$request['state'],
-                        'user_id' => User::latest()->first()->id
-                     ]);
-                     
+        $this->AuthService->createUserEntreprise($request->validated());
+        // $this->AuthService->createProfile($request->validated());
         return $this->showLogin();
     }
 
