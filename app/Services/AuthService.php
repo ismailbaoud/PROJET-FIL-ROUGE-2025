@@ -21,4 +21,14 @@ class AuthService
         }
     }
 
+    public function createUserEntreprise(array $data) 
+    {
+        User::create(['userName' => $data['fullName'],
+            'email' => $data['businessEmail'],
+            'password' => $data['password'],
+            'role' => 'entreprise'
+        ]);
+    }
+
+  
 }
