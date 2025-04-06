@@ -80,4 +80,8 @@ class AuthController extends Controller {
             echo $user["password"] . $request["password"];
         }
     }
+
+    public function logout(){
+        
+    }
 }
