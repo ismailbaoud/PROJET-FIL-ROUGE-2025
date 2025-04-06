@@ -40,5 +40,20 @@ class AuthService
         ]);
     }
 
+    public function login(object $data){
+        $user = User::where('email' , '=' , $data['email'])->first();
+        
+        if($user && Hash::check($data["password"], $user->password)){
 
+            if($user->role == 'hunter'){
+                return "hunterDashboard";
+            }elseif($user->role == 'entreprise'){
+                return "entrepriseDashboard";
+            }elseif($user->role == 'admin'){
+                return "adminDashboard";
+            }else{
+                return "";
+            }
+    }
+}
 }
