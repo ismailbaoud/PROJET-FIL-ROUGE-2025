@@ -4,7 +4,7 @@
 @Section('main')
 <div class="flex h-screen">
     <!-- Sidebar (Fixed Width) -->
-    <aside class="w-64 bg-white h-screen shadow-lg">
+    <aside class="w-64 bg-gray-100 h-screen">
         <div class="p-6 font-bold text-[#111827]">
             Admin Panel
         </div>
@@ -16,7 +16,7 @@
         <header class="flex items-center justify-between border-b border-gray-300 pb-4">
             <h2 class="text-lg font-semibold text-gray-900">Dashboard Overview</h2>
             <div class="flex items-center gap-3">
-                <span class="text-sm text-gray-600">Admin</span>
+                <span class="text-sm text-gray-600">Admin {{Auth::user()->userName}}</span>
                 <div class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700">
                     A
                 </div>
