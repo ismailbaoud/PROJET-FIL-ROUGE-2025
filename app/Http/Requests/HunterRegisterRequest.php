@@ -24,7 +24,8 @@ class HunterRegisterRequest extends FormRequest
         return [
             "userName"=>"required",
             "email"=>"email",
-            "password"=>"required | min:8"
+            "password"=>"required | min:8",
+            "confirm-password"=>"required | min:8"
         ];
     }
 }
