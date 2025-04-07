@@ -2,9 +2,9 @@
 
 
 @Section('main')
-  <div class="flex h-screen bg-gray-50">
+  <div class="flex h-screen bg-gray-100">
       <!-- Sidebar -->
-      <div class="w-64 bg-white h-full flex flex-col">
+      <div class="w-64 bg-gray-100 h-full flex flex-col">
         <div class="p-6 font-bold text-[#111827]">
           Admin Panel
         </div>
@@ -14,7 +14,7 @@
     <!-- Main Content -->
     <div class="flex-1 flex flex-col bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
       <!-- Header -->
-      <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+      <header class="flex items-center  justify-between border-b border-gray-200 px-6 py-4">
         <h2 class="text-lg font-medium text-gray-900">User Management</h2>
         <div class="flex items-center gap-3">
           <span class="text-sm text-gray-600">Admin</span>
