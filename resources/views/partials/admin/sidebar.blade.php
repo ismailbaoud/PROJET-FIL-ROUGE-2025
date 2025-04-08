@@ -1,6 +1,6 @@
-<nav class="w-64 bg-gray-900 text-white h-screen">
+<nav class="w-64 bg-white text-white h-auto">
     <div class="flex items-center justify-center py-6">
-        <h2 class="text-xl font-semibold">Bug Bounty</h2>
+        <h2 class="text-xl text-black font-semibold">Bug Bounty</h2>
     </div>
     <ul class="space-y-4 px-4">
         <li>
@@ -50,6 +50,12 @@
                 <i class="fas fa-cogs text-xl"></i>
                 <span class="ml-3">Paramètres</span>
             </a>
+        </li>
+        <li>
+                <form method="POST" action="{{ route('logout') }}" class="flex items-center p-4 rounded-lg bg-gray-800 shadow-md hover:shadow-lg hover:bg-gray-700 transition duration-300">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>  
         </li>
     </ul>
 </nav>
