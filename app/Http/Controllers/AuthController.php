@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HunterRegisterRequest;
 use App\Http\Requests\EntrepriseRegisterRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Models\User;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller {
 
@@ -40,7 +42,7 @@ class AuthController extends Controller {
     public function EntrepriseRegister(EntrepriseRegisterRequest $request ) {
 
         $this->AuthService->createUserEntreprise($request->validated());
-        // $this->AuthService->createProfile($request->validated());
+
         return $this->showLogin();
     }
 
@@ -50,17 +52,29 @@ class AuthController extends Controller {
 
     }
 
-    public function Login(Request $request) {
+    public function login(Request $request)
+{
+    $dashboard = $this->AuthService->login($request->only('email', 'password'));
 
-        $route = $this->AuthService->login($request);
-        if($route){
-        return to_route($route);
-        }else{
-            return back();
-        }
+    if ($dashboard) {
+        $request->session()->regenerate();
+        return to_route($dashboard);
     }
 
-    public function logout(){
-        
-    }
+    return back()->withErrors([
+        'email' => 'Invalid credentials.',
+    ]);
+}
+
+
+public function logout(Request $request)
+{
+    $this->AuthService->logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return to_route('home');
+}
+
 }
