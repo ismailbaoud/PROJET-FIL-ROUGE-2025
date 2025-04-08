@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
@@ -40,20 +41,33 @@ class AuthService
         ]);
     }
 
-    public function login(object $data){
-        $user = User::where('email' , '=' , $data['email'])->first();
-        
-        if($user && Hash::check($data["password"], $user->password)){
+    public function login(array $data)
+{
+    
+    $credentials = [
+        'email' => $data['email'],
+        'password' => $data['password'],
+    ];
 
-            if($user->role == 'hunter'){
-                return "hunterDashboard";
-            }elseif($user->role == 'entreprise'){
-                return "entrepriseDashboard";
-            }elseif($user->role == 'admin'){
-                return "adminDashboard";
-            }else{
-                return "";
-            }
+    if (Auth::attempt($credentials)) {
+
+        $user = Auth::user();
+
+        return match ($user->role) {
+            'hunter' => 'hunterDashboard',
+            'entreprise' => 'entrepriseDashboard',
+            'admin' => 'adminDashboard',
+            default => null,
+        };
     }
+
+    return null; 
 }
+
+public function logout()
+{
+    Auth::logout();
+}
+
+
 }
