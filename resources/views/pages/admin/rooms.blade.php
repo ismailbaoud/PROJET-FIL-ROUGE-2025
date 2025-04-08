@@ -4,7 +4,7 @@
 @Section('main')
     <div class="flex h-screen bg-gray-100">
         <!-- Sidebar -->
-        <div class="w-64 bg-gray-100 h-full flex flex-col">
+        <div class="w-64 bg-white h-full flex flex-col">
             <div class="p-6 font-bold text-[#111827]">
                 Admin Panel
             </div>
