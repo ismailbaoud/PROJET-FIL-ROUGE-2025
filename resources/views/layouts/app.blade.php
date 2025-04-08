@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     @vite('resources/css/app.css')
     <script>
         tailwind.config = {
@@ -31,13 +30,13 @@
 
 </head>
 <body>
-    @if(1 == 1)
 
-    @include('partials.header')
-    @include('partials.sidebar')
-    @else
-    @endif
+@guest
+@include('partials.header')
+@include('partials.sidebar')
+@endguest
 
+{{-- @dd(Auth::user()) --}}
 
     <main>
           
@@ -45,11 +44,8 @@
         @yield('main')
     
     </main>
-    @if(1 == 1)
 
     @include('partials.footer')
-    @else
-    @endif
 
     @vite('resources/js/app.js')
 </body>
