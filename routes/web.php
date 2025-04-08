@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 
 
 
-Route::get('/', [HomeController::class , 'index']);
+Route::get('/', [HomeController::class , 'index'])->name('home');
 //hunter
 Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter']);
 Route::post('/register', [AuthController::class , 'HunterRegister'])->name('register');
@@ -68,9 +68,7 @@ Route::get('/dm/settings', function () {
 Route::get('/ht/dashboard', function () {
     return view('pages.hunter/hunter');
 })->name("hunterDashboard");
-// Route::get('/dm/users', function () {
-//     return view('pages.admin/user_management');
-// });
+
 Route::get('/ht/programs', function () {
     return view('pages.hunter/programs');
 });
@@ -86,11 +84,5 @@ Route::get('/ht/messages', function () {
 Route::get('/ht/settings', function () {
     return view('pages.hunter/settings');
 });
-// Route::get('/dm/settings', function () {
-//     return view('pages.admin/settings');
-// });
 
-// Route::get('/dm/dashboard', function () {
-//     return view('pages.entreprise/settings');
-// });
 
