@@ -20,11 +20,52 @@
                                 <p class="text-gray-500 mt-1">Manage your Microsoft security programs</p>
                             </div>
                         </div>
-                        <button class="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800">
+                        <button onclick="displayForm()"
+                            class="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800">
                             Create New Program
                         </button>
                     </div>
 
+                    {{-- create programes --}}
+                    <section id="displayForm" class="hidden mb-10">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Add New Program</h2>
+                        <form action="/create" method="POST" class="bg-white shadow rounded-lg p-6 space-y-4">
+                            @csrf
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Program Name</label>
+                                <input type="text" name="title" id="name"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea name="description" id="description" rows="3"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    required></textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="min_reward" class="block text-sm font-medium text-gray-700">Min
+                                        Reward</label>
+                                    <input type="number" name="min_reward" id="min_reward"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="max_reward" class="block text-sm font-medium text-gray-700">Max
+                                        Reward</label>
+                                    <input type="number" name="max_reward" id="max_reward"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        required>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Create
+                                    Program</button>
+                            </div>
+                        </form>
+                    </section>
                     <!-- Program Controls -->
                     <div class="bg-gray-50 p-4 rounded-lg mb-6 flex flex-wrap gap-4 items-center justify-between">
                         <div class="flex gap-3">
@@ -87,22 +128,31 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Program Row 1 -->
+                                @foreach ($programs as $program)
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Windows Security</div>
-                                                <div class="text-xs text-gray-500">Operating System</div>
+                                                <div class="text-sm font-medium text-gray-900">{{$program->title}}</div>
+                                                <div class="text-xs text-gray-500">{{$program->description}}</div>
                                             </div>
                                         </div>
                                     </td>
+                                    @php
+                                    $colors = [
+                                        'en_attente' => ['bg' => 'bg-yellow-100', 'text' => 'text-yellow-800', 'label' => 'En attente'],
+                                        'actif' => ['bg' => 'bg-green-100', 'text' => 'text-green-800', 'label' => 'Actif'],
+                                        'inactif' => ['bg' => 'bg-red-100', 'text' => 'text-red-800', 'label' => 'Inactif'],
+                                    ];
+                                    $status = $colors[$program->status] ?? ['bg' => 'bg-gray-100', 'text' => 'text-gray-800', 'label' => $program->status];
+                                    @endphp
+                                                                    
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Active
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $status['bg'] }} {{ $status['text'] }}">
+                                            {{ $status['label'] }}
                                         </span>
                                     </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         $500 - $250,000
                                     </td>
@@ -120,176 +170,7 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!-- Program Row 2 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Azure Cloud Services</div>
-                                                <div class="text-xs text-gray-500">Cloud Infrastructure</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        $1,000 - $40,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        187
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 12, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Pause</button>
-                                            <button class="text-red-600 hover:text-red-900">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Program Row 3 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Microsoft 365</div>
-                                                <div class="text-xs text-gray-500">Productivity Suite</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        $500 - $15,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        156
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 10, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Pause</button>
-                                            <button class="text-red-600 hover:text-red-900">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Program Row 4 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Xbox Live</div>
-                                                <div class="text-xs text-gray-500">Gaming Platform</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                            Limited
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        $1,500 - $20,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        92
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 8, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Open</button>
-                                            <button class="text-red-600 hover:text-red-900">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Program Row 5 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Dynamics 365</div>
-                                                <div class="text-xs text-gray-500">Business Applications</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                            Draft
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        $500 - $10,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        0
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 5, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                            <button class="text-green-600 hover:text-green-900">Publish</button>
-                                            <button class="text-red-600 hover:text-red-900">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Program Row 6 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">GitHub Security</div>
-                                                <div class="text-xs text-gray-500">Developer Platform</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Paused
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        $617 - $30,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        203
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 1, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">Edit</button>
-                                            <button class="text-green-600 hover:text-green-900">Resume</button>
-                                            <button class="text-red-600 hover:text-red-900">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -315,4 +196,16 @@
             </main>
         </div>
     </div>
+    <script>
+        function displayForm() {
+            const form = document.getElementById("displayForm");
+            if (form.classList.contains("hidden")) {
+                form.classList.remove("hidden");
+                form.classList.add("flex", "flex-col");
+            } else {
+                form.classList.add("hidden");
+                form.classList.remove("flex", "flex-col");
+            }
+        }
+    </script>
 @endsection
