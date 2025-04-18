@@ -13,4 +13,8 @@ class Program extends Model
         "max_reward",
         "user_id",
     ];
+    public function users()
+{
+    return $this->belongsToMany();
+}
 }
