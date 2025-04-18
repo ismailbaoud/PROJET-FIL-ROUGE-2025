@@ -23,7 +23,7 @@ class AuthController extends Controller {
 
     public function showRegisterHunter() {
 
-        return view( 'auth.register_hunter' );
+        return view('auth.register_hunter');
         
     }
 
