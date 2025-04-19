@@ -9,27 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('profiles', function (Blueprint $table) {
+    public function up()
+{
+    Schema::create('program_user', function (Blueprint $table) {
         $table->id();
-        $table->string('companyName');
-        $table->string('companyUrl');
-        $table->text('country');
-        $table->text('content_vusial')->nullable();
-        $table->string('state');
-        $table->integer('pointes')->default(0);
-        $table->integer('rewards')->default(0);
+        $table->foreignId('program_id')->constrained()->onDelete('cascade');
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->timestamps();
-        });
-    }
+
+        $table->unique(['program_id', 'user_id']);
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('program_user');
     }
 };

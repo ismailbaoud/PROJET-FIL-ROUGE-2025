@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('status',['actif','en_attnte','archive'])->default('en_attnte');
+            $table->enum('status', ['en_attente', 'accepte', 'rejete'])->default('en_attente');
             $table->integer('min_reward');
             $table->integer('max_reward');
             $table->foreignId('user_id')->constrained()->enDelete('cascade');

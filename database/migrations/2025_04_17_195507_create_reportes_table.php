@@ -10,26 +10,25 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('profiles', function (Blueprint $table) {
+{
+    Schema::create('reports', function (Blueprint $table) {
         $table->id();
-        $table->string('companyName');
-        $table->string('companyUrl');
-        $table->text('country');
-        $table->text('content_vusial')->nullable();
-        $table->string('state');
-        $table->integer('pointes')->default(0);
-        $table->integer('rewards')->default(0);
+        $table->string('title');
+        $table->text('description');
+        $table->string('type'); // مثلاً: XSS, SQLi, CSRF...
+        $table->enum('status', ['open', 'pending', 'closed'])->default('pending');
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->foreignId('program_id')->constrained()->onDelete('cascade');
         $table->timestamps();
-        });
-    }
+    });
+}
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('reportes');
     }
 };
