@@ -10,54 +10,52 @@ use App\Http\Controllers\Controller;
 
 class ProgramController extends Controller
 {
-   public function index(Request $request)
-{
-    // Initialize query builder for the Program model
-    $query = Program::query();
 
-    // Apply status filter if exists
-    if ($request->has('status') && in_array($request->status, ['accepte', 'rejete', 'en_attente'])) {
-        $query->where('status', $request->status);
+    //index
+    public function index(Request $request){
+        $query = Program::query();
+
+        if ($request->has('status') && $request->status !== '') {
+            $query->where('status', $request->status);
+        }
+
+        switch ($request->sort) {
+            case 'highest_bounty':
+                $query->orderByDesc('max_reward');
+                break;
+            case 'most_reports':
+                $query->orderByDesc('reports_count');
+                break;
+            case 'recently_updated':
+                $query->orderByDesc('updated_at');
+                break;
+            default:
+                $query->orderByDesc('created_at');
+                break;
+        }
+
+        $programs = $query->paginate(6);
+
+        return view('pages.entreprise/programs', compact('programs'));
     }
-
-    // Apply sorting
-    switch ($request->sort) {
-        case 'highest_bounty':
-            $query->orderBy('max_reward', 'desc');
-            break;
-        case 'recently_updated':
-            $query->orderBy('updated_at', 'desc');
-            break;
-        case 'newest':
-        default:
-            $query->orderBy('created_at', 'desc');
-            break;
-    }
-
-    // Get paginated programs
-    $programs = $query->paginate(6);
-
-    // Return view with the filtered programs
-    return view('pages.entreprise.programs', compact('programs'));
-}
+    
 
 
-    public function create(Request $request)
-    {
+    //create
+    public function create(Request $request){
         Program::create([
             'title' => $request->title,
             'description' => $request->description,
             'min_reward' => $request->min_reward,
             'max_reward' => $request->max_reward,
-            'status' => 'en_attnte',
             'user_id' => Auth::id()
         ]);
-
         return back()->with('success', 'Program created successfully!');
     }
 
-    public function update(Request $request, $id)
-    {
+
+    //update
+    public function update(Request $request, $id){
         $program = Program::findOrFail($id);
         $program->update([
             'title' => $request->title,
@@ -70,8 +68,9 @@ class ProgramController extends Controller
         return back()->with('success', 'Program updated successfully!');
     }
 
-    public function changeStatus($id)
-    {
+
+    //change status
+    public function changeStatus($id){
         $program = Program::findOrFail($id);
 
         switch ($program->status) {
@@ -91,8 +90,9 @@ class ProgramController extends Controller
         return back()->with('success', 'Program status changed successfully!');
     }
 
-    public function delete($id)
-    {
+
+    //delete
+    public function delete($id){
         $program = Program::findOrFail($id);
         $program->status = 'rejete';
         $program->save();
@@ -101,8 +101,8 @@ class ProgramController extends Controller
     }
     
 
-    public function addMember(Request $request, $programId)
-    {
+    //addMember
+    public function addMember(Request $request, $programId){
         $program = Program::findOrFail($programId);
         $user = User::findOrFail($request->user_id);
 
@@ -110,4 +110,6 @@ class ProgramController extends Controller
 
         return back()->with('success', 'Member added to program successfully!');
     }
+
+    
 }
