@@ -5,44 +5,51 @@ namespace App\Http\Controllers\hunters;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
 
+    //index
     public function index(){
-        return view('pages.hunter/reports');
+        $user = Auth::user();
+        $programs = $user->joinedPrograms;
+        $reports = $user->reports()->with('program')->get();
+
+        return view('pages.hunter/reports' , compact('programs', 'reports'));
     }
-    public function create(Request $request)
-    {
+
+
+    //create
+    public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|string|max:50',
-            'status' => 'required|string|in:open,closed,pending',
-            'user_id' => 'required|exists:users,id',
-            'program_id' => 'required|exists:programs,id',
+            'program_id' => 'required',
         ]);
 
         Report::create([
             'title' => $request->title,
             'description' => $request->description,
             'type' => $request->type,
-            'status' => $request->status,
-            'user_id' => $request->user_id,
+            'user_id' => Auth::user()->id,
             'program_id' => $request->program_id,
         ]);
 
         return back()->with('success', 'Report created successfully!');
     }
 
-    public function read($id)
-    {
-        $report = Report::with(['user', 'program'])->findOrFail($id);
-        return view('pages.reports.show', compact('report'));
+
+    //show
+    public function show(){
+
+        return view('pages.hunter/reportDetails');
     }
 
-    public function update(Request $request, $id)
-    {
+
+    //update
+    public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -61,11 +68,16 @@ class ReportController extends Controller
         return back()->with('success', 'Report updated successfully!');
     }
 
-    public function destroy($id)
-    {
-        $report = Report::findOrFail($id);
-        $report->delete();
 
-        return back()->with('success', 'Report deleted successfully!');
+    //delete
+    public function destroy(Report $report)
+    {
+        try {
+            $report->delete();
+            return back()->with('success', 'Report deleted successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred while deleting the report.');
+        }
     }
+    
 }
