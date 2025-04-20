@@ -28,6 +28,25 @@ class User extends Authenticatable
         return $this->hasOne();
     }
 
+    public function createdPrograms(){
+        return $this->hasMany(Program::class);
+    }
+
+    public function joinedPrograms(){
+        return $this->belongsToMany(Program::class, 'program_user')
+                    ->using(\App\Models\ProgramUser::class)
+                    ->withTimestamps();
+    }
+
+    public function reports(){
+        return $this->hasMany(Report::class, 'user_id');
+    }
+
+    public function programs(){
+        return $this->hasMany(Report::class, 'user_id');
+    }
+
+
     
     /**
      * The attributes that should be hidden for serialization.
@@ -44,11 +63,12 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array{
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
+
+    
 }
