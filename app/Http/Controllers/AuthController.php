@@ -15,30 +15,36 @@ class AuthController extends Controller {
 
     protected $AuthService;
 
-    public function __construct(AuthService $AuthService)
-    {
+    public function __construct(AuthService $AuthService){
         $this->AuthService = $AuthService;
     }
 
 
+    //show register hunter
     public function showRegisterHunter() {
 
         return view('auth.register_hunter');
         
     }
 
+
+    //hunter register
     public function HunterRegister(HunterRegisterRequest $request ) {
 
         $this->AuthService->createUserHunter($request->validated());
         return $this->showLogin();
     }
 
+
+    //show register entreprise
     public function showRegisterEntreprise() {
 
         return view( 'auth.register_entreprise' );
 
     }
 
+
+    //entreprise register
     public function EntrepriseRegister(EntrepriseRegisterRequest $request ) {
 
         $this->AuthService->createUserEntreprise($request->validated());
@@ -46,35 +52,38 @@ class AuthController extends Controller {
         return $this->showLogin();
     }
 
+
+    //show login
     public function showLogin() {
 
         return view( 'auth.login' );
 
     }
 
-    public function login(Request $request)
-{
-    $dashboard = $this->AuthService->login($request->only('email', 'password'));
 
-    if ($dashboard) {
-        $request->session()->regenerate();
-        return to_route($dashboard);
+    //login
+    public function login(Request $request){
+        $dashboard = $this->AuthService->login($request->only('email', 'password'));
+
+        if ($dashboard) {
+            $request->session()->regenerate();
+            return to_route($dashboard);
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ]);
     }
 
-    return back()->withErrors([
-        'email' => 'Invalid credentials.',
-    ]);
-}
 
+    //logout
+    public function logout(Request $request){
+        $this->AuthService->logout();
 
-public function logout(Request $request)
-{
-    $this->AuthService->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return to_route('home');
-}
+        return to_route('home');
+    }
 
 }
