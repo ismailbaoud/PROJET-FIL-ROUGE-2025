@@ -11,9 +11,27 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 
+    //index
     public function index()
     {
-
-        return view('pages.entreprise/entreprise');
+        $entreprise = Auth::user();
+    
+        $programs = Program::where('user_id', $entreprise->id)
+                           ->latest()
+                           ->take(3)
+                           ->get();
+    
+        $programIds = $programs->pluck('id');
+    
+        $reports = Report::whereIn('program_id', $programIds)
+                         ->latest()
+                         ->take(4)
+                         ->get();
+        
+        return view('pages.entreprise/entreprise', compact('programs', 'reports'));
     }
+    
+    
+
+
 }
