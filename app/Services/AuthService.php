@@ -33,8 +33,8 @@ class AuthService
 
     public function createProfile(array $data){
         Profile::create([
-            'name' => $data['companyName'],
-            'url' => $data['accountUrl'],
+            'companyName' => $data['companyName'],
+            'companyUrl' => $data['companyUrl'],
             'country' =>$data['country'],
             'state' =>$data['state'],
             'user_id' => User::latest()->first()->id
@@ -42,7 +42,7 @@ class AuthService
     }
 
     public function login(array $data)
-{
+    {
     
     $credentials = [
         'email' => $data['email'],
@@ -55,19 +55,19 @@ class AuthService
 
         return match ($user->role) {
             'hunter' => 'hunterDashboard',
-            'entreprise' => 'entrepriseDashboard',
+            'entreprise' => 'showEntrepriseDashboard',
             'admin' => 'adminDashboard',
             default => null,
         };
     }
 
     return null; 
-}
+    }
 
-public function logout()
-{
-    Auth::logout();
-}
+    public function logout()
+    {
+        Auth::logout();
+    }
 
 
 }
