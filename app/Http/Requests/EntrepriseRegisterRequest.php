@@ -26,7 +26,7 @@ class EntrepriseRegisterRequest extends FormRequest
             "businessEmail"=>"email",
             "password"=>"required | min:8",
             "companyName"=>"required",
-            "accountUrl"=>"required",
+            "companyUrl"=>"required",
             "country"=>"required",
             "state"=>"required",
         ];
