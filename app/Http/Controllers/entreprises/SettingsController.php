@@ -9,7 +9,11 @@ use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
 {
+
+   //index
    public function index(){
     return view('pages.entreprise/settings');
    }
+
+   
 }
