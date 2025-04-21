@@ -21,9 +21,9 @@
     </div>
     <div class="bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9]">
         <div class="w-full max-w-6xl mx-auto px-4 py-8">
-            <form action="/EntrepriseRegister" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <form action="{{ route('entrepriseRegister') }}" method="POST"
+                class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                 @csrf
-                <!-- Step 1: Company Details -->
                 <div class="space-y-6">
                     <h2 class="text-xl font-medium text-gray-700">Step 1: Company Details</h2>
 
@@ -35,7 +35,7 @@
 
                     <div class="space-y-2">
                         <label for="accountUrl" class="block text-gray-700">Account URL</label>
-                        <input id="accountUrl" name="accountUrl" type="text"
+                        <input id="accountUrl" name="companyUrl" type="text"
                             class="w-full h-12 px-3 bg-white rounded-md border border-black focus:outline-none focus:ring-1 focus:ring-gray-500" />
                     </div>
 
@@ -53,7 +53,6 @@
                     </div>
                 </div>
 
-                <!-- Step 2: Security Contact Information -->
                 <div class="space-y-6">
                     <h2 class="text-xl font-medium text-gray-700">Step 2: Security Contact Information</h2>
 
@@ -76,7 +75,6 @@
                     </div>
                 </div>
 
-                <!-- Terms and Submit Button - Full Width -->
                 <div class="md:col-span-2 space-y-6 mt-4 text-center">
                     <div class="flex items-center space-x-2 justify-center">
                         <input type="checkbox" id="terms"
