@@ -5,13 +5,22 @@ namespace App\Http\Controllers\entreprises;
 use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
 
-    //index
-    public function index(){
-        return view('pages.entreprise/reports');
+    public function index()
+    {
+        $userId = Auth::id();
+    
+        $reports = Report::with('program')
+            ->whereHas('program', function($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->paginate(6);
+
+        return view('pages.entreprise.reports', compact('reports'));
     }
 
 
