@@ -15,8 +15,13 @@ return new class extends Migration
         $table->id();
         $table->foreignId('program_id')->constrained()->onDelete('cascade');
         $table->string('target');
-        $table->enum('target_type', ['web', 'mobile', 'api', 'other']);
-        $table->enum('type', ['in', 'out']);
+        $table->enum('target_type', [
+            'web',
+            'mobile',
+            'api',
+            'cloud',
+            'other'
+        ]);        $table->enum('type', ['in', 'out']);
         $table->text('instructions')->nullable();
         $table->timestamps();
     });
