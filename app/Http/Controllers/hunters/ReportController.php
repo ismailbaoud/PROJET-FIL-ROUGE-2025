@@ -27,12 +27,13 @@ class ReportController extends Controller
             'description' => 'required|string',
             'type' => 'required|string|max:50',
             'program_id' => 'required',
+            'severity' => 'required'
         ]);
-
         Report::create([
             'title' => $request->title,
             'description' => $request->description,
             'type' => $request->type,
+            'severitie' => $request->severity,
             'user_id' => Auth::user()->id,
             'program_id' => $request->program_id,
         ]);
@@ -48,24 +49,18 @@ class ReportController extends Controller
     }
 
 
-    //update
-    public function update(Request $request, $id){
+    //update status
+    public function updateStatus(Request $request, $id){
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'type' => 'required|string|max:50',
             'status' => 'required|string|in:open,closed,pending',
         ]);
 
         $report = Report::findOrFail($id);
         $report->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'type' => $request->type,
             'status' => $request->status,
         ]);
 
-        return back()->with('success', 'Report updated successfully!');
+        return back()->with('success', 'Report status updated successfully!');
     }
 
 
