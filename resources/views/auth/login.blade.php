@@ -2,14 +2,13 @@
 
 @Section('main')
     <div class="min-h-screen flex flex-col md:flex-row items-center justify-center p-4 space-y-6 md:space-y-0 md:space-x-20">
-        <!-- Login Form Card -->
         <div class="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
             <div class="mb-6 text-center">
                 <h1 class="text-2xl font-bold text-black">Secure the Web. Join the Hunt.</h1>
                 <p class="mt-2 text-gray-600">Log in to HappyHunt and start hunting or managing your security program.</p>
             </div>
 
-            <form action="/login" method="post" class="space-y-4">
+            <form action="{{ route('login') }}" method="post" class="space-y-4">
                 @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
@@ -68,7 +67,6 @@
             </div>
         </div>
 
-        <!-- Illustration -->
         <div class="w-full md:w-1/3 flex justify-center">
             <img src="{{ asset('images/login.svg') }}" alt="Sign Up" class="max-w-full h-auto">
         </div>
