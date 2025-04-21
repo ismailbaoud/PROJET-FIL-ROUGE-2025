@@ -15,8 +15,27 @@ return new class extends Migration
         $table->id();
         $table->string('title');
         $table->text('description');
-        $table->string('type'); // مثلاً: XSS, SQLi, CSRF...
-        $table->enum('status', ['open', 'pending', 'closed'])->default('pending');
+        $table->string('type');
+        $table->decimal('reward')->default(0);
+        
+        
+        $table->integer('pointe')->default(0);
+        $table->enum('status', ['new',
+            'triaged',
+            'needs_more_info',
+            'duplicate',
+            'informative',
+            'not_applicable',
+            'not_reproducible',
+            'resolved',
+            'wont_fix',
+            'spam'])->default('new');
+        
+        $table->enum('severitie', ['Low',
+        'Medium',
+        'High',
+        'Critical']);
+
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('program_id')->constrained()->onDelete('cascade');
         $table->timestamps();
