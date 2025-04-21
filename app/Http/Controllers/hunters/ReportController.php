@@ -49,7 +49,7 @@ class ReportController extends Controller
     }
 
 
-    //update status
+    //update
     public function updateStatus(Request $request, $id){
         $request->validate([
             'status' => 'required|string|in:open,closed,pending',
