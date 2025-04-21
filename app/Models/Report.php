@@ -8,7 +8,7 @@ class Report extends Model
 {
     
     protected $fillable = [
-        'title', 'description', 'type', 'status', 'user_id', 'program_id',
+        'title', 'description', 'type', 'status','severitie', 'user_id', 'program_id',
     ];
 
     public function user(){
