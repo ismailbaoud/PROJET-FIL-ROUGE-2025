@@ -55,24 +55,18 @@ class ReportController extends Controller
     }
 
 
-    //update
-    public function update(Request $request, $id){
+    //update status
+    public function updateStatus(Request $request, $id){
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'type' => 'required|string|max:50',
             'status' => 'required|string|in:open,closed,pending',
         ]);
 
         $report = Report::findOrFail($id);
         $report->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'type' => $request->type,
             'status' => $request->status,
         ]);
 
-        return back()->with('success', 'Report updated successfully!');
+        return back()->with('success', 'Report status updated successfully!');
     }
 
     //delete
