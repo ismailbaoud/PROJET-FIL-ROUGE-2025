@@ -14,13 +14,15 @@ return new class extends Migration
     Schema::create('reports', function (Blueprint $table) {
         $table->id();
         $table->string('title');
-        $table->text('description');
         $table->string('type');
-        $table->decimal('reward')->default(0);
-        
-        
-        $table->integer('pointe')->default(0);
-        $table->enum('status', ['new',
+        $table->string('target');
+        $table->text('steps'); 
+        $table->text('impact');
+        $table->text('poc')->nullable(); 
+        $table->decimal('reward')->default(0); 
+        $table->integer('pointe')->default(0); 
+        $table->enum('status', [
+            'new',
             'triaged',
             'needs_more_info',
             'duplicate',
@@ -29,17 +31,18 @@ return new class extends Migration
             'not_reproducible',
             'resolved',
             'wont_fix',
-            'spam'])->default('new');
-        
-        $table->enum('severitie', ['Low',
-        'Medium',
-        'High',
-        'Critical']);
-
+            'spam'
+        ])->default('new');
+    
+        $table->enum('severity', ['Low', 'Medium', 'High', 'Critical']); 
+    
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('program_id')->constrained()->onDelete('cascade');
+    
         $table->timestamps();
     });
+    
+    
 }
 
 

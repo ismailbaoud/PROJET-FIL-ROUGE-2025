@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
         $table->id();
-        $table->string('companyName');
-        $table->string('companyUrl');
+        $table->string('companyName')->nullable();
+        $table->string('companyUrl')->nullable();
         $table->text('country');
         $table->text('content_vusial')->nullable();
         $table->string('state');
