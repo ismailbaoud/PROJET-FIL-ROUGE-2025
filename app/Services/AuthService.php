@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,16 +26,24 @@ class AuthService
     public function createUserEntreprise(array $data) 
     {
         User::create(['userName' => $data['fullName'],
-            'email' => $data['businessEmail'],
-            'password' => $data['password'],
-            'role' => 'entreprise'
+                      'email' => $data['businessEmail'],
+                      'password' => $data['password'],
+                      'role' => 'entreprise'
         ]);
     }
 
-    public function createProfile(array $data){
+    public function createEntrepriseProfile(array $data){
         Profile::create([
             'companyName' => $data['companyName'],
             'companyUrl' => $data['companyUrl'],
+            'country' =>$data['country'],
+            'state' =>$data['state'],
+            'user_id' => User::latest()->first()->id
+        ]);
+    }
+
+    public function createHunterProfile(array $data){
+        Profile::create([
             'country' =>$data['country'],
             'state' =>$data['state'],
             'user_id' => User::latest()->first()->id
