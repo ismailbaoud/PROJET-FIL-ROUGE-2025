@@ -1,388 +1,290 @@
 @extends('layouts.app')
 
-@Section('main')
-    <div class="flex h-screen">
-        @include('partials.entreprise.sidebar')
-        <div class="flex-1 flex flex-col">
-            @include('partials.entreprise.header')
-            <!-- Main Content Area -->
-            <main class="flex-1 p-6 overflow-auto bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-                <div class="max-w-7xl mx-auto">
-                    <!-- Reports Header -->
-                    <div class="flex justify-between items-center mb-8">
-                        <div>
-                            <h2 class="text-2xl font-semibold text-gray-900">Security Reports</h2>
-                            <p class="text-gray-500 mt-1">Manage vulnerability reports across all your programs</p>
+@section('main')
+<div class="flex h-screen bg-gray-50">
+    @include('partials.entreprise.sidebar')
+    
+    <div class="flex-1 flex flex-col overflow-hidden">
+        @include('partials.entreprise.header')
+        
+        <main class="flex-1 overflow-auto bg-gradient-to-br from-white to-gray-50 p-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Security Reports Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                            Vulnerability Reports Dashboard
+                        </h1>
+                        <p class="text-gray-600 mt-1">Manage and triage security reports across all programs</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Advanced Filters -->
+                <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 mb-6">
+                    <form method="GET" >
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex flex-wrap gap-3">
+                                <div class="relative">
+                                    <select name="program_id" class="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full md:w-48">
+                                        <option value="">All Programs</option>
+                                        @foreach($reports as $report)
+                                            <option value="{{ $report->program->id }}" {{ request('program_id') == $report->program->id ? 'selected' : '' }}>{{ $report->program->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative">
+                                    <select name="severity" class="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full md:w-48">
+                                        <option value="">All Severities</option>
+                                        <option value="Critical" {{ request('severity') == 'Critical' ? 'selected' : '' }}>Critical</option>
+                                        <option value="High" {{ request('severity') == 'High' ? 'selected' : '' }}>High</option>
+                                        <option value="Medium" {{ request('severity') == 'Medium' ? 'selected' : '' }}>Medium</option>
+                                        <option value="Low" {{ request('severity') == 'Low' ? 'selected' : '' }}>Low</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative">
+                                    <select name="status" class="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full md:w-48">
+                                        <option value="">All Statuses</option>
+                                        <option value="New" {{ request('status') == 'New' ? 'selected' : '' }}>New</option>
+                                        <option value="Triaging" {{ request('status') == 'Triaging' ? 'selected' : '' }}>Triaging</option>
+                                        <option value="Accepted" {{ request('status') == 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                                        <option value="Resolved" {{ request('status') == 'Resolved' ? 'selected' : '' }}>Resolved</option>
+                                        <option value="Rejected" {{ request('status') == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative w-full md:w-64">
+                                <input type="text" name="search" placeholder="Search reports..." value="{{ request('search') }}" class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute left-3 top-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
                         </div>
-                        <div class="flex space-x-3">
-                            <button
-                                class="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-md hover:bg-gray-50">
-                                Export Reports
-                            </button>
-                            <button class="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800">
-                                Generate Analytics
-                            </button>
+                    </form>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Reports</p>
+                                <p class="mt-1 text-2xl font-bold text-gray-900">{{ $reports->total() }}</p>
+                            </div>
+                            <div class="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Reports Controls -->
-                    <div class="bg-gray-50 p-4 rounded-lg mb-6 flex flex-wrap gap-4 items-center justify-between">
-                        <div class="flex gap-3">
-                            <select
-                                class="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm">
-                                <option>All Programs</option>
-                                <option>Microsoft Windows</option>
-                                <option>Microsoft Azure</option>
-                                <option>Microsoft 365</option>
-                                <option>Xbox Live</option>
-                            </select>
-                            <select
-                                class="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm">
-                                <option>All Severities</option>
-                                <option>Critical</option>
-                                <option>High</option>
-                                <option>Medium</option>
-                                <option>Low</option>
-                            </select>
-                            <select
-                                class="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm">
-                                <option>All Statuses</option>
-                                <option>New</option>
-                                <option>Triaging</option>
-                                <option>Accepted</option>
-                                <option>Resolved</option>
-                                <option>Rejected</option>
-                            </select>
-                        </div>
-                        <div class="flex gap-3">
-                            <select
-                                class="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 text-sm">
-                                <option>Sort: Newest First</option>
-                                <option>Oldest First</option>
-                                <option>Highest Severity</option>
-                                <option>Highest Bounty</option>
-                            </select>
-                            <button
-                                class="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-md hover:bg-gray-50 text-sm">
-                                Bulk Actions
-                            </button>
+                    
+                    <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Pending Review</p>
+                                <p class="mt-1 text-2xl font-bold text-blue-600">{{ $reports->where('status', 'New')->count() + $reports->where('status', 'Triaging')->count() }}</p>
+                            </div>
+                            <div class="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Reports Summary Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-white p-4 border border-gray-200 rounded-lg">
-                            <div class="text-sm font-medium text-gray-500">Total Reports</div>
-                            <div class="mt-1 text-2xl font-semibold text-gray-900">247</div>
-                        </div>
-                        <div class="bg-white p-4 border border-gray-200 rounded-lg">
-                            <div class="text-sm font-medium text-gray-500">Pending Review</div>
-                            <div class="mt-1 text-2xl font-semibold text-blue-600">42</div>
-                        </div>
-                        <div class="bg-white p-4 border border-gray-200 rounded-lg">
-                            <div class="text-sm font-medium text-gray-500">Accepted</div>
-                            <div class="mt-1 text-2xl font-semibold text-green-600">183</div>
-                        </div>
-                        <div class="bg-white p-4 border border-gray-200 rounded-lg">
-                            <div class="text-sm font-medium text-gray-500">Rejected</div>
-                            <div class="mt-1 text-2xl font-semibold text-gray-600">22</div>
+                    
+                    <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Accepted</p>
+                                <p class="mt-1 text-2xl font-bold text-green-600">{{ $reports->where('status', 'Accepted')->count() }}</p>
+                            </div>
+                            <div class="h-10 w-10 rounded-lg bg-green-50 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Reports Table -->
-                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Report ID
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Title
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Program
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Severity
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Reported
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Bounty
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Report Row 1 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1842
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">Remote Code Execution in Windows
-                                            Kernel</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Windows Security
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Critical
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                            Triaging
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 18, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Pending
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-green-600 hover:text-green-900">Accept</button>
-                                            <button class="text-red-600 hover:text-red-900">Reject</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Report Row 2 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1841
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">Authentication Bypass in Azure AD
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Azure Cloud Services
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Critical
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Accepted
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 17, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        $40,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-purple-600 hover:text-purple-900">Resolve</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Assign</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Report Row 3 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1840
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">XSS Vulnerability in SharePoint
-                                            Online</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Microsoft 365
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">
-                                            High
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Accepted
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 16, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        $8,500
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-purple-600 hover:text-purple-900">Resolve</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Assign</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Report Row 4 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1839
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">SSRF in GitHub Actions</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        GitHub Security
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">
-                                            High
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                                            Resolved
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 15, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        $12,000
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Reopen</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Archive</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Report Row 5 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1838
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">SQL Injection in Dynamics CRM</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Dynamics 365
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                            Medium
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                            New
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 14, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        Pending
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-green-600 hover:text-green-900">Accept</button>
-                                            <button class="text-red-600 hover:text-red-900">Reject</button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Report Row 6 -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        MS-2025-1837
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">Privilege Escalation in Xbox Live
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Xbox Live
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">
-                                            High
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Rejected
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        Mar 13, 2025
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        $0
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <div class="flex justify-end space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900">View</button>
-                                            <button class="text-green-600 hover:text-green-900">Reconsider</button>
-                                            <button class="text-gray-600 hover:text-gray-900">Archive</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="flex items-center justify-between mt-6">
-                        <div class="text-sm text-gray-500">
-                            Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span
-                                class="font-medium">247</span> reports
-                        </div>
-                        <div class="flex space-x-2">
-                            <button
-                                class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
-                                Previous
-                            </button>
-                            <button
-                                class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 bg-white hover:bg-gray-50">
-                                Next
-                            </button>
+                    
+                    <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Bounties</p>
+                                <p class="mt-1 text-2xl font-bold text-gray-900">${{ number_format($reports->whereNotNull('reward')->sum('reward'), 0) }}</p>
+                            </div>
+                            <div class="h-10 w-10 rounded-lg bg-purple-50 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+
+                <!-- Reports Table -->
+                <div class="bg-white rounded-xl shadow-xs overflow-hidden border border-gray-200">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report ID</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vulnerability</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Severity</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reported</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bounty</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report by</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach($reports as $report)
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500">{{ $report->id }}</td>
+                                        <td class="px-6 py-4">
+                                            <div class="text-sm font-semibold text-gray-900">{{ $report->title }}</div>
+                                            <div class="text-xs text-gray-500 mt-1">{{ $report->type }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707  Mosk 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <span class="text-sm text-gray-900">{{ $report->program->title ?? 'Unknown' }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @php
+                                                $severity = match($report->severitie) {
+                                                'Critical' => ['label' => 'Critical', 'bg' => 'bg-red-100', 'text' => 'text-red-800'],
+                                                'High' => ['label' => 'High', 'bg' => 'bg-orange-100', 'text' => 'text-orange-800'],
+                                                'Medium' => ['label' => 'Medium', 'bg' => 'bg-yellow-100', 'text' => 'text-yellow-800'],
+                                                default => ['label' => 'Low', 'bg' => 'bg-green-100', 'text' => 'text-green-800'],
+                                            };
+                                            @endphp
+
+                                            <span class="px-2 py-1 inline-flex text-xs leading-4 font-bold rounded-full {{ $severity['bg'] }} {{ $severity['text'] }} uppercase">
+                                                {{ $report->severitie }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @php
+                                                $statusStyles = match($report->status) {
+                                                    'New' => 'bg-gray-100 text-gray-800',
+                                                    'Triaging' => 'bg-blue-100 text-blue-800',
+                                                    'Accepted' => 'bg-green-100 text-green-800',
+                                                    'Resolved' => 'bg-purple-100 text-purple-800',
+                                                    'Rejected' => 'bg-red-100 text-red-800',
+                                                    default => 'bg-gray-100 text-gray-800'
+                                                };
+                                            @endphp
+                                            <span class="px-2 py-1 inline-flex text-xs leading-4 font-medium rounded-full {{ $statusStyles }}">
+                                                {{ $report->status }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <div class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                {{ $report->created_at->format('M d, Y') }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <div class="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                {{ $report->reward ? '$' . number_format($report->reward, 0) : 'Pending' }}
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <a href="{{ route('hunter.profile', $report->user->id) }}" class="flex items-center justify-end gap-2 hover:underline">
+                                                <img src="{{ asset('storage/' . ($report->user->profile->content_vusial ?? 'default.png')) }}"
+                                                     alt="User Avatar"
+                                                     class="w-8 h-8 rounded-full object-cover shadow" />
+                                                <span class="text-gray-800 font-semibold">
+                                                    {{ $report->user->userName ?? 'Unknown' }}
+                                                </span>
+                                            </a>
+                                        </td>
+                                        
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="flex justify-end space-x-3">
+                                                <a href="" class="text-blue-600 hover:text-blue-900 flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                    </svg>
+                                                </a>
+                                                <form action="{{ route('entreprise_report_update' , $report->id) }}" method="POST" id="status-form-{{ $report->id }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <select name="status" 
+                                                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                                            onchange="document.getElementById('status-form-{{ $report->id }}').submit();"
+                                                            >
+                                                        <option value="new" {{ $report->status == 'new' ? 'selected' : '' }}>New</option>
+                                                        <option value="triaged" {{ $report->status == 'triaged' ? 'selected' : '' }}>Triaged</option>
+                                                        <option value="needs_more_info" {{ $report->status == 'needs_more_info' ? 'selected' : '' }}>Needs More Info</option>
+                                                        <option value="duplicate" {{ $report->status == 'duplicate' ? 'selected' : '' }}>Duplicate</option>
+                                                        <option value="informative" {{ $report->status == 'informative' ? 'selected' : '' }}>Informative</option>
+                                                        <option value="not_applicable" {{ $report->status == 'not_applicable' ? 'selected' : '' }}>Not Applicable</option>
+                                                        <option value="not_reproducible" {{ $report->status == 'not_reproducible' ? 'selected' : '' }}>Not Reproducible</option>
+                                                        <option value="resolved" {{ $report->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
+                                                        <option value="wont_fix" {{ $report->status == 'wont_fix' ? 'selected' : '' }}>Won't Fix</option>
+                                                        <option value="spam" {{ $report->status == 'spam' ? 'selected' : '' }}>Spam</option>
+                                                    </select>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex flex-col sm:flex-row items-center justify-between mt-6">
+                    <div class="text-sm text-gray-500 mb-4 sm:mb-0">
+                        Showing <span class="font-medium">{{ $reports->firstItem() }}</span> to <span class="font-medium">{{ $reports->lastItem() }}</span> of <span class="font-medium">{{ $reports->total() }}</span> reports
+                    </div>
+                    <div class="flex space-x-2">
+                        {{ $reports->appends(request()->query())->links('pagination::tailwind') }}
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
+</div>
 @endsection

@@ -6,11 +6,8 @@
         @include('partials.entreprise.sidebar')
         <div class="flex-1 flex flex-col">
             @include('partials.entreprise.header')
-
-            <!-- Main Content Area -->
             <main class="flex-1 p-6 overflow-auto bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
                 <div class="max-w-7xl mx-auto">
-                    <!-- Payment Header -->
                     <div class="flex justify-between items-center mb-8">
                         <div>
                             <h2 class="text-2xl font-semibold text-gray-900">Bounty Payments</h2>
@@ -27,7 +24,6 @@
                         </div>
                     </div>
 
-                    <!-- Account Summary Cards -->
                     <div class="grid grid-cols-3 gap-6 mb-8">
                         <div class="bg-white p-6 border border-gray-200 rounded-lg">
                             <div class="text-sm font-medium text-gray-500">Available Balance</div>
@@ -46,7 +42,6 @@
                         </div>
                     </div>
 
-                    <!-- Payment Method -->
                     <div class="bg-white p-6 border border-gray-200 rounded-lg mb-8">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-lg font-medium text-gray-900">Payment Method</h3>
@@ -64,7 +59,6 @@
                         </div>
                     </div>
 
-                    <!-- Pending Payments Tab Navigation -->
                     <div class="border-b border-gray-200 mb-6">
                         <nav class="-mb-px flex space-x-8">
                             <a href="#"
@@ -82,7 +76,6 @@
                         </nav>
                     </div>
 
-                    <!-- Pending Payments Controls -->
                     <div class="bg-gray-50 p-4 rounded-lg mb-6 flex flex-wrap gap-4 items-center justify-between">
                         <div class="flex gap-3">
                             <select
@@ -113,7 +106,6 @@
                         </div>
                     </div>
 
-                    <!-- Pending Payments Table -->
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden mb-8">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -154,7 +146,6 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Payment Row 1 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox"
@@ -191,7 +182,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- Payment Row 2 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox"
@@ -228,7 +218,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- Payment Row 3 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox"
@@ -265,7 +254,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- Payment Row 4 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox"
@@ -301,7 +289,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- Payment Row 5 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="checkbox"
@@ -340,7 +327,6 @@
                         </table>
                     </div>
 
-                    <!-- Bulk Payment Modal (Hidden by default) -->
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="payment-modal">
                         <div class="flex items-center justify-center min-h-screen">
                             <div class="bg-white rounded-lg max-w-md w-full p-6">
@@ -396,7 +382,6 @@
                         </div>
                     </div>
 
-                    <!-- Add Funds Modal (Hidden by default) -->
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="add-funds-modal">
                         <div class="flex items-center justify-center min-h-screen">
                             <div class="bg-white rounded-lg max-w-md w-full p-6">

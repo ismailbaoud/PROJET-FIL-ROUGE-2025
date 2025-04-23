@@ -1,93 +1,171 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        @include('partials.entreprise.sidebar')
-        <div class="flex-1 flex flex-col">
-            @include('partials.entreprise.header')
-            <!-- Main Content -->
-            <main class="flex-1 ml-64 flex flex-col h-screen bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-
-                <div class="flex-1 overflow-auto p-6">
-                    <!-- Welcome -->
-                    <h1 class="text-2xl font-semibold text-gray-900 mb-6">Welcome back, John!</h1>
-
-                    <!-- Stats Section -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                        @foreach ([['value' => '12', 'label' => 'Active Programs'], ['value' => '45', 'label' => 'Pending Reports'], ['value' => '$24.5k', 'label' => 'Rewards Paid'], ['value' => '89%', 'label' => 'Response Rate']] as $stat)
-                            <div class="bg-white shadow rounded-md p-6">
-                                <div class="text-3xl font-semibold text-gray-900">{{ $stat['value'] }}</div>
-                                <div class="text-gray-600 mt-1">{{ $stat['label'] }}</div>
-                            </div>
-                        @endforeach
+<div class="flex flex-col md:flex-row h-screen bg-gray-50">
+    @include('partials.entreprise.sidebar')
+    <div class="flex-1 flex flex-col overflow-hidden">
+        @include('partials.entreprise.header')
+        
+        <main class="flex-1 overflow-auto bg-gradient-to-br from-white to-gray-50 p-4 md:p-6">
+            <!-- Header -->
+            <div class="max-w-7xl mx-auto mb-8 p-4 bg-white rounded-xl border-l-4 border-gray-900 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Bug Bounty Command Center</h1>
+                        <p class="text-gray-600">
+                            Welcome back, <span class="font-semibold text-gray-900">{{ Auth::user()->name }}</span>. 
+                            <span class="hidden md:inline">
+                                You have <span class="font-semibold text-green-600">{{ $reports->count() }} new reports today</span> requiring attention.
+                            </span>
+                        </p>
                     </div>
-
-                    <!-- Actions -->
-                    <div class="flex justify-between mb-6">
-                        <button
-                            class="bg-gray-900 hover:bg-gray-800 text-white rounded-md px-4 py-2 flex items-center gap-2">
-                            <i class="fas fa-plus text-sm"></i> Create New Program
-                        </button>
-                        <button class="bg-white text-gray-900 border border-gray-300 rounded-md px-4 py-2 hover:bg-gray-50">
-                            View All Reports
-                        </button>
+                    <div class="flex gap-2">
+                        <a href="" class="bg-gray-900 hover:bg-gray-800 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all">
+                            <i class="fas fa-bug"></i> New Program
+                        </a>
                     </div>
-
-                    <!-- Active Programs -->
-                    <section class="mb-8">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Active Programs</h2>
-                        <div class="bg-white shadow rounded-md overflow-hidden">
-                            <div class="grid grid-cols-4 p-4 border-b border-gray-300 text-gray-600">
-                                <div>Program Name</div>
-                                <div class="text-right">Status</div>
-                                <div class="text-right">Reports</div>
-                                <div class="text-right">Rewards</div>
-                            </div>
-                            @foreach ([['name' => 'Web Application Security', 'status' => 'Active', 'reports' => '24', 'reward' => '$12,000'], ['name' => 'Mobile App Security', 'status' => 'In Review', 'reports' => '18', 'reward' => '$8,500']] as $program)
-                                <div class="grid grid-cols-4 p-4 border-b border-gray-200">
-                                    <div class="text-gray-900">{{ $program['name'] }}</div>
-                                    <div
-                                        class="text-right {{ $program['status'] == 'Active' ? 'text-green-500' : 'text-gray-500' }}">
-                                        {{ $program['status'] }}
-                                    </div>
-                                    <div class="text-right text-gray-900">{{ $program['reports'] }}</div>
-                                    <div class="text-right text-gray-900">{{ $program['reward'] }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </section>
-
-                    <!-- Recent Reports -->
-                    <section>
-                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Recent Reports</h2>
-                        <div class="space-y-4">
-                            @foreach ([['name' => 'SQL Injection Vulnerability', 'reporter' => 'Alice Smith', 'time' => '2 hours ago', 'status' => 'Under Review'], ['name' => 'XSS in Search Function', 'reporter' => 'Bob Johnson', 'time' => '5 hours ago', 'status' => 'Approved']] as $report)
-                                <div class="bg-white shadow rounded-md p-4">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-4">
-                                            <div
-                                                class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                                                {{ substr($report['reporter'], 0, 2) }}
-                                            </div>
-                                            <div>
-                                                <div class="text-gray-900 font-medium">{{ $report['name'] }}</div>
-                                                <div class="text-gray-600 text-sm">Reported by {{ $report['reporter'] }} •
-                                                    {{ $report['time'] }}</div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="px-3 py-1 rounded-full text-sm {{ $report['status'] == 'Approved' ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600' }}">
-                                            {{ $report['status'] }}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </section>
-
                 </div>
-            </main>
-        </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                @foreach ([
+                    ['value' => $programs->count(), 'label' => 'Active Programs', 'icon' => 'fa-shield-alt', 'trend' => 'up'],
+                    ['value' => $reports->count(), 'label' => 'Pending Reports', 'icon' => 'fa-file-alt', 'trend' => 'up'],
+                    ['value' => '$24.5k', 'label' => 'Rewards Paid', 'icon' => 'fa-award', 'trend' => 'steady'],
+                    ['value' => '89%', 'label' => 'Response Rate', 'icon' => 'fa-bolt', 'trend' => 'down']
+                ] as $stat)
+                <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-2xl font-bold text-gray-900">{{ $stat['value'] }}</p>
+                            <p class="text-gray-600 text-sm">{{ $stat['label'] }}</p>
+                        </div>
+                        <div class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                            <i class="fas {{ $stat['icon'] }} text-gray-600"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center text-xs {{ $stat['trend'] == 'up' ? 'text-green-500' : ($stat['trend'] == 'down' ? 'text-red-500' : 'text-gray-500') }}">
+                        <i class="fas fa-arrow-{{ $stat['trend'] == 'up' ? 'up' : ($stat['trend'] == 'down' ? 'down' : 'right') }} mr-1"></i>
+                        {{ $stat['trend'] == 'up' ? '' : ($stat['trend'] == 'down' ? '' : 'No change') }} from last week
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <!-- Programs Table -->
+            <div class="max-w-7xl mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-bug text-green-500"></i> Active Security Programs
+                    </h2>
+                    <div class="relative w-full sm:w-64">
+                        <input type="text" placeholder="Search programs..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-xs overflow-hidden border border-gray-200">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scope</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Reports</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Rewards</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @forelse ($programs as $program)
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <div class="font-medium text-gray-900">{{ $program->title }}</div>
+                                        <div class="text-gray-500 text-xs">Created {{ $program->created_at->diffForHumans() }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">{{ $program->scope }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right text-sm font-medium text-gray-900">
+                                        {{ $program->reports_count ?? 0 }}
+                                    </td>
+                                    <td class="px-6 py-4 text-right text-sm font-medium text-gray-900">
+                                        {{ $program->reward_amount ?? '$0' }}
+                                    </td>
+                                    <td class="px-6 py-4 text-right text-sm font-medium">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $program->status == 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                                            {{ $program->status }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                        No active programs available.
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-shield-virus text-red-400"></i> Recent Vulnerability Reports
+                    </h2>
+                    <a href="" class="text-sm font-medium text-gray-900 hover:text-gray-600 flex items-center gap-1">
+                        View all <i class="fas fa-chevron-right text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    @forelse ($reports as $report)
+                    <div class="bg-white rounded-xl shadow-xs border border-gray-200 hover:shadow-md transition-all">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-start gap-3">
+                                    <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 mt-1">
+                                        <i class="fas fa-user-secret"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900">{{ $report->title }}</h3>
+                                        <p class="text-gray-600 text-sm">Reported by {{ $report->reporter_name }} • {{ $report->created_at->diffForHumans() }}</p>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 rounded-full text-xs font-medium 
+                                    {{ $report->severity == 'High' ? 'bg-red-100 text-red-800' : ($report->severity == 'Medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
+                                    {{ $report->severity }}
+                                </span>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                    {{ $report->status == 'Approved' ? 'bg-green-100 text-green-800' : ($report->status == 'Resolved' ? 'bg-gray-100 text-gray-800' : 'bg-blue-100 text-blue-800') }}">
+                                    {{ $report->status }}
+                                </span>
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ $report->bounty_amount ? 'Reward: $' . $report->bounty_amount : 'Bounty pending' }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-2 border-t border-gray-200 text-right">
+                            <a href="" class="text-xs font-medium text-gray-900 hover:text-gray-600 flex items-center gap-1">
+                                View details <i class="fas fa-chevron-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="col-span-full text-center text-gray-500 py-8">
+                        No vulnerability reports found.
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+        </main>
     </div>
+</div>
 @endsection
