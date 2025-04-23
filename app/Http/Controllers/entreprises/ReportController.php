@@ -14,15 +14,15 @@ class ReportController extends Controller
     {
         $userId = Auth::id();
     
-        $reports = Report::with('program')
+        $reports = Report::with(['program', 'user.profile'])
             ->whereHas('program', function($query) use ($userId) {
                 $query->where('user_id', $userId);
             })
             ->paginate(6);
-
+    
         return view('pages.entreprise.reports', compact('reports'));
     }
-
+    
 
     //create
     public function create(Request $request){
@@ -58,7 +58,7 @@ class ReportController extends Controller
     //update status
     public function updateStatus(Request $request, $id){
         $request->validate([
-            'status' => 'required|string|in:open,closed,pending',
+            'status' => 'required',
         ]);
 
         $report = Report::findOrFail($id);
