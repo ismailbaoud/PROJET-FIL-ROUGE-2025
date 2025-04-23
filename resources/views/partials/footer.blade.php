@@ -1,7 +1,6 @@
 <footer class=" text-black py-16 bg-gradient-to-b from-white via-white via-1% to-[#E8F5E9]">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Brand Section -->
             <div>
                 <h2 class="text-2xl font-bold mb-4">HappyHunt</h2>
                 <p class="text-gray-800">
@@ -10,7 +9,6 @@
                 </p>
             </div>
 
-            <!-- Platform Section -->
             <div>
                 <h2 class="text-xl font-semibold mb-4">Platform</h2>
                 <ul class="space-y-3">
@@ -21,7 +19,6 @@
                 </ul>
             </div>
 
-            <!-- Company Section -->
             <div>
                 <h2 class="text-xl font-semibold mb-4">Company</h2>
                 <ul class="space-y-3">
@@ -32,7 +29,6 @@
                 </ul>
             </div>
 
-            <!-- Legal Section -->
             <div>
                 <h2 class="text-xl font-semibold mb-4">Legal</h2>
                 <ul class="space-y-3">
@@ -43,7 +39,6 @@
             </div>
         </div>
 
-        <!-- Bottom Section -->
         <div class="mt-16 flex flex-col md:flex-row justify-between items-center">
             <div class="text-gray-400 mb-4 md:mb-0">
                 &copy; 2025 HappyHunt. All rights reserved.
@@ -62,7 +57,7 @@
                     <i class="fab fa-github text-black w-4 h-4"></i>
                 </a>
             </div>
-            
+
         </div>
     </div>
 </footer>
