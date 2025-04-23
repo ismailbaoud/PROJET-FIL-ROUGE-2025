@@ -25,7 +25,9 @@ class HunterRegisterRequest extends FormRequest
             "userName"=>"required",
             "email"=>"email",
             "password"=>"required | min:8",
-            "confirm-password"=>"required | min:8"
+            "confirm-password"=>"required | min:8",
+            "country"=>"required",
+            "state"=>"required",
         ];
     }
 }
