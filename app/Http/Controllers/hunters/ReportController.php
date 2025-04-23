@@ -6,47 +6,76 @@ use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
 
     //index
-    public function index(){
+
+    public function index()
+    {
         $user = Auth::user();
-        $programs = $user->joinedPrograms;
-        $reports = $user->reports()->with('program')->get();
+        $reports = $user->reports()->latest()->get();
+    
+        return view('pages.hunter.reports', compact('reports'));
+    }
+    
 
-        return view('pages.hunter/reports' , compact('programs', 'reports'));
+
+    
+    public function store(Request $request, $id)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'type' => 'required|in:SQL Injection,XSS,CSRF,RCE,Other',
+        'target' => 'required|string|max:255',
+        'steps' => 'required|string',
+        'impact' => 'required|string',
+        'poc' => 'required|file|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime', 
+        'severity' => 'required|in:Low,Medium,High,Critical',
+    ]);
+
+    $uploadPath = public_path('uploads/');
+
+    if (!File::exists($uploadPath)) {
+        File::makeDirectory($uploadPath, 0755, true);
     }
 
+    $file = $request->file('poc');
+    $filename = time() . '_' . $file->getClientOriginalName();
+    $file->move($uploadPath, $filename);
 
-    //create
-    public function store(Request $request){
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'type' => 'required|string|max:50',
-            'program_id' => 'required',
-            'severity' => 'required'
-        ]);
-        Report::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'type' => $request->type,
-            'severitie' => $request->severity,
-            'user_id' => Auth::user()->id,
-            'program_id' => $request->program_id,
-        ]);
+    $data = [
+        'title' => $validated['title'],
+        'type' => $validated['type'],
+        'target' => $validated['target'],
+        'steps' => $validated['steps'],
+        'impact' => $validated['impact'],
+        'severity' => $validated['severity'],
+        'user_id' => Auth::id(),
+        'program_id' => $id,
+        'poc' => $filename,
+    ];
 
-        return back()->with('success', 'Report created successfully!');
-    }
+    Report::create($data);
+
+    return back()->with('success', 'Report created successfully!');
+}
 
 
-    //show
-    public function show(){
 
-        return view('pages.hunter/reportDetails');
-    }
+
+public function show($id)
+{
+    $report = Report::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->firstOrFail(); 
+
+    return view('pages.hunter.reportDetails', compact('report'));
+}
+
 
 
     //update
@@ -73,6 +102,10 @@ class ReportController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', 'An error occurred while deleting the report.');
         }
+    }
+
+    public function showSubmitForm($id){
+        return view('pages.hunter.submitReport' ,compact('id'));
     }
     
 }
