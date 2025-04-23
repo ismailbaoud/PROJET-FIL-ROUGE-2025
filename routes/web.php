@@ -1,40 +1,97 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\entreprises\DashboardController as dashboardEntreprise;
+use App\Http\Controllers\entreprises\ProgramController as entrepriseProgram;
+use App\Http\Controllers\entreprises\ReportController as ReportEntreprise;
+use App\Http\Controllers\entreprises\ScopeController as scopeController;
+use App\Http\Controllers\entreprises\SettingsController as settingsEntroprise;
+
+use App\Http\Controllers\hunters\DashboardController as dashboardHunter;
+use App\Http\Controllers\hunters\LeaderboardController as LeaderboardController;
+use App\Http\Controllers\hunters\ProgramController as hunterPrograms;
+use App\Http\Controllers\hunters\ReportController as ReportHunter;
+use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
+
+
+//main routes (home & auth)
+
+    Route::get('/', [HomeController::class , 'index'])->name('home');
+    Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter'])->name('showRegisterHunter');
+    Route::post('/register', [AuthController::class , 'HunterRegister'])->name('hunterRegister');
+    Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise'])->name('showRegisterentreprise');
+    Route::post('/EntrepriseRegister', [AuthController::class , 'EntrepriseRegister'])->name('entrepriseRegister');
+    Route::get('/loginPage', [AuthController::class , 'showLogin'])->name('showLogin');
+    Route::post('/login', [AuthController::class , 'Login'])->name('login');
+    Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
+
+//end
 
 
 
-Route::get('/', [HomeController::class , 'index'])->name('home');
+//entreprise 
+
+    //dashboard
+    Route::get('/tr/dashboard', [dashboardEntreprise::class, 'index'])->name('showEntrepriseDashboard');
+
+    //programs
+    Route::get('/tr/programs', [entrepriseProgram::class, 'index'])->name('entreprisePrograms');
+    Route::post('/tr/programs/create', [entrepriseProgram::class, 'create'])->name('createProgram');
+    Route::post('/tr/programs/{id}/update', [entrepriseProgram::class, 'update']);
+    Route::delete('/tr/programs/{id}/delete', [entrepriseProgram::class, 'delete']);
+    
+    //scope
+    Route::get('/programs/{program}/scopes/create', [ScopeController::class, 'create'])->name('scopes.create');
+    Route::post('/programs/{program}/scopes', [ScopeController::class, 'store'])->name('scopes.store');
+    Route::get('/scopes/{scope}/edit', [ScopeController::class, 'edit'])->name('scopes.edit');
+    Route::put('/scopes/{scope}', [ScopeController::class, 'update'])->name('scopes.update');
+    Route::delete('/scopes/{scope}', [ScopeController::class, 'destroy'])->name('scopes.destroy');
+    
+    //settings
+    Route::get('/tr/settings', [settingsEntroprise::class, 'index'])->name('settingsEntreprise');
+    Route::post('/tr/settings/update', [settingsEntroprise::class, 'update'])->name('Entreprise_settings_update');
+
+    //reports
+    Route::get('/tr/reports', [ReportEntreprise::class, 'index'])->name('reportEntreprise');
+    Route::put('/tr/reports/{id}/update', [ReportEntreprise::class, 'updateStatus'])->name('entreprise_report_update');
+    
+    //end
+    
+    
+    
 //hunter
-Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter']);
-Route::post('/register', [AuthController::class , 'HunterRegister'])->name('register');
-Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise']);
-Route::post('/EntrepriseRegister', [AuthController::class , 'EntrepriseRegister']);
-Route::get('/loginPage', [AuthController::class , 'showLogin']);
-Route::post('/login', [AuthController::class , 'Login']);
-Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
+    
+    //dashboard
+    Route::get('/ht/dashboard', [dashboardHunter::class, 'index'])->name('hunterDashboard');
 
+    //programs
+    Route::get('/ht/programs', [hunterPrograms::class, 'index'])->name('programs');
+    Route::post('/programs/{id}/join', [hunterPrograms::class, 'joinProgram'])->name('programs.join');
+    Route::get('/ht/myprograms', [hunterPrograms::class, 'joinedPrograms']);
+    Route::get('/ht/program_details/{id}', [hunterPrograms::class, 'show'])->name('programDetails');
 
+    //reports
+    Route::get('/ht/reports', [ReportHunter::class, 'index'])->name('hunter_report_index');
+    Route::get('/ht/report/details/{id}', [ReportHunter::class, 'show'])->name('hunter_report_details');
+    Route::get('/ht/report/submit/{id}', [ReportHunter::class, 'showSubmitForm'])->name('hunter_report_submit');
+    Route::post('/ht/report/store/{id}', [ReportHunter::class, 'store'])->name('hunter_report_store');
+    Route::delete('/ht/report/{report}/delete', [ReportHunter::class, 'destroy'])->name('hunter_report_delete');
+    
+    //leaderboard
+    Route::get('/ht/leaderboard', [LeaderboardController::class , 'index'])->name('leaderBoard');
+    
+    //settings
+    Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
+    Route::post('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
+    Route::post('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
+    Route::post('/hunter/upload-avatar', [HunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
 
-// entreprises
-Route::get('/tr/dashboard', function () {
-    return view('pages.entreprise/entreprise');
-})->name("entrepriseDashboard");
-Route::get('/tr/payment', function () {
-    return view('pages.entreprise/payment');
-});
-Route::get('/tr/programs', function () {
-    return view('pages.entreprise/programs');
-});
-Route::get('/tr/reports', function () {
-    return view('pages.entreprise/reports');
-});
-Route::get('/tr/settings', function () {
-    return view('pages.entreprise/settings');
-});
+    //end
+    
 
 
 // administration 
@@ -62,27 +119,3 @@ Route::get('/dm/logs', function () {
 Route::get('/dm/settings', function () {
     return view('pages.admin/settings');
 });
-
-
-// hunter 
-Route::get('/ht/dashboard', function () {
-    return view('pages.hunter/hunter');
-})->name("hunterDashboard");
-
-Route::get('/ht/programs', function () {
-    return view('pages.hunter/programs');
-});
-Route::get('/ht/reports', function () {
-    return view('pages.hunter/reports');
-});
-Route::get('/ht/leaderboard', function () {
-    return view('pages.hunter/leaderboard');
-});
-Route::get('/ht/messages', function () {
-    return view('pages.hunter/messages');
-});
-Route::get('/ht/settings', function () {
-    return view('pages.hunter/settings');
-});
-
-
