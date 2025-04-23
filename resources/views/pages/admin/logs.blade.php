@@ -3,7 +3,6 @@
 
 @Section('main')
     <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar -->
         <div class="w-64 bg-white h-full flex flex-col">
             <div class="p-6 font-bold text-[#111827]">
                 Admin Panel
@@ -11,9 +10,7 @@
             @include('partials.admin.sidebar')
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-            <!-- Header -->
             <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
                 <h2 class="text-lg font-medium text-gray-900">Logs</h2>
                 <div class="flex items-center gap-3">
@@ -24,13 +21,11 @@
                 </div>
             </header>
 
-            <!-- Main Content Area -->
             <main class="flex-1 p-6 overflow-auto">
                 <div class="max-w-7xl mx-auto">
                     <div class="p-6 min-h-screen">
                         <h1 class="text-2xl font-bold text-gray-800 mb-6">Journal des Logs</h1>
 
-                        <!-- Search & Filter -->
                         <div class="mb-4 flex flex-col md:flex-row md:justify-between">
                             <input type="text" placeholder="🔍 Rechercher un log..."
                                 class="p-2 border rounded-md w-full md:w-1/3 mb-2 md:mb-0">
@@ -42,7 +37,6 @@
                             </select>
                         </div>
 
-                        <!-- Table -->
                         <div class="bg-white shadow-md rounded-lg overflow-hidden">
                             <table class="w-full border-collapse">
                                 <thead class="bg-gray-200">
@@ -83,10 +77,9 @@
                             </table>
                         </div>
 
-                        <!-- Add Log Button -->
                         <div class="mt-6">
                             <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                                ➕ Ajouter un Log
+                                Ajouter un Log
                             </a>
                         </div>
                     </div>

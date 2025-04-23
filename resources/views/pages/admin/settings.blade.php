@@ -3,7 +3,6 @@
 
 @Section('main')
     <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar -->
         <div class="w-64 bg-white h-full flex flex-col">
             <div class="p-6 font-bold text-[#111827]">
                 Admin Panel
@@ -11,9 +10,7 @@
             @include('partials.admin.sidebar')
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-            <!-- Header -->
             <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
                 <h2 class="text-lg font-medium text-gray-900">Paramètres</h2>
                 <div class="flex items-center gap-3">
@@ -24,13 +21,11 @@
                 </div>
             </header>
 
-            <!-- Main Content Area -->
             <main class="flex-1 p-6 overflow-auto">
                 <div class="max-w-7xl mx-auto">
                     <div class="p-6  min-h-screen">
                         <h1 class="text-2xl font-bold text-gray-800 mb-6">Paramètres de Configuration</h1>
 
-                        <!-- General Settings Section -->
                         <div class="mb-6">
                             <h2 class="text-xl font-semibold text-gray-700 mb-4">Paramètres Généraux</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -49,7 +44,6 @@
                             </div>
                         </div>
 
-                        <!-- Security Settings Section -->
                         <div class="mb-6">
                             <h2 class="text-xl font-semibold text-gray-700 mb-4">Paramètres de Sécurité</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -73,7 +67,6 @@
                             </div>
                         </div>
 
-                        <!-- Email Settings Section -->
                         <div class="mb-6">
                             <h2 class="text-xl font-semibold text-gray-700 mb-4">Paramètres de Notification Email</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -94,7 +87,6 @@
                             </div>
                         </div>
 
-                        <!-- Save Button -->
                         <div class="mt-6">
                             <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
                                 Sauvegarder les Paramètres

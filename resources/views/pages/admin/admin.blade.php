@@ -3,7 +3,6 @@
 
 @Section('main')
     <div class="flex h-screen ">
-        <!-- Sidebar (Fixed Width) -->
         <aside class="w-64 bg-white h-screen">
             <div class="p-6 font-bold text-[#111827]">
                 Admin Panel
@@ -11,7 +10,6 @@
             @include('partials.admin.sidebar')
         </aside>
 
-        <!-- Main Content (Flexible Width) -->
         <main class="flex-1 p-6 bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
             <header class="flex items-center justify-between border-b border-gray-300 pb-4">
                 <h2 class="text-lg font-semibold text-gray-900">Dashboard Overview</h2>
@@ -24,7 +22,6 @@
             </header>
 
             <div class="mt-6">
-                <!-- Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <div class="bg-white rounded-md p-6">
                         <div class="text-sm text-[#6b7280] mb-2">Active Users</div>
@@ -48,9 +45,7 @@
                     </div>
                 </div>
 
-                <!-- Two Column Layout -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                    <!-- Recent User Activity -->
                     <div class="bg-white rounded-md p-6">
                         <h2 class="text-xl font-semibold text-[#111827] mb-4">Recent User Activity</h2>
 
@@ -85,7 +80,6 @@
                         </div>
                     </div>
 
-                    <!-- Security Alerts -->
                     <div class="bg-white rounded-md p-6">
                         <h2 class="text-xl font-semibold text-[#111827] mb-4">Security Alerts</h2>
 
@@ -109,7 +103,6 @@
                     </div>
                 </div>
 
-                <!-- Report Moderation Queue -->
                 <div class="bg-white rounded-md p-6">
                     <h2 class="text-xl font-semibold text-[#111827] mb-4">Report Moderation Queue</h2>
 

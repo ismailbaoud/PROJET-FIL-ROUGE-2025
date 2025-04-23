@@ -19,7 +19,7 @@
                     </button>
                     <button
                         class="border-2 border-gray-800 px-8 py-4 text-lg md:text-xl rounded-lg font-semibold hover:bg-gray-800 hover:text-white transition duration-300 w-full md:w-auto">
-                        <a href="/register_entreprise">For Companys</a>
+                        <a href="{{ route('showRegisterentreprise') }}">For Companys</a>
                     </button>
                 </div>
             </div>
@@ -34,7 +34,6 @@
             </h2>
 
             <div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-10 w-full">
-                <!-- Card 1 -->
                 <div
                     class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 text-center mb-8 md:mb-0">
                     <div
@@ -53,7 +52,6 @@
                     </button>
                 </div>
 
-                <!-- Card 2 -->
                 <div
                     class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
                     <div
@@ -72,7 +70,6 @@
                     </button>
                 </div>
 
-                <!-- Card 3 -->
                 <div
                     class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
                     <div

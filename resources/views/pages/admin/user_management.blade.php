@@ -3,7 +3,6 @@
 
 @Section('main')
     <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar -->
         <div class="w-64 bg-white h-full flex flex-col">
             <div class="p-6 font-bold text-[#111827]">
                 Admin Panel
@@ -11,9 +10,7 @@
             @include('partials.admin.sidebar')
         </div>
 
-        <!-- Main Content -->
         <div class="flex-1 flex flex-col bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-            <!-- Header -->
             <header class="flex items-center  justify-between border-b border-gray-200 px-6 py-4">
                 <h2 class="text-lg font-medium text-gray-900">User Management</h2>
                 <div class="flex items-center gap-3">
@@ -24,10 +21,8 @@
                 </div>
             </header>
 
-            <!-- Main Content Area -->
             <main class="flex-1 p-6 overflow-auto">
                 <div class="max-w-7xl mx-auto">
-                    <!-- User Management Controls -->
                     <div class="flex justify-between items-center mb-6">
                         <div class="flex gap-3">
                             <div class="relative">
@@ -56,7 +51,6 @@
                         </button>
                     </div>
 
-                    <!-- User Stats -->
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                         <div class="bg-white p-4 border border-gray-200 rounded-lg">
                             <div class="text-sm font-medium text-gray-500">Total Users</div>
@@ -76,7 +70,6 @@
                         </div>
                     </div>
 
-                    <!-- Users Table -->
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
@@ -112,7 +105,6 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- User Row 1 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -152,7 +144,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- User Row 2 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -192,7 +183,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- User Row 3 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -232,7 +222,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- User Row 4 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -272,7 +261,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- User Row 5 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -312,7 +300,6 @@
                                     </td>
                                 </tr>
 
-                                <!-- User Row 6 -->
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -355,7 +342,6 @@
                         </table>
                     </div>
 
-                    <!-- Pagination -->
                     <div class="flex items-center justify-between mt-6">
                         <div class="text-sm text-gray-500">
                             Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span
@@ -376,7 +362,6 @@
             </main>
         </div>
 
-        <!-- Add User Modal (Hidden by default) -->
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="add-user-modal">
             <div class="flex items-center justify-center min-h-screen">
                 <div class="bg-white rounded-lg max-w-md w-full p-6">
@@ -444,7 +429,6 @@
             </div>
         </div>
 
-        <!-- Edit User Modal (Hidden by default) -->
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" id="edit-user-modal">
             <div class="flex items-center justify-center min-h-screen">
                 <div class="bg-white rounded-lg max-w-md w-full p-6">
