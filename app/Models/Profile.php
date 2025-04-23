@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     protected $fillable = [
-    'name',
-    'url',
+    'companyName',
+    'companyUrl',
+    'content_vusial',
     'country',
     'state',
     'user_id'];

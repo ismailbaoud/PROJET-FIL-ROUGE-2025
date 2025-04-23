@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
 
     public function Profile(){
-        return $this->hasOne();
+        return $this->hasOne(Profile::class);
     }
 
     public function createdPrograms(){
@@ -45,6 +45,28 @@ class User extends Authenticatable
     public function programs(){
         return $this->hasMany(Report::class, 'user_id');
     }
+
+    public function paymentInfo(){
+        return $this->hasOne(PaymentInfo::class);
+    }
+
+
+    public function wallet()
+    {
+        return $this->hasOne(EntrepriseWallet::class);
+    }
+
+
+
+    public function sentTransactions(){
+        return $this->hasMany(Transaction::class, 'from_user_id');
+    }
+
+    public function receivedTransactions(){
+        return $this->hasMany(Transaction::class, 'to_user_id');
+    }
+
+
 
 
     
