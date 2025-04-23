@@ -18,7 +18,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route("register")}}" method="post">
+                <form action="{{ route('hunterRegister') }}" method="post">
                     @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -35,7 +35,8 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label for="password" class="block  mt-4 text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <label for="password"
+                                class="block  mt-4 text-sm font-medium text-gray-700 mb-1">Password</label>
                             <input type="password" id="password" name="password"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                         </div>
@@ -43,6 +44,20 @@
                             <label for="confirm-password" class="block mt-4 text-sm font-medium text-gray-700 mb-1">Confirm
                                 Password</label>
                             <input type="password" id="confirm-password" name="confirm-password"
+                                class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="passwocountryrd"
+                                class="block  mt-4 text-sm font-medium text-gray-700 mb-1">country</label>
+                            <input type="text" id="country" name="country"
+                                class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="state" class="block mt-4 text-sm font-medium text-gray-700 mb-1">state</label>
+                            <input type="text" id="state" name="state"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                         </div>
                     </div>
