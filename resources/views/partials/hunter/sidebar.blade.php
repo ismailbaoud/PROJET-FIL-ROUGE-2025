@@ -1,54 +1,66 @@
-<aside class="w-64 text-black h-screen fixed flex flex-col ">
-    <div class="p-6 text-center">
-        <h1 class="text-2xl font-bold tracking-wide">HappyHunt</h1>
+<aside class="w-64 bg-gray-50 h-screen fixed flex flex-col">
+    <!-- Logo Section -->
+    <div class="p-2 border-b border-gray-200 flex items-center justify-center">
+        <img src="/images/3b8729e3-de16-4307-bc78-f92b553144e5-removebg-preview.png" alt="HappyHunt Logo" class="h-52 object-contain">
     </div>
 
-    <nav class="flex-1 px-4 py-4 flex flex-col space-y-4">
-        <div class="space-y-3">
+    <!-- Navigation Menu -->
+    <nav class="flex-1 px-3 py-4 flex flex-col">
+        <div class="space-y-1">
             <a href="/ht/dashboard"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-900 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-home text-gray-700"></i>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-home w-5 text-gray-500"></i>
                 <span>Dashboard</span>
             </a>
 
             <a href="/ht/programs"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-700 bg-gray-50 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-briefcase text-gray-700"></i>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-briefcase w-5 text-gray-500"></i>
                 <span>All Programs</span>
             </a>
 
             <a href="/ht/myprograms"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-700 bg-gray-50 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-briefcase text-gray-700"></i>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-folder-open w-5 text-gray-500"></i>
                 <span>My Programs</span>
             </a>
 
-
             <a href="/ht/reports"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-700 bg-gray-50 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-clipboard-list text-gray-700"></i>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-clipboard-list w-5 text-gray-500"></i>
                 <span>Reports</span>
             </a>
 
             <a href="{{ route('leaderBoard') }}"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-700 bg-gray-50 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-wallet text-gray-700"></i>
-                <span>leaderboard</span>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-trophy w-5 text-gray-500"></i>
+                <span>Leaderboard</span>
             </a>
 
             <a href="/ht/settings/{{Auth::id()}}"
-                class="flex items-center gap-4 px-5 py-4 text-sm font-medium text-gray-700 bg-gray-50 rounded-xl shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]">
-                <i class="fas fa-cogs text-gray-700"></i>
-                <span>settings</span>
-            </a>
-
-            <a>
-                <form method="POST" action="{{ route('logout') }}"
-                    class="flex text-white  items-center p-4 rounded-lg bg-gray-800 shadow-md hover:shadow-lg hover:bg-gray-700 transition duration-300">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
+                class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 rounded-md
+                       hover:bg-[#E8F5E9] hover:text-gray-900 transition-colors duration-200 border border-black">
+                <i class="fas fa-cog w-5 text-gray-500"></i>
+                <span>Settings</span>
             </a>
         </div>
     </nav>
+
+    <!-- Bottom Section -->
+    <div class="p-4 border-t border-gray-200">
+        <form method="POST" action="{{ route('logout') }}" class="w-full">
+            @csrf
+            <button type="submit" 
+                class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 rounded-md border border-black
+                       hover:bg-gray-100 transition-colors duration-200">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </form>
+    </div>
 </aside>
