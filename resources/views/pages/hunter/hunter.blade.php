@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="min-h-screen flex bg-gray-50">
+    <div class="min-h-screen flex">
         @include('partials.hunter.sidebar')
 
         <div class="flex-1 flex flex-col overflow-hidden">
             @include('partials.hunter.header')
 
-            <main class="flex-1 overflow-auto p-6">
+            <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
                 <div class="max-w-7xl mx-auto">
                     <!-- Welcome Card -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8 flex items-center">
                         <div class="relative">
                             <div
-                                class="h-16 w-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold mr-6 shadow-md">
+                                class="h-16 w-16 rounded-full bg-red-500
+                                -600 flex items-center justify-center text-white text-xl font-bold mr-6 shadow-md">
                                 CH
                             </div>
                             <span
@@ -37,7 +38,7 @@
                         <div
                             class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
                             <div class="text-gray-500 text-sm font-medium mb-2">Total Reports</div>
-                            <div class="text-3xl font-bold text-blue-600">247</div>
+                            <div class="text-3xl font-bold text-red-500">247</div>
                             <div class="mt-2 flex items-center text-xs text-green-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -99,7 +100,7 @@
                                 <p class="text-sm text-gray-500 mt-1">Programs currently accepting vulnerability reports</p>
                             </div>
                             <button
-                                class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                class="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition-colors text-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -145,7 +146,7 @@
                                                 </span>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <button class="text-blue-600 hover:text-blue-900">View Program</button>
+                                                <button class="text-red-500 hover:text-red-900">View Program</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -162,7 +163,7 @@
                                 <h2 class="text-xl font-bold text-gray-900">Recent Reports</h2>
                                 <p class="text-sm text-gray-500 mt-1">Your most recent vulnerability submissions</p>
                             </div>
-                            <button class="text-sm text-blue-600 hover:text-blue-800">View All</button>
+                            <button class="text-sm text-red-500 hover:text-red-800">View All</button>
                         </div>
                         <div class="space-y-4">
                             <!-- Critical Report -->
@@ -183,7 +184,7 @@
                                             </svg>
                                             {{ $report->time_diff }} • Under Review
                                         </div>
-                                        <button class="text-sm text-blue-600 hover:text-blue-800">View Details</button>
+                                        <button class="text-sm text-red-500 hover:text-red-800">View Details</button>
                                     </div>
                                 </div>
                             @endforeach

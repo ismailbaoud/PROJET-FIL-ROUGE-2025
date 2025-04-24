@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('main')
-<div class="flex min-h-screen bg-gray-50">
+<div class="flex min-h-screen">
     @include('partials.hunter.sidebar')
 
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.hunter.header')
 
-        <main class="flex-1 overflow-auto p-6">
+        <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
             <div class="max-w-4xl mx-auto">
                 <!-- Header -->
                 <div class="flex justify-between items-center mb-6">
