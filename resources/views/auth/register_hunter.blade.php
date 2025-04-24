@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @Section('main')
-    <div class="flex justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-center items-center min-h-screen px-4 sm:px-6 lg:px-8 bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9]">
+        <div class="w-full md:w-1/3 flex justify-center">
+            <img src="{{ asset('images/login.svg') }}" alt="Sign Up" class="max-w-full h-auto">
+        </div>
         <div class="w-full max-w-lg space-y-8">
             <div class="text-center">
                 <h2 class="mt-6 text-2xl font-bold text-gray-900">Create Your Hunter Account</h2>
             </div>
             <div class="mt-8 space-y-6">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <button
+                <div class="flex flex-col sm:flex-row w-full">
+                    <a href="{{ route('auth.github') }}"
+"
                         class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded bg-gray-900 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         Sign up with GitHub
-                    </button>
-                    <button
-                        class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                        Sign up with Google
-                    </button>
+                </a>
                 </div>
 
                 <form action="{{ route('hunterRegister') }}" method="post">
@@ -86,5 +86,6 @@
                 </form>
             </div>
         </div>
+        
     </div>
 @endsection
