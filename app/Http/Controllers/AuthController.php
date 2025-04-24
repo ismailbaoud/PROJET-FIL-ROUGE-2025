@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+
 
 class AuthController extends Controller
 {
@@ -103,6 +105,67 @@ class AuthController extends Controller
             'email' => 'Invalid credentials.',
         ]);
     }
+
+
+    public function redirectToGitHub(){
+        $query = http_build_query([
+            'client_id' => env('GITHUB_CLIENT_ID'),
+            'redirect_uri' => env('GITHUB_REDIRECT_URI'),
+            'scope' => 'read:user user:email',
+            'allow_signup' => 'true',
+        ]);
+
+        return redirect('https://github.com/login/oauth/authorize?' . $query);
+    }
+
+
+    public function handleGitHubCallback(Request $request){
+        $code = $request->get('code');
+
+        $response = Http::asForm()->post('https://github.com/login/oauth/access_token', [
+            'client_id' => env('GITHUB_CLIENT_ID'),
+            'client_secret' => env('GITHUB_CLIENT_SECRET'),
+            'code' => $code,
+            'redirect_uri' => env('GITHUB_REDIRECT_URI'),
+        ]);
+
+        parse_str($response->body(), $data);
+        $accessToken = $data['access_token'];
+
+        $userInfo = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+            'Accept' => 'application/json'
+        ])->get('https://api.github.com/user')->json();
+
+        $userEmail = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+            'Accept' => 'application/json'
+        ])->get('https://api.github.com/user/emails')->json();
+
+        $primaryEmail = collect($userEmail)->firstWhere('primary', true)['email'] ?? null;
+
+        $user = User::firstOrCreate(
+            ['email' => $primaryEmail],
+            [
+                'userName' => $userInfo['login'],
+                'password' => Hash::make(uniqid()),
+                'role' => 'hunter' 
+            ]
+        );
+
+        if ($user->wasRecentlyCreated) {
+            Profile::create([
+                'user_id' => $user->id,
+                'country' => 'unknown',
+                'state' => 'unknown'
+            ]);
+        }
+
+        Auth::login($user, true);
+
+        return to_route('hunterDashboard');
+    }
+
 
     // Handle logout
     public function logout(Request $request)
