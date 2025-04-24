@@ -6,7 +6,7 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.entreprise.header')
         
-        <main class="flex-1 overflow-auto bg-gradient-to-br from-white to-gray-50 p-4 md:p-6">
+        <main class="flex-1 overflow-auto p-4 md:p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
             <!-- Header -->
             <div class="max-w-7xl mx-auto mb-8 p-4 bg-white rounded-xl border-l-4 border-gray-900 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
