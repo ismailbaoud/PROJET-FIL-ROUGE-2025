@@ -10,12 +10,17 @@ use App\Http\Controllers\entreprises\ProgramController as entrepriseProgram;
 use App\Http\Controllers\entreprises\ReportController as ReportEntreprise;
 use App\Http\Controllers\entreprises\ScopeController as scopeController;
 use App\Http\Controllers\entreprises\SettingsController as settingsEntroprise;
+use App\Http\Controllers\entreprises\RewardController as RewardEntroprise;
 
 use App\Http\Controllers\hunters\DashboardController as dashboardHunter;
 use App\Http\Controllers\hunters\LeaderboardController as LeaderboardController;
 use App\Http\Controllers\hunters\ProgramController as hunterPrograms;
 use App\Http\Controllers\hunters\ReportController as ReportHunter;
 use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
+
+
+use App\Http\Controllers\admin\DashboardController as adminDashboard;
+use App\Http\Controllers\admin\UserManagmentController as adminUserManagement;
 
 
 //main routes (home & auth)
@@ -28,6 +33,9 @@ use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
     Route::get('/loginPage', [AuthController::class , 'showLogin'])->name('showLogin');
     Route::post('/login', [AuthController::class , 'Login'])->name('login');
     Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
+    Route::get('/auth/github', [AuthController::class, 'redirectToGitHub'])->name('auth.github');
+    Route::get('/auth/github/callback', [AuthController::class, 'handleGitHubCallback']);
+
 
 //end
 
@@ -58,11 +66,14 @@ use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
     //reports
     Route::get('/tr/reports', [ReportEntreprise::class, 'index'])->name('reportEntreprise');
     Route::put('/tr/reports/{id}/update', [ReportEntreprise::class, 'updateStatus'])->name('entreprise_report_update');
+
+    //rewards
+    Route::get('/tr/reward/{id}', [RewardEntroprise::class, 'index'])->name('entreprise_reward_index');
+    Route::post('/tr/reward/{user}/submit', [RewardEntroprise::class, 'submitReward'])->name('entreprise_reward_submit');
+    Route::get('/stripe/success', [RewardEntroprise::class, 'stripeSuccess'])->name('stripe.success');
+
     
     //end
-    
-    
-    
 //hunter
     
     //dashboard
@@ -76,7 +87,7 @@ use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
 
     //reports
     Route::get('/ht/reports', [ReportHunter::class, 'index'])->name('hunter_report_index');
-    Route::get('/ht/report/details/{id}', [ReportHunter::class, 'show'])->name('hunter_report_details');
+    Route::get('/report/details/{id}', [ReportEntreprise::class, 'show'])->name('hunter_report_details');
     Route::get('/ht/report/submit/{id}', [ReportHunter::class, 'showSubmitForm'])->name('hunter_report_submit');
     Route::post('/ht/report/store/{id}', [ReportHunter::class, 'store'])->name('hunter_report_store');
     Route::delete('/ht/report/{report}/delete', [ReportHunter::class, 'destroy'])->name('hunter_report_delete');
@@ -88,19 +99,15 @@ use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
     Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
     Route::post('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
     Route::post('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
-    Route::post('/hunter/upload-avatar', [HunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
+    Route::post('/hunter/upload-avatar', [hunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
 
     //end
     
 
 
 // administration 
-Route::get('/dm/dashboard', function () {
-    return view('pages.admin/admin');
-})->name('adminDashboard');
-Route::get('/dm/users', function () {
-    return view('pages.admin/user_management');
-});
+Route::get('/dm/dashboard', [adminDashboard::class , 'index'])->name('adminDashboard');
+Route::get('/dm/users', [adminUserManagement::class , 'index']);
 Route::get('/dm/programs', function () {
     return view('pages.admin/programs');
 });
