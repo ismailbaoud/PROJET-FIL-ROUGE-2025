@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Report;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ReportStatusChanged;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -19,8 +21,12 @@ class ReportController extends Controller
                 $query->where('user_id', $userId);
             })
             ->paginate(6);
+        
+            $user = Auth::user();
     
-        return view('pages.entreprise.reports', compact('reports'));
+            $profile = $user->profile;
+    
+        return view('pages.entreprise.reports', compact('reports', 'profile'));
     }
     
 
@@ -51,24 +57,27 @@ class ReportController extends Controller
     //show
     public function show($id){
         $report = Report::with(['user', 'program'])->findOrFail($id);
-        return view('pages.reports.show', compact('report'));
+        return view('pages.hunter/reportDetails', compact('report'));
     }
 
 
     //update status
+    
     public function updateStatus(Request $request, $id){
         $request->validate([
             'status' => 'required',
         ]);
-
+    
         $report = Report::findOrFail($id);
         $report->update([
             'status' => $request->status,
         ]);
-
-        return back()->with('success', 'Report status updated successfully!');
+    
+        Mail::to($report->user->email)->send(new ReportStatusChanged($report));
+    
+        return back()->with('success', 'Report status updated and email sent successfully!');
     }
-
+    
     //delete
     public function destroy($id){
         $report = Report::findOrFail($id);
