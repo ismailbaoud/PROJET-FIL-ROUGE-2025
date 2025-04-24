@@ -7,7 +7,7 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.entreprise.header')
         
-        <main class="flex-1 overflow-auto bg-gradient-to-br from-white to-gray-50 p-6">
+        <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
             <div class="max-w-7xl mx-auto">
                 <!-- Security Reports Header -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
@@ -134,7 +134,7 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Total Bounties</p>
-                                <p class="mt-1 text-2xl font-bold text-gray-900">${{ number_format($reports->whereNotNull('reward')->sum('reward'), 0) }}</p>
+                                <p class="mt-1 text-2xl font-bold text-gray-900">$ {{$profile->rewards}}</p>
                             </div>
                             <div class="h-10 w-10 rounded-lg bg-purple-50 flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,7 +159,6 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reported</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bounty</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report by</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
@@ -183,7 +182,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @php
-                                                $severity = match($report->severitie) {
+                                                $severity = match($report->severity) {
                                                 'Critical' => ['label' => 'Critical', 'bg' => 'bg-red-100', 'text' => 'text-red-800'],
                                                 'High' => ['label' => 'High', 'bg' => 'bg-orange-100', 'text' => 'text-orange-800'],
                                                 'Medium' => ['label' => 'Medium', 'bg' => 'bg-yellow-100', 'text' => 'text-yellow-800'],
@@ -192,7 +191,7 @@
                                             @endphp
 
                                             <span class="px-2 py-1 inline-flex text-xs leading-4 font-bold rounded-full {{ $severity['bg'] }} {{ $severity['text'] }} uppercase">
-                                                {{ $report->severitie }}
+                                                {{ $report->severity }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -240,11 +239,16 @@
                                         
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify-end space-x-3">
-                                                <a href="" class="text-blue-600 hover:text-blue-900 flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                <a href="{{ route('hunter_report_details', $report->id) }}"
+                                                    class="text-red-600 hover:text-red-800 flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                     </svg>
+                                                    View
                                                 </a>
                                                 <form action="{{ route('entreprise_report_update' , $report->id) }}" method="POST" id="status-form-{{ $report->id }}">
                                                     @csrf

@@ -7,7 +7,7 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.entreprise.header')
         
-        <main class="flex-1 overflow-auto bg-gradient-to-br from-white to-gray-50 p-6">
+        <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
             <div class="max-w-4xl mx-auto">
                 <!-- Header -->
                 <div class="mb-8">
