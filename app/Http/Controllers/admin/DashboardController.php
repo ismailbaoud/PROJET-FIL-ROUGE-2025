@@ -18,11 +18,11 @@ class DashboardController extends Controller
         $activeUsers = User::where('status', 'active')->get()->count();
         $totalReports = Report::get()->count();
         $totalPrograms = Program::get()->count();
-        $totalPayount = User::with('profile')->get()->sum(function ($user) {return $user->profile->rewards ?? 0;});
-        $reports = Report::with('user')->orderBy('created_at','desc')->take(2)->get();
-        $programs = Program::orderBy('created_at', 'desc')->take(2)->get();
-        $hunters = User::where('role', 'hunter')->where('status','EnAttent')->orderBy('created_at', 'desc')->take(2)->get();
-        $entreprises = User::where('role', 'entreprise')->where('status','EnAttent')->orderBy('created_at','desc')->take(2)->get();
+        $totalPayounts = User::with('profile')->get()->sum(function ($user) {return $user->profile->rewards ?? 0;});
+        $reports = Report::with('user')->latest()->take(2)->get();
+        $programs = Program::latest()->take(2)->get();
+        $hunters = User::where('role', 'hunter')->where('status','EnAttent')->latest()->take(2)->get();
+        $entreprises = User::where('role', 'entreprise')->where('status','EnAttent')->latest()->take(2)->get();
         return view('pages/admin/admin', compact('reports', 'programs', 'hunters' , 'entreprises', 'activeUsers','totalReports', 'totalPrograms', 'totalPayounts'));
     }
 
