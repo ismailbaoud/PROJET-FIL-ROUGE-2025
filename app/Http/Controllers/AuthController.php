@@ -31,7 +31,8 @@ class AuthController extends Controller
                 'userName' => $data['userName'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'role' => 'hunter'
+                'role' => 'hunter',
+                'status'=> 'active'
             ]);
 
             Profile::create([
