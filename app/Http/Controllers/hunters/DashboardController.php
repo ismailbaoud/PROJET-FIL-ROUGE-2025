@@ -14,17 +14,16 @@ class DashboardController extends Controller
 
     //index
     public function index(){
-        $hunter = Auth::user();
         
         $programs = Program::with('entreprise')
                             ->latest()
                             ->take(2)
-                            ->where('status', '=' , 'panding')
+                            ->where('status', '=' , 'accepte')
                             ->get();
         
         
 
-        $reports = Report::where('user_id', '=', $hunter->id)
+        $reports = Report::where('user_id', '=', Auth::user()->id)
                          ->latest()
                          ->take(2)
                          ->get()
@@ -33,8 +32,9 @@ class DashboardController extends Controller
                              return $report;
                          });
                             
-                           
-        return view('pages.hunter/hunter', compact('programs', 'reports'));
+        $totalReports = Report::get()->count();
+        $validatedReports = Program::where('status','resolved')->get()->count();    
+        return view('pages.hunter/hunter', compact('programs', 'reports', 'totalReports', 'validatedReports'));
     }
 
 
