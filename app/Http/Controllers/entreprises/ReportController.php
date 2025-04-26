@@ -12,22 +12,42 @@ use Illuminate\Support\Facades\Mail;
 class ReportController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
     
-        $reports = Report::with(['program', 'user.profile'])
+        $reportsQuery = Report::with(['program', 'user.profile'])
             ->whereHas('program', function($query) use ($userId) {
                 $query->where('user_id', $userId);
-            })
-            ->paginate(6);
-        
-            $user = Auth::user();
+            });
     
-            $profile = $user->profile;
+        if ($request->filled('status')) {
+            $reportsQuery->where('status', $request->status);
+        }
+    
+        if ($request->filled('severity')) {
+            $reportsQuery->where('severity', $request->severity);
+        }
+    
+        if ($request->filled('program_id')) {
+            $reportsQuery->where('program_id', $request->program_id);
+        }
+    
+        if ($request->filled('search')) {
+            $reportsQuery->where('title', 'like', '%' . $request->search . '%');
+        }
+    
+        $reports = $reportsQuery->paginate(6)->withQueryString();
+    
+        $user = Auth::user();
+        $profile = $user->profile;
     
         return view('pages.entreprise.reports', compact('reports', 'profile'));
     }
+    
+    
+
+    
     
 
     //create
@@ -36,7 +56,7 @@ class ReportController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|string|max:50',
-            'status' => 'required|string|in:open,closed,pending',
+            'status' => 'required|string',
             'user_id' => 'required|exists:users,id',
             'program_id' => 'required|exists:programs,id',
         ]);
