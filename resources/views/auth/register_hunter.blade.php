@@ -25,12 +25,18 @@
                             <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
                             <input type="text" id="username" name="userName"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
+                                @error('userName')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                             <input type="email" id="email" name="email"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
+                                @error('email')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -39,13 +45,20 @@
                                 class="block  mt-4 text-sm font-medium text-gray-700 mb-1">Password</label>
                             <input type="password" id="password" name="password"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
+                                @error('password')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+
+                            </div>
                         <div>
                             <label for="confirm-password" class="block mt-4 text-sm font-medium text-gray-700 mb-1">Confirm
                                 Password</label>
-                            <input type="password" id="confirm-password" name="confirm-password"
+                            <input type="password" id="confirm-password" name="password_confirmation"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
+                                @error('password_confirmation')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -54,27 +67,18 @@
                                 class="block  mt-4 text-sm font-medium text-gray-700 mb-1">country</label>
                             <input type="text" id="country" name="country"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
+                                @error('country')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            </div>
                         <div>
                             <label for="state" class="block mt-4 text-sm font-medium text-gray-700 mb-1">state</label>
                             <input type="text" id="state" name="state"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 mt-4">
-                        <div class="flex items-start">
-                            <input id="terms" name="terms" type="checkbox"
-                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                            <label for="terms" class="ml-3 text-sm font-medium text-gray-700">I agree to Terms &
-                                Responsible Disclosure Policy</label>
-                        </div>
-                        <div class="flex items-start">
-                            <input id="2fa" name="2fa" type="checkbox"
-                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                            <label for="2fa" class="ml-3 text-sm font-medium text-gray-700">Enable Two-Factor
-                                Authentication (Recommended)</label>
-                        </div>
+                                @error('state')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            </div>
                     </div>
 
                     <div>
@@ -88,4 +92,13 @@
         </div>
         
     </div>
+    @if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}',
+        });
+    </script>
+@endif
 @endsection
