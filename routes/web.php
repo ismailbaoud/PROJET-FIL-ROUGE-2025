@@ -11,6 +11,7 @@ use App\Http\Controllers\entreprises\ReportController as ReportEntreprise;
 use App\Http\Controllers\entreprises\ScopeController as scopeController;
 use App\Http\Controllers\entreprises\SettingsController as settingsEntroprise;
 use App\Http\Controllers\entreprises\RewardController as RewardEntroprise;
+use App\Http\Controllers\entreprises\TransactionController as entropriseTransactions;
 
 use App\Http\Controllers\hunters\DashboardController as dashboardHunter;
 use App\Http\Controllers\hunters\LeaderboardController as LeaderboardController;
@@ -20,12 +21,16 @@ use App\Http\Controllers\hunters\SettingsController as hunterSettingsController;
 
 
 use App\Http\Controllers\admin\DashboardController as adminDashboard;
-use App\Http\Controllers\admin\UserManagmentController as adminUserManagement;
+use App\Http\Controllers\admin\UserManagementController as adminUserManagement;
+use App\Http\Controllers\admin\ProgramController as adminPrograms;
+use App\Http\Controllers\admin\ReportController as adminReports;
+use App\Http\Controllers\admin\TransactionController as adminTransactions;
+use App\Http\Controllers\admin\SettingsController as adminSettings;
 
 
 //main routes (home & auth)
 
-    Route::get('/', [HomeController::class , 'index'])->name('home');
+    Route::view('/', 'pages.home')->name('home');
     Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter'])->name('showRegisterHunter');
     Route::post('/register', [AuthController::class , 'HunterRegister'])->name('hunterRegister');
     Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise'])->name('showRegisterentreprise');
@@ -69,11 +74,15 @@ use App\Http\Controllers\admin\UserManagmentController as adminUserManagement;
 
     //rewards
     Route::get('/tr/reward/{id}', [RewardEntroprise::class, 'index'])->name('entreprise_reward_index');
-    Route::post('/tr/reward/{user}/submit', [RewardEntroprise::class, 'submitReward'])->name('entreprise_reward_submit');
+    Route::post('/tr/reward/{report}/submit', [RewardEntroprise::class, 'submitReward'])->name('entreprise_reward_submit');
     Route::get('/stripe/success', [RewardEntroprise::class, 'stripeSuccess'])->name('stripe.success');
 
+    Route::get('tr/transactions', [entropriseTransactions::class, 'index'])->name('entrepriseTransactions');
+
+
     
-    //end
+//end
+
 //hunter
     
     //dashboard
@@ -107,22 +116,19 @@ use App\Http\Controllers\admin\UserManagmentController as adminUserManagement;
 
 // administration 
 Route::get('/dm/dashboard', [adminDashboard::class , 'index'])->name('adminDashboard');
+
 Route::get('/dm/users', [adminUserManagement::class , 'index']);
-Route::get('/dm/programs', function () {
-    return view('pages.admin/programs');
-});
-Route::get('/dm/reports', function () {
-    return view('pages.admin/reports');
-});
-Route::get('/dm/transactions', function () {
-    return view('pages.admin/transactions');
-});
-Route::get('/dm/green-rooms', function () {
-    return view('pages.admin/rooms');
-});
-Route::get('/dm/logs', function () {
-    return view('pages.admin/logs');
-});
-Route::get('/dm/settings', function () {
-    return view('pages.admin/settings');
-});
+Route::patch('/dm/users/{id}/update', [adminUserManagement::class , 'changeStatus'])->name('updateUser');
+Route::get('/dm/users/{id}/delete', [adminUserManagement::class , 'destroy'])->name('deleteUser');
+
+Route::get('/dm/programs', [adminPrograms::class , 'index']);
+Route::patch('/dm/programs/{id}/update', [adminPrograms::class , 'changeStatus'])->name('updateProgram');
+Route::get('/dm/programs/{id}/delete', [adminPrograms::class , 'destroy'])->name('deleteProgram');
+
+Route::get('/dm/reports', [adminReports::class, 'index']);
+Route::get('/dm/reports/{report}/delete', [adminReports::class , 'destroy'])->name('deleteReport');
+
+Route::get('/dm/transactions', [adminTransactions::class , 'index']);
+
+Route::get('/dm/settings', [adminSettings::class , 'index']);
+Route::get('/dm/settings/{user}', [adminSettings::class , 'update'])->name('adminSettingsUpdate');
