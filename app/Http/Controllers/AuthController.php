@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HunterRegisterRequest;
-use App\Http\Requests\EntrepriseRegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -22,11 +21,18 @@ class AuthController extends Controller
     }
 
     // Handle hunter registration
-    public function HunterRegister(HunterRegisterRequest $request)
+    public function HunterRegister(Request $request)
     {
-        $data = $request->validated();
-
-        if ($data['password'] === $data['confirm-password']) {
+        $data = $request->validate([
+            'userName' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string|min:8',
+            'country' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+        ]);
+    
+        if ($data['password'] === $data['password_confirmation']) {
             $user = User::create([
                 'userName' => $data['userName'],
                 'email' => $data['email'],
@@ -34,20 +40,21 @@ class AuthController extends Controller
                 'role' => 'hunter',
                 'status'=> 'active'
             ]);
-
+    
             Profile::create([
                 'country' => $data['country'],
                 'state' => $data['state'],
                 'user_id' => $user->id
             ]);
-
+    
             return $this->showLogin();
         }
-
+    
         return back()->withErrors([
             'password' => 'Passwords do not match.',
         ]);
     }
+
 
     // Show entreprise registration form
     public function showRegisterEntreprise()
@@ -56,9 +63,22 @@ class AuthController extends Controller
     }
 
     // Handle entreprise registration
-    public function EntrepriseRegister(EntrepriseRegisterRequest $request)
+    public function EntrepriseRegister(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->validate([
+            'fullName' => 'required|string|max:255',
+            'businessEmail' => 'required|email',
+            'password' => 'required|string|min:8',
+            'companyName' => 'required|string|max:255',
+            'companyUrl' => 'nullable|url',
+            'country' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+        ]);
+
+
+        if (User::where('email', $data['businessEmail'])->exists()) {
+            return redirect()->back()->with('error', 'The email address is already in use. Please use a different email.');
+        }
 
         $user = User::create([
             'userName' => $data['fullName'],
