@@ -42,7 +42,7 @@ class RewardController extends Controller
             }
 
             if ($report) {
-                $report->pointes += $pointeAmount; 
+                $report->pointe+= $pointeAmount; 
                 $report->save();
             }
 
@@ -77,7 +77,7 @@ class RewardController extends Controller
                 'success_url' => route('stripe.success', [
                     'user_id' => $report->user->id,
                     'amount' => $bounty_amount,
-                    'report' => $report->id,
+                    'report' => $report,
                 ]),
                 'cancel_url' => route('reportEntreprise') . '?status=cancel',
             ]);
@@ -100,7 +100,10 @@ class RewardController extends Controller
             $profile->rewards += $amount;
             $profile->save();
         }
-
+        if ($report) {
+            $report->reward+= $amount; 
+            $report->save();
+        }
         $entrepriseUser = Auth::user();
         $entrepriseProfile = $entrepriseUser->profile;
         if ($entrepriseProfile) {
