@@ -76,7 +76,7 @@ class ReportController extends Controller
 
     //show
     public function show($id){
-        $report = Report::with(['user', 'program'])->findOrFail($id);
+        $report = Report::with(['user', 'program'])->find($id);
         return view('pages.hunter/reportDetails', compact('report'));
     }
 
@@ -88,7 +88,7 @@ class ReportController extends Controller
             'status' => 'required',
         ]);
     
-        $report = Report::findOrFail($id);
+        $report = Report::find($id);
         $report->update([
             'status' => $request->status,
         ]);
