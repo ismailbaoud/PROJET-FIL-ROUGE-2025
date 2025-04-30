@@ -7,18 +7,20 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Program;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\entreprise\ProgramRequest;
 
 class ProgramController extends Controller
 {
 
     //index
-    public function index(Request $request){
-        $query = Program::query();
-
+    public function index(Request $request)
+    {
+        $query = Program::where('user_id', Auth::Id())->withCount('reports');
+    
         if ($request->has('status') && $request->status !== '') {
             $query->where('status', $request->status);
         }
-
+    
         switch ($request->sort) {
             case 'highest_bounty':
                 $query->orderByDesc('max_reward');
@@ -33,16 +35,17 @@ class ProgramController extends Controller
                 $query->orderByDesc('created_at');
                 break;
         }
-
+    
         $programs = $query->paginate(6);
-
-        return view('pages.entreprise/programs', compact('programs'));
+    
+        return view('pages.entreprise.programs', compact('programs'));
     }
+    
     
 
 
     //create
-    public function create(Request $request){
+    public function create(ProgramRequest $request){
         Program::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -55,8 +58,8 @@ class ProgramController extends Controller
 
 
     //update
-    public function update(Request $request, $id){
-        $program = Program::findOrFail($id);
+    public function update(ProgramRequest $request, $id){
+        $program = Program::find($id);
         $program->update([
             'title' => $request->title,
             'description' => $request->description,
@@ -71,7 +74,7 @@ class ProgramController extends Controller
 
     //change status
     public function changeStatus($id){
-        $program = Program::findOrFail($id);
+        $program = Program::find($id);
 
         switch ($program->status) {
             case 'en_attnte':
@@ -93,22 +96,16 @@ class ProgramController extends Controller
 
     //delete
     public function delete($id){
-        $program = Program::findOrFail($id);
-        $program->status = 'rejete';
+        $program = Program::find($id);
+        if($program->status === 'rejete'){
+
+            $program->status = 'accepte';
+        }elseif($program->status === 'accepte'){
+            $program->status = 'rejete';
+        }
         $program->save();
     
         return back()->with('success', 'Program rejected successfully!');
-    }
-    
-
-    //addMember
-    public function addMember(Request $request, $programId){
-        $program = Program::findOrFail($programId);
-        $user = User::findOrFail($request->user_id);
-
-        $program->members()->syncWithoutDetaching([$user->id]);
-
-        return back()->with('success', 'Member added to program successfully!');
     }
 
     
