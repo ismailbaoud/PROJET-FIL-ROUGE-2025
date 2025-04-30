@@ -25,7 +25,7 @@ class ScopeController extends Controller
             'instructions' => 'nullable|string',
         ]);
     
-        $program = Program::findOrFail($programId);
+        $program = Program::find($programId);
     
 
         $scope = new Scope();
