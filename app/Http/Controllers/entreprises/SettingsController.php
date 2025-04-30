@@ -15,13 +15,13 @@ class SettingsController extends Controller
    //index
    public function index(){
       $user = Auth::user();
-      $profile = Profile::find(Auth::user()->id);
+      $profile = $user->profile;
       return view('pages.entreprise/settings', compact('user', 'profile'));
    }
 
    public function update(Request $request){
-      $user = User::find(Auth::user()->id);
-      $profile = Profile::find(Auth::user()->id);
+      $user = Auth::user();
+      $profile = $user->profile;
 
       $user->update([
          'userName' => $request->userName
@@ -36,4 +36,14 @@ class SettingsController extends Controller
       return back();
    }
    
+   public function delete() {
+      $user = Auth::user();
+  
+      Auth::logout();
+  
+      $user->delete();
+  
+      return redirect()->route('home');
+  }
+  
 }
