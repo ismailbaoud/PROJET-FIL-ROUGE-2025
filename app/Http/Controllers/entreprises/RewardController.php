@@ -24,12 +24,12 @@ class RewardController extends Controller
         $rules = [];
 
         if ($request->reward_type === 'pointes') {
-            $rules['pointe_amount'] = 'required|numeric|min:1';
+            $request->validate([
+                'pointe_amount' => 'required|numeric|min:1',]);
         } elseif ($request->reward_type === 'bounty') {
-            $rules['bounty_amount'] = 'required|numeric|min:1';
+            $request->validate([
+                'bounty_amount' => 'required|numeric|min:1',]);
         }
-
-        $request->validate($rules);
 
         if ($request->reward_type === 'pointes') {
             $pointeAmount = $request->pointe_amount;
@@ -55,6 +55,8 @@ class RewardController extends Controller
 
         return back()->with('success', 'Points reward submitted successfully.');
     }
+
+
 
     public function payWithStripe($bounty_amount, Report $report)
     {
@@ -91,9 +93,9 @@ class RewardController extends Controller
 
     public function stripeSuccess(Request $request)
     {
-        $user = User::findOrFail($request->user_id);
+        $user = User::find($request->user_id);
         $amount = $request->amount;
-        $report = Report::findOrFail($request->report);
+        $report = Report::find($request->report);
 
         $profile = $user->profile;
         if ($profile) {
