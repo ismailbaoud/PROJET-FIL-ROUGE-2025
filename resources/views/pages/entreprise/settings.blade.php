@@ -34,27 +34,7 @@
                     </div>
                     <div class="p-6">
                         <div class="flex flex-col md:flex-row gap-6 mb-6">
-                            <div class="flex-shrink-0">
-                                <div class="relative">
-                                    <div class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-2xl font-medium">
-                                        IB
-                                    </div>
-                                    <button class="absolute -bottom-2 -right-2 bg-white p-1.5 rounded-full shadow-sm border border-gray-300 hover:bg-gray-50">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="mt-3 flex justify-center md:justify-start space-x-2">
-                                    <button class="text-xs text-blue-600 hover:text-blue-800">Upload</button>
-                                    <button class="text-xs text-gray-500 hover:text-gray-700">Remove</button>
-                                </div>
-                            </div>
                             <div class="flex-1">
-                                <p class="text-xs text-gray-500 mb-4">
-                                    Recommended dimensions: 200x200 pixels. Maximum file size: 5MB.
-                                </p>
                                 <form action="{{ route('Entreprise_settings_update') }}" method="POST" class="space-y-4">
                                     @csrf
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -111,9 +91,12 @@
                                     <h3 class="text-sm font-medium text-red-600">Delete Account</h3>
                                     <p class="text-sm text-gray-500 mt-1">Permanently delete your account and all associated data. This action cannot be undone.</p>
                                 </div>
-                                <button class="px-4 py-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 text-sm sm:w-auto w-full">
-                                    Delete Account
-                                </button>
+                                <form id="delete-form" action="{{ route('Entreprise_settings_delete') }}" method="get">
+                                    
+                                    <a id="deleteButton" class="px-4 py-2 bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 text-sm sm:w-auto w-full">
+                                        Delete Account
+                                    </a>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -122,4 +105,17 @@
         </main>
     </div>
 </div>
+<script>
+    let deleteButton = document.getElementById('deleteButton');
+
+    deleteButton.addEventListener('click', (e)=>{
+        e.preventDefault()
+
+        const confirmDelete = confirm('Are you sure you want to delete your account?');
+        
+        if(confirmDelete){
+            document.getElementById('delete-form').submit();
+        }
+    })
+</script>
 @endsection

@@ -1,56 +1,23 @@
 @extends('layouts.app')
 
 @section('main')
-<div class="flex flex-col md:flex-row h-screen bg-gray-50">
+<div class="flex flex-col md:flex-row h-screen">
     @include('partials.entreprise.sidebar')
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.entreprise.header')
         
-        <main class="flex-1 overflow-auto p-4 md:p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
+        <main class="flex-1 text-center overflow-auto p-4 md:p-6 bg-gradient-to-t from-white via-white via-30% to-[#E8F5E9]">
             <!-- Header -->
-            <div class="max-w-7xl mx-auto mb-8 p-4 bg-white rounded-xl border-l-4 border-gray-900 shadow-sm">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="max-w-7xl mx-auto mb-8 p-4 bg-white rounded-sm text-center">
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900">Bug Bounty Command Center</h1>
                         <p class="text-gray-600">
-                            Welcome back, <span class="font-semibold text-gray-900">{{ Auth::user()->name }}</span>. 
+                            Welcome back, <span class="font-semibold text-gray-900">{{ Auth::user()->userName }}</span>. 
                             <span class="hidden md:inline">
                                 You have <span class="font-semibold text-green-600">{{ $reports->count() }} new reports today</span> requiring attention.
                             </span>
                         </p>
                     </div>
-                    <div class="flex gap-2">
-                        <a href="" class="bg-gray-900 hover:bg-gray-800 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all">
-                            <i class="fas fa-bug"></i> New Program
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                @foreach ([
-                    ['value' => $programs->count(), 'label' => 'Active Programs', 'icon' => 'fa-shield-alt', 'trend' => 'up'],
-                    ['value' => $reports->count(), 'label' => 'Pending Reports', 'icon' => 'fa-file-alt', 'trend' => 'up'],
-                    ['value' => '$24.5k', 'label' => 'Rewards Paid', 'icon' => 'fa-award', 'trend' => 'steady'],
-                    ['value' => '89%', 'label' => 'Response Rate', 'icon' => 'fa-bolt', 'trend' => 'down']
-                ] as $stat)
-                <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-4 hover:shadow-md transition-all">
-                    <div class="flex justify-between">
-                        <div>
-                            <p class="text-2xl font-bold text-gray-900">{{ $stat['value'] }}</p>
-                            <p class="text-gray-600 text-sm">{{ $stat['label'] }}</p>
-                        </div>
-                        <div class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center">
-                            <i class="fas {{ $stat['icon'] }} text-gray-600"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex items-center text-xs {{ $stat['trend'] == 'up' ? 'text-green-500' : ($stat['trend'] == 'down' ? 'text-red-500' : 'text-gray-500') }}">
-                        <i class="fas fa-arrow-{{ $stat['trend'] == 'up' ? 'up' : ($stat['trend'] == 'down' ? 'down' : 'right') }} mr-1"></i>
-                        {{ $stat['trend'] == 'up' ? '' : ($stat['trend'] == 'down' ? '' : 'No change') }} from last week
-                    </div>
-                </div>
-                @endforeach
             </div>
 
             <!-- Programs Table -->
@@ -59,10 +26,6 @@
                     <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                         <i class="fas fa-bug text-green-500"></i> Active Security Programs
                     </h2>
-                    <div class="relative w-full sm:w-64">
-                        <input type="text" placeholder="Search programs..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-gray-900">
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                    </div>
                 </div>
                 
                 <div class="bg-white rounded-xl shadow-xs overflow-hidden border border-gray-200">
@@ -70,8 +33,7 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scope</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
                                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Reports</th>
                                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Rewards</th>
                                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -83,9 +45,6 @@
                                     <td class="px-6 py-4">
                                         <div class="font-medium text-gray-900">{{ $program->title }}</div>
                                         <div class="text-gray-500 text-xs">Created {{ $program->created_at->diffForHumans() }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900">
-                                        <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-medium text-gray-700">{{ $program->scope }}</span>
                                     </td>
                                     <td class="px-6 py-4 text-right text-sm font-medium text-gray-900">
                                         {{ $program->reports_count ?? 0 }}
@@ -118,7 +77,7 @@
                     <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
                         <i class="fas fa-shield-virus text-red-400"></i> Recent Vulnerability Reports
                     </h2>
-                    <a href="" class="text-sm font-medium text-gray-900 hover:text-gray-600 flex items-center gap-1">
+                    <a href="{{ route('reportEntreprise') }}" class="text-sm font-medium text-gray-900 hover:text-gray-600 flex items-center gap-1">
                         View all <i class="fas fa-chevron-right text-xs"></i>
                     </a>
                 </div>
