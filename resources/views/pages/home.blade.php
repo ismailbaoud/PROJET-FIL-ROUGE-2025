@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @Section('main')
-    <main class="">
+    <div class="">
         <div
-            class="flex flex-col md:flex-row items-center justify-between w-[100%] bg-gradient-to-br from-white via-white via-30% to-[#E8F5E9] p-10 md:p-20">
+            class="flex flex-col md:flex-row items-center justify-between w-[100%] bg-gradient-to-br from-white via-white via-30% to-[#E8F5E9] p-10 md:p-20 ">
             <div class="max-w-xxl text-center md:text-left">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
                     Secure the Digital Frontier <br> with Elite Hunters
@@ -28,14 +28,14 @@
             </div>
         </div>
 
-        <div class="bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9] pb-20">
+        <div id="about" class="bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9] pb-20">
             <h2 class="text-4xl font-extrabold p-6 md:p-30 text-gray-900 flex items-center space-x-3">
                 <span class="w-full text-center"><i class="fa-solid fa-rocket"></i> Comment ça marche</span>
             </h2>
 
             <div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-10 w-full">
                 <div
-                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 text-center mb-8 md:mb-0">
+                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300  transition-all duration-300 text-center mb-8 md:mb-0">
                     <div
                         class="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
                         <i class="fa-solid fa-user-secret"></i>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div
-                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
+                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300  transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
                     <div
                         class="text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">
                         <i class="fa-solid fa-bug"></i>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div
-                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 shadow-lg hover:shadow-gray-400 transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
+                    class="w-full md:w-[30%] bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl border border-gray-300 transition-all duration-300 ease-in-out text-center mb-8 md:mb-0">
                     <div
                         class="text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
                         <i class="fa-solid fa-trophy"></i>
@@ -91,7 +91,7 @@
         </div>
 
 
-        <div class="bg-gradient-to-br from-white via-white via-50% to-[#E8F5E9]">
+        <div  class=" md:mt-20 bg-gradient-to-br from-white via-white via-50% to-[#E8F5E9]">
             <h2 class="text-4xl text-center p-10 md:p-20 font-extrabold text-gray-900 mb-5">Cyberwarriors' Hall of Fame</h2>
             <p class="text-gray-600 text-lg mb-10 text-center">Where legends are forged in the digital battleground</p>
 
@@ -125,16 +125,16 @@
             </div>
         </div>
 
-        <div
-            class="px-6 md:px-20 pb-10 md:pb-20 pt-10 md:pt-30 bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9]">
-            <div class="mt-10 md:mt-20 p-6 md:p-20">
+        <div id="reports"
+            class="px-6 md:px-20 pb-10 md:pb-20 pt-10 bg-gradient-to-tr from-white via-white via-30% to-[#E8F5E9]">
+            <div class="p-6 md:p-20">
                 <h1 class="text-3xl font-bold text-center mb-5">Rapports Bug Bounty</h1>
                 <p class="text-gray-500 text-center mb-5">Consultez et gérez les rapports de vulnérabilité</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-44">
                 <div class="flex justify-center items-center">
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 w-full max-w-md">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 w-full max-w-md">
                         <div class="flex justify-between items-center">
                             <span
                                 class="text-gray-600 font-semibold text-sm bg-gray-100 px-3 py-1 rounded-full">Élevé</span>
@@ -170,7 +170,7 @@
                         <div class="mt-6 flex justify-between items-center">
                             <p class="text-gray-600 font-semibold text-sm">En attente</p>
                             <button
-                                class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow-sm hover:bg-gray-700 transition">
+                                class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-700 transition">
                                 Voir le rapport
                             </button>
                         </div>
@@ -205,8 +205,5 @@
                     alt="Adobe" class="h-8 md:h-10 mx-auto">
             </div>
         </div>
-
-
-
-    </main>
+    </div>
 @endsection
