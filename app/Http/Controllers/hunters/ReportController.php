@@ -65,26 +65,13 @@ class ReportController extends Controller
 }
 
 
-
-
-public function show($id)
-{
-    $report = Report::where('id', $id)
-                    ->where('user_id', Auth::id())
-                    ->firstOrFail(); 
-
-    return view('pages.hunter.reportDetails', compact('report'));
-}
-
-
-
     //update
     public function updateStatus(Request $request, $id){
         $request->validate([
             'status' => 'required|string|in:open,closed,pending',
         ]);
 
-        $report = Report::findOrFail($id);
+        $report = Report::find($id);
         $report->update([
             'status' => $request->status,
         ]);

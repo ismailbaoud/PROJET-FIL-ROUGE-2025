@@ -13,32 +13,33 @@ class ProgramController extends Controller
 
 
     //index
-    public function index(Request $request){
-        $query = Program::query();
-
-        if ($request->has('status') && $request->status !== '') {
-            $query->where('status', $request->status);
+    public function index(Request $request)
+    {
+        $programs = Program::query();
+    
+        if ($request->filled('status')) {
+            $programs = $programs->where('status', $request->status);
         }
-
-        switch ($request->sort) {
-            case 'highest_bounty':
-                $query->orderByDesc('max_reward');
-                break;
-            case 'most_reports':
-                $query->orderByDesc('reports_count');
-                break;
-            case 'recently_updated':
-                $query->orderByDesc('updated_at');
-                break;
-            default:
-                $query->orderByDesc('created_at');
-                break;
+    
+        if ($request->filled('sort')) {
+            if ($request->sort === 'highest_bounty') {
+                $programs = $programs->orderBy('max_reward', 'desc');
+            } elseif ($request->sort === 'most_reports') {
+                $programs = $programs->orderBy('reports_count', 'desc');
+            } elseif ($request->sort === 'recently_updated') {
+                $programs = $programs->orderBy('updated_at', 'desc');
+            } else {
+                $programs = $programs->orderBy('created_at', 'desc');
+            }
+        } else {
+            $programs = $programs->orderBy('created_at', 'desc');
         }
-
-        $programs = $query->paginate(6);
-
-        return view('pages.hunter/programs', compact('programs'));
+    
+        $programs = $programs->paginate(6);
+    
+        return view('pages.hunter.programs', compact('programs'));
     }
+    
 
 
     //show
@@ -63,7 +64,7 @@ class ProgramController extends Controller
     //join program
     public function joinProgram($id){
     $user = Auth::user(); 
-    $program = Program::findOrFail($id);
+    $program = Program::find($id);
 
     if (!$user->joinedPrograms->contains($program->id)) {
         $user->joinedPrograms()->attach($program->id);

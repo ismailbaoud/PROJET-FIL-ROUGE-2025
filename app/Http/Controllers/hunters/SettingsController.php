@@ -40,7 +40,7 @@ class SettingsController extends Controller
 
 
    public function storeOrUpdatePaymentInfo(Request $request){
-      $user = auth()->user(); 
+      $user = Auth::user(); 
 
       $validated = $request->validate([
           'name' => 'required|string|max:255',

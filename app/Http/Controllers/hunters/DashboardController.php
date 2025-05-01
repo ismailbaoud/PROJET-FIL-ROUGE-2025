@@ -23,7 +23,7 @@ class DashboardController extends Controller
         
         
 
-        $reports = Report::where('user_id', '=', Auth::user()->id)
+        $reports = Report::where('user_id', '=', Auth::Id())
                          ->latest()
                          ->take(2)
                          ->get()
