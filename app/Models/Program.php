@@ -12,10 +12,11 @@ class Program extends Model
         "min_reward",
         "max_reward",
         "user_id",
+        "status",
     ];
 
     public function users(){
-        return $this->belongsToMany();
+        return $this->belongsTo(User::class);
     }
 
 
@@ -33,6 +34,12 @@ class Program extends Model
     public function scopes(){
         return $this->hasMany(Scope::class);
     }
+
+    public function reports()
+{
+    return $this->hasMany(Report::class);
+}
+
 
 
 }

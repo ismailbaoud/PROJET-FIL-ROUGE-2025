@@ -21,7 +21,8 @@ class User extends Authenticatable
         'userName',
         'email',
         'password',
-        'role'
+        'role',
+        'status'
     ];
 
     public function Profile(){
@@ -43,7 +44,7 @@ class User extends Authenticatable
     }
 
     public function programs(){
-        return $this->hasMany(Report::class, 'user_id');
+        return $this->hasMany(Program::class);
     }
 
     public function paymentInfo(){

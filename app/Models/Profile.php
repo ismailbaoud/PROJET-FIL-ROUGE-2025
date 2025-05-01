@@ -15,7 +15,7 @@ class Profile extends Model
     'user_id'];
     
     public function User(){
-        return $this->belongsTo();
+        return $this->belongsTo(User::class);
     }
     
 }
