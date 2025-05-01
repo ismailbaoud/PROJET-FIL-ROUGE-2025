@@ -39,13 +39,6 @@
             </a>
         </li>
         <li>
-            <a href="/dm/logs"
-                class="flex items-center p-4 rounded-lg bg-white  border border-2 border-black  hover:bg-gray-700 transition duration-300">
-                <i class="fas fa-file-alt text-xl"></i>
-                <span class="ml-3">Logs</span>
-            </a>
-        </li>
-        <li>
             <a href="/dm/settings"
                 class="flex items-center p-4 rounded-lg bg-white  border border-2 border-black  hover:bg-gray-700 transition duration-300">
                 <i class="fas fa-cogs text-xl"></i>
