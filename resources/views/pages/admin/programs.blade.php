@@ -2,26 +2,14 @@
 
 
 @Section('main')
+
     <div class="flex h-screen bg-gray-100">
-        <div class="w-64 bg-white h-full flex flex-col">
-            <div class="p-6 font-bold text-[#111827]">
-                Admin Panel
-            </div>
-            @include('partials.admin.sidebar')
-        </div>
+        @include('partials.admin.sidebar')
+        <div class="flex-1 flex flex-col overflow-hidden bg-white">
+            @include('partials.admin.header')
 
-        <div class="flex-1 flex flex-col bg-gradient-to-r from-white via-white via-5% to-[#E8F5E9]">
-            <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-                <h2 class="text-lg font-medium text-gray-900">Programmes de Bug Bounty</h2>
-                <div class="flex items-center gap-3">
-                    <span class="text-sm text-gray-600">Admin</span>
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600">
-                        A
-                    </div>
-                </div>
-            </header>
 
-            <main class="flex-1 p-6 overflow-auto">
+            <main class="flex-1 p-6 overflow-auto bg-gradient-to-t from-white via-white via-5% to-[#E8F5E9]">
                 <div class="max-w-7xl mx-auto">
                     <div class="p-6 min-h-screen">
                         <h1 class="text-2xl font-bold text-gray-800 mb-6">Programmes de Bug Bounty</h1>
@@ -49,17 +37,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ( $programs as $program )
+                                        
                                     <tr class="border-b hover:bg-gray-100">
-                                        <td class="p-3">Bug Hunt 2025</td>
-                                        <td class="p-3">Google</td>
-                                        <td class="p-3">$10,000</td>
+                                        <td class="p-3">{{ $program->title }}</td>
+                                        <td class="p-3">{{ $program->entreprise->userName }}</td>
+                                        
+                                        <td class="p-3">${{ $program->total_rewards ?? '0.00' }}</td>
                                         <td class="p-3"><span
-                                                class="px-2 py-1 rounded-md text-white bg-green-500">Ouvert</span></td>
+                                            class="px-2 py-1 rounded-md text-green-500">{{ $program->status }}</span></td>
                                         <td class="p-3 flex space-x-2">
-                                            <a href="#" class="text-blue-500"> Modifier</a>
-                                            <button class="text-red-500"> Supprimer</button>
+                                            <div class="flex justify-end space-x-2">
+                                                <form action="{{ route('updateProgram', $program->id) }}" method="POST" id="updateStatus-{{ $program->id }}">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <select name="status" id="selectItem-{{ $program->id }}">
+                                                        <option value="accepte" {{ $program->status === 'accepte' ? 'selected' : '' }}>accepte</option>
+                                                        <option value="panding" {{ $program->status === 'panding' ? 'selected' : '' }}>Panding</option>
+                                                        <option value="rejete" {{ $program->status === 'rejete' ? 'selected' : '' }}>Rejete</option>
+                                                    </select>
+                                                </form>
+                                                <a href="{{  route('deleteProgram' ,$program->id) }}" class="text-red-600 hover:text-red-900">Suspend</a>
+                                            </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -68,4 +70,6 @@
             </main>
         </div>
     </div>
+    <script src="{{ asset('js/admin/program.js') }}" defer></script>
+
 @endsection
