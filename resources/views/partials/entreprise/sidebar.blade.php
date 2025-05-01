@@ -1,7 +1,14 @@
-<aside class="w-64 bg-gray-50 text-black h-screen fixed flex flex-col">
+<div class="fixed top-4 left-4 z-50 md:hidden">
+    <button id="burgerButton" class="p-3 rounded-full bg-white shadow-md border border-gray-300 hover:shadow-lg hover:bg-gray-100 transition-all duration-300">
+      <i class="fas fa-bars text-2xl text-gray-700"></i>
+    </button>
+</div>
+  
+
+<aside id="sidebar" class="w-64 bg-transparant h-screen fixed flex flex-col transition-transform duration-300 transform md:translate-x-0 bg-translate-x-full md:static">
     <!-- Logo / Title Section -->
     <div class="p-8 border-b border-gray-200 flex items-center justify-center">
-        <img src="/images/3b8729e3-de16-4307-bc78-f92b553144e5-removebg-preview.png" alt="HappyHunt Logo" class="h-52 w-auto object-contain">
+        <img src="{{ asset('images/happyhunt.png') }}" alt="HappyHunt Logo" class="h-52 rounded-lg object-contain">
     </div>
 
     <!-- Navigation Menu -->
@@ -24,6 +31,12 @@
             <span>Reports</span>
         </a>
 
+        <a href="{{ route('entrepriseTransactions') }}"
+            class="flex items-center gap-4 px-5 py-3 text-sm font-medium text-gray-800 bg-gray-50 rounded-xl border border-2 border-black hover:bg-[#E8F5E9] transition-all duration-300">
+            <i class="fas fa-clipboard-list text-gray-700"></i>
+            <span>Transactions</span>
+        </a>
+
         <a href="{{ route('settingsEntreprise') }}"
             class="flex items-center gap-4 px-5 py-3 text-sm font-medium text-gray-800 bg-gray-50 rounded-xl border border-2 border-black hover:bg-[#E8F5E9] transition-all duration-300">
             <i class="fas fa-cogs text-gray-700"></i>
@@ -43,3 +56,12 @@
         </form>
     </div>
 </aside>
+
+<script>
+    const burgerButton = document.getElementById('burgerButton');
+    const sidebar = document.getElementById('sidebar');
+
+    burgerButton.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+    });
+</script>
