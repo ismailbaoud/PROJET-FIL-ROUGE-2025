@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-<div class="flex min-h-screen bg-gray-50">
+<div class="flex min-h-screen bg-white">
     @include('partials.hunter.sidebar')
     
     <div class="flex-1 flex flex-col overflow-hidden">
@@ -104,11 +104,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </a>
-                                <button class="text-gray-400 hover:text-gray-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                    </svg>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -136,20 +131,6 @@
     </div>
 </div>
 
-<script>
-    function applyFilters() {
-        const status = document.getElementById('statusFilter').value;
-        const sortBy = document.getElementById('sortBy').value;
+<script src="{{ asset('js/hunter/program.js') }}" defer></script>
 
-        const url = new URL(window.location.href);
-        status ? url.searchParams.set('status', status) : url.searchParams.delete('status');
-        sortBy ? url.searchParams.set('sort', sortBy) : url.searchParams.delete('sort');
-        url.searchParams.set('page', 1); // Reset to first page
-        window.location.href = url.toString();
-    }
-
-    function resetFilters() {
-        window.location.href = window.location.pathname;
-    }
-</script>
 @endsection

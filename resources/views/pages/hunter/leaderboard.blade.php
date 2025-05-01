@@ -20,12 +20,6 @@
                         </h1>
                         <p class="text-gray-600 mt-1">Top security researchers by reputation points</p>
                     </div>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        Add New Hunter
-                    </a>
                 </div>
 
                 <!-- Leaderboard Table -->
@@ -41,35 +35,30 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ([
-                                ['rank' => 1, 'name' => 'Alice Smith', 'points' => '1,500', 'country' => 'USA', 'avatar' => 'A'],
-                                ['rank' => 2, 'name' => 'Bob Johnson', 'points' => '1,300', 'country' => 'UK', 'avatar' => 'B'],
-                                ['rank' => 3, 'name' => 'Charlie Lee', 'points' => '1,100', 'country' => 'Canada', 'avatar' => 'C'],
-                                ['rank' => 4, 'name' => 'Diana Chen', 'points' => '950', 'country' => 'China', 'avatar' => 'D'],
-                                ['rank' => 5, 'name' => 'Ethan Wilson', 'points' => '800', 'country' => 'Australia', 'avatar' => 'E']
-                            ] as $hunter)
+                            @foreach ( $profiles as $profile)
+                                
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2.5 py-1.5 rounded-full text-xs font-medium {{ $hunter['rank'] <= 3 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800' }}">
-                                        #{{ $hunter['rank'] }}
+                                    <span class="px-2.5 py-1.5 rounded-full text-xs font-medium">
+                                        #{{ $profile->rank }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold mr-3">
-                                            {{ $hunter['avatar'] }}
+                                            <img src="{{asset('storage/'.$profile->content_vusial )}}" alt="" srcset="">
                                         </div>
-                                        <div class="text-sm font-medium text-gray-900">{{ $hunter['name'] }}</div>
+                                        <div class="text-sm font-medium text-gray-900">{{ $profile->user->userName }}</div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
-                                    {{ $hunter['points'] }}
+                                    {{ $profile->pointes }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $hunter['country'] }}
+                                    {{ $profile->country }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <a href="#" class="text-red-600 hover:text-red-800 flex items-center">
+                                    <a href="{{ route('hunter.profile', $profile->user->id) }}" class="text-red-600 hover:text-red-800 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

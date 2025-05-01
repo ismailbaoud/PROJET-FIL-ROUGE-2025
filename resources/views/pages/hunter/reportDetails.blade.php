@@ -2,7 +2,6 @@
 
 @section('main')
     <div class="flex min-h-screen">
-        {{-- Sidebar --}}
         @if(auth()->user()->role === 'entreprise')
             @include('partials.entreprise.sidebar')
         @else
@@ -10,7 +9,6 @@
         @endif
 
         <div class="flex-1 flex flex-col overflow-hidden">
-            {{-- Header --}}
             @if(auth()->user()->role === 'entreprise')
                 @include('partials.entreprise.header')
             @else
@@ -56,7 +54,6 @@
                         </div>
                     </div>
 
-                    <!-- Report Content -->
                     <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-6 mb-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-4">Report Details</h2>
                         <ul class="text-sm text-gray-700 space-y-2">
@@ -69,7 +66,6 @@
                         </ul>
                     </div>
 
-                    <!-- Steps -->
                     <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-6 mb-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-2">Steps to Reproduce</h2>
                         <div class="prose text-gray-700">
@@ -77,7 +73,6 @@
                         </div>
                     </div>
 
-                    <!-- Impact -->
                     <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-6 mb-6">
                         <h2 class="text-lg font-semibold text-gray-900 mb-2">Impact</h2>
                         <div class="prose text-gray-700">
@@ -85,7 +80,6 @@
                         </div>
                     </div>
 
-                    <!-- POC (if exists) -->
                     @if ($report->poc)
                         <div class="bg-white rounded-xl shadow-xs border border-gray-200 p-6 mb-6">
                             <h2 class="text-lg font-semibold text-gray-900 mb-2">Proof of Concept</h2>

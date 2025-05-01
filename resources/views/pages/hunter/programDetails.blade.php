@@ -330,10 +330,5 @@
         </div>
     </div>
 
-    <script>
-        function toggleForm(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('hidden');
-        }
-    </script>
-@endsection
+    <script src="{{ asset('js/hunter/program.js') }}" defer></script>
+    @endsection
