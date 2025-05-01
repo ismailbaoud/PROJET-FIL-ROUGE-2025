@@ -63,3 +63,12 @@ function reloadPrograms() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+
+let updateButton = document.getElementById('updateButton');
+let updateProgramForm = document.getElementById('updateProgramForm');
+updateButton.addEventListener('click', (e)=>{
+    e.preventDefault();
+    updateProgramForm.classList.toggle('hidden');
+    updateProgramForm.classList.toggle('flex');
+})
