@@ -54,8 +54,8 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
     //programs
     Route::get('/tr/programs', [entrepriseProgram::class, 'index'])->name('entreprisePrograms');
     Route::post('/tr/programs/create', [entrepriseProgram::class, 'create'])->name('createProgram');
-    Route::post('/tr/programs/{id}/update', [entrepriseProgram::class, 'update']);
-    Route::delete('/tr/programs/{id}/delete', [entrepriseProgram::class, 'delete']);
+    Route::post('/tr/programs/{id}/update', [entrepriseProgram::class, 'update'])->name('entreprise_program_edit');
+    Route::delete('/tr/programs/{id}/delete', [entrepriseProgram::class, 'delete'])->name('entreprise_program_delete');
     
     //scope
     Route::get('/programs/{program}/scopes/create', [ScopeController::class, 'create'])->name('scopes.create');
@@ -67,6 +67,7 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
     //settings
     Route::get('/tr/settings', [settingsEntroprise::class, 'index'])->name('settingsEntreprise');
     Route::post('/tr/settings/update', [settingsEntroprise::class, 'update'])->name('Entreprise_settings_update');
+    Route::get('/tr/settings/delete', [settingsEntroprise::class, 'delete'])->name('Entreprise_settings_delete');
 
     //reports
     Route::get('/tr/reports', [ReportEntreprise::class, 'index'])->name('reportEntreprise');
@@ -107,7 +108,7 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
     //settings
     Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
     Route::post('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
-    Route::post('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
+    Route::patch('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
     Route::post('/hunter/upload-avatar', [hunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
 
     //end
