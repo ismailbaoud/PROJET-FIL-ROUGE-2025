@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('status', ['panding', 'accepte', 'rejete'])->default('panding');
+            $table->enum('status', ['panding', 'accepte', 'rejete'])->default('accepte');
             $table->integer('min_reward');
             $table->integer('max_reward');
-            $table->foreignId('user_id')->constrained()->enDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

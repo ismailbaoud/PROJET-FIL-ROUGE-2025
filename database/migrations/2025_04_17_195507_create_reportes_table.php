@@ -24,7 +24,6 @@ return new class extends Migration
         $table->enum('status', [
             'new',
             'triaged',
-            'needs_more_info',
             'duplicate',
             'informative',
             'not_applicable',

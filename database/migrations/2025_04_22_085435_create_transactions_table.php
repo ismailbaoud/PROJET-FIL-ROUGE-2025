@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id'); 
-            $table->unsignedBigInteger('to_user_id');   
-            $table->unsignedBigInteger('report_id');
-            $table->unsignedBigInteger('program_id');
+            $table->integer('from_user_id'); 
+            $table->integer('to_user_id');   
+            $table->integer('report_id');
+            $table->integer('program_id');
             $table->decimal('amount', 10, 2);
             $table->string('method');
-            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->timestamps();
 
             $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');

@@ -21,7 +21,8 @@ return new class extends Migration
             'api',
             'cloud',
             'other'
-        ]);        $table->enum('type', ['in', 'out']);
+        ]);        
+        $table->enum('type', ['in', 'out']);
         $table->text('instructions')->nullable();
         $table->timestamps();
     });
