@@ -1,6 +1,6 @@
 <header class="max-w-screen px-4 flex items-center justify-between bg-white fixed z-50 left-0 right-0 shadow-sm">
     <div class="font-bold text-2xl">
-        <a href="/">          <img src="{{ asset('images/happyhunt.png') }}" alt="HappyHunt Logo" class="h-22 rounded-lg object-contain">
+        <a href="/">          <img src="{{ asset('images/happyhunt1.png') }}" alt="HappyHunt Logo" class="h-16 py-1 rounded-lg object-contain">
         </a>
     </div>
 
@@ -29,6 +29,10 @@
             <a href="{{ route('showRegisterHunter') }}"
                 class="inline-flex items-center justify-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90">
                 Join the Hunt
+            </a>
+            <a href="{{ route('showRegisterentreprise') }}"
+                class="inline-flex items-center justify-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-black/90">
+                Entreprise Register
             </a>
         </div>
     </div>

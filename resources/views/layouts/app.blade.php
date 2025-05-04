@@ -39,13 +39,15 @@
     @endguest
 
     <main>
+        @include('sweetalert::alert')
 
         @yield('main')
 
     </main>
-
+@guest
+    
     @include('partials.footer')
-
+    @endguest
     @vite('resources/js/app.js')
 
 </body>
