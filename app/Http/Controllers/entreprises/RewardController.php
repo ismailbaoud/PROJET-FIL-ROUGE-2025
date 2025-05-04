@@ -10,53 +10,49 @@ use App\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class RewardController extends Controller
 {
     public function index($id)
     {
-        $report = Report::with('user')->where('id', $id)->first(); 
-        return view('pages.entreprise/reward' , compact('report'));
+        $report = Report::with(['user', 'user.profile'])->findOrFail($id);
+
+        return view('pages.entreprise.reward', compact('report'));
     }
 
     public function submitReward(Request $request, Report $report)
     {
-        $rules = [];
+        $request->validate([
+            'reward_type' => 'required|string|in:pointes,bounty',
+            'pointe_amount' => 'required_if:reward_type,pointes|min:1',
+            'bounty_amount' => 'min:1',
+        ]);
 
-        if ($request->reward_type === 'pointes') {
-            $request->validate([
-                'pointe_amount' => 'required|numeric|min:1',]);
-        } elseif ($request->reward_type === 'bounty') {
-            $request->validate([
-                'bounty_amount' => 'required|numeric|min:1',]);
-        }
+        try {
+            if ($request->reward_type === 'pointes') {
+                $user = $report->user;
+                $profile = $user->profile;
 
-        if ($request->reward_type === 'pointes') {
-            $pointeAmount = $request->pointe_amount;
-            $user = $report->user;
-            $profile = $user->profile;
-
-            if ($profile) {
-                $profile->pointes += $pointeAmount; 
-                $profile->save();
+                if ($profile && $report) {
+                    $profile->pointes += $request->pointe_amount;
+                    $report->pointe += $request->pointe_amount;
+                    $profile->save();
+                    $report->save();
+                    Alert::toast('Points reward added successfully!', 'success');
+                } else {
+                    throw new \Exception('Profile or report not found');
+                }
+            } elseif ($request->reward_type === 'bounty') {
+                return $this->payWithStripe($request->bounty_amount, $report);
             }
-
-            if ($report) {
-                $report->pointe+= $pointeAmount; 
-                $report->save();
-            }
-
-            return back()->with('success', 'Points reward added successfully.');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to submit reward: ' . $e->getMessage(), 'error');
         }
 
-        if ($request->reward_type === 'bounty') {
-            return $this->payWithStripe($request->bounty_amount, $report);
-        }
-
-        return back()->with('success', 'Points reward submitted successfully.');
+        return back();
     }
-
-
 
     public function payWithStripe($bounty_amount, Report $report)
     {
@@ -79,49 +75,63 @@ class RewardController extends Controller
                 'success_url' => route('stripe.success', [
                     'user_id' => $report->user->id,
                     'amount' => $bounty_amount,
-                    'report' => $report,
+                    'report_id' => $report->id,
                 ]),
                 'cancel_url' => route('reportEntreprise') . '?status=cancel',
             ]);
 
             return redirect($session->url);
-
         } catch (\Exception $e) {
-            return dd(['stripe' => 'Stripe error: ' . $e->getMessage()]);
+            Alert::toast('Failed to process payment: ' . $e->getMessage(), 'error');
+            return back();
         }
     }
 
     public function stripeSuccess(Request $request)
     {
-        $user = User::find($request->user_id);
-        $amount = $request->amount;
-        $report = Report::find($request->report);
-
-        $profile = $user->profile;
-        if ($profile) {
-            $profile->rewards += $amount;
-            $profile->save();
-        }
-        if ($report) {
-            $report->reward+= $amount; 
-            $report->save();
-        }
-        $entrepriseUser = Auth::user();
-        $entrepriseProfile = $entrepriseUser->profile;
-        if ($entrepriseProfile) {
-            $entrepriseProfile->rewards += $amount;
-            $entrepriseProfile->save();
-        }
-
-        Transaction::create([
-            'from_user_id' => $entrepriseUser->id,
-            'to_user_id' => $user->id,
-            'report_id' => $report->id,
-            'program_id' => $report->program_id,
-            'amount' => $amount,
-            'method' => 'stripe',
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'amount' => 'required|numeric|min:1',
+            'report_id' => 'required|exists:reports,id',
         ]);
 
-        return to_route('reportEntreprise')->with('success', 'Reward added successfully!');
+        try {
+            $user = User::findOrFail($request->user_id);
+            $report = Report::findOrFail($request->report_id);
+            $amount = $request->amount;
+            $entrepriseUser = Auth::user();
+
+            DB::transaction(function () use ($user, $report, $amount, $entrepriseUser) {
+                $profile = $user->profile;
+                $entrepriseProfile = $entrepriseUser->profile;
+
+                if ($profile && $report && $entrepriseProfile) {
+                    $profile->rewards += $amount;
+                    $report->reward += $amount;
+                    $entrepriseProfile->rewards -= $amount;
+
+                    $profile->save();
+                    $report->save();
+                    $entrepriseProfile->save();
+
+                    Transaction::create([
+                        'from_user_id' => $entrepriseUser->id,
+                        'to_user_id' => $user->id,
+                        'report_id' => $report->id,
+                        'program_id' => $report->program_id,
+                        'amount' => $amount,
+                        'method' => 'stripe',
+                    ]);
+                } else {
+                    throw new \Exception('Profile or report not found');
+                }
+            });
+
+            Alert::toast('Reward processed successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to process reward: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
     }
 }

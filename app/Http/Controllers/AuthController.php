@@ -10,6 +10,7 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AuthController extends Controller
@@ -189,13 +190,12 @@ class AuthController extends Controller
 
 
     // Handle logout
-    public function logout(Request $request)
-    {
+    public function logout(Request $request) {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
+        
+        Alert::toast('You have been logged out successfully!', 'success');
         return to_route('home');
     }
 }

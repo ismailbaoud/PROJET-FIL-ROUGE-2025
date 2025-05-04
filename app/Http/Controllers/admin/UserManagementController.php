@@ -6,46 +6,61 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class userManagementController extends Controller
+class UserManagementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->get();
+        try {
+            $users = User::with('profile')
+                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+                ->when($request->filled('role'), fn($q) => $q->where('role', $request->role))
+                ->latest()
+                ->paginate(6)
+                ->withQueryString();
 
-        $totalUsers = User::count();
-    
-        $activeUsers = User::where('status', 'active')->count();
-    
-        $suspendedUsers = User::where('status', 'suspended')->count();
-    
-        $newUsersThisMonth = User::whereMonth('created_at', Carbon::now()->month)
-                                  ->whereYear('created_at', Carbon::now()->year)
-                                  ->count();
-    
-        return view('pages.admin.user_management', compact('users', 'totalUsers', 'activeUsers', 'suspendedUsers', 'newUsersThisMonth'));
+            $totalUsers = User::count();
+            $activeUsers = User::where('status', 'active')->count();
+            $suspendedUsers = User::where('status', 'suspended')->count();
+            $newUsersThisMonth = User::whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year)
+                ->count();
+
+            return view('pages.admin.users.index', compact('users', 'totalUsers', 'activeUsers', 'suspendedUsers', 'newUsersThisMonth'));
+        } catch (\Exception $e) {
+            Alert::toast('Failed to load users: ' . $e->getMessage(), 'error');
+            return back();
+        }
     }
-    
 
-    public function changeStatus(Request $request, $id){
+    public function changeStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:active,suspended,en_attente',
+        ]);
 
-        $user = User::find($id);
-        $user->update(['status'=>$request->status]);
+        try {
+            $user = User::findOrFail($id);
+            $user->update(['status' => $request->status]);
+
+            Alert::toast('User status updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update user status: ' . $e->getMessage(), 'error');
+        }
+
         return back();
-
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+        try {
+            $user->delete();
+            Alert::toast('User deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to delete user: ' . $e->getMessage(), 'error');
+        }
+
         return back();
     }
 }

@@ -5,34 +5,53 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $programs = Program::with('users')->withSum('reports as total_rewards', 'reward')->orderBy('created_at','desc')->get();
-        
-        return view('pages.admin/programs', compact('programs'));
+        try {
+            $programs = Program::with('users')
+                ->withSum('reports as total_rewards', 'reward')
+                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+                ->orderByDesc('created_at')
+                ->paginate(6)
+                ->withQueryString();
+
+            return view('pages.admin.programs.index', compact('programs'));
+        } catch (\Exception $e) {
+            Alert::toast('Failed to load programs: ' . $e->getMessage(), 'error');
+            return back();
+        }
     }
 
+    public function changeStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:accepte,pending,rejected',
+        ]);
 
-    public function changeStatus(Request $request, $id){
+        try {
+            $program = Program::findOrFail($id);
+            $program->update(['status' => $request->status]);
 
-        $program = Program::find($id);
-        $program->update(['status'=>$request->status]);
+            Alert::toast('Program status updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update program status: ' . $e->getMessage(), 'error');
+        }
+
         return back();
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
+    public function destroy(Program $program)
     {
-        $program = Program::find($id)->delete();
+        try {
+            $program->delete();
+            Alert::toast('Program deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to delete program: ' . $e->getMessage(), 'error');
+        }
 
         return back();
     }

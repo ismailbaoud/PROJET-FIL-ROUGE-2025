@@ -5,108 +5,110 @@ namespace App\Http\Controllers\entreprises;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Program;
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\entreprise\ProgramRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramController extends Controller
 {
-
-    //index
+    // Display list of programs
     public function index(Request $request)
     {
-        $query = Program::where('user_id', Auth::Id())->withCount('reports');
-    
-        if ($request->has('status') && $request->status !== '') {
+        $validStatuses = ['active', 'inactive'];
+        $validSorts = [
+            'newest' => 'created_at',
+            'highest_bounty' => 'max_reward',
+        ];
+
+        $query = Program::where('user_id', Auth::id())->withCount('reports');
+
+        if ($request->has('status') && in_array($request->status, $validStatuses)) {
             $query->where('status', $request->status);
         }
-    
-        switch ($request->sort) {
-            case 'highest_bounty':
-                $query->orderByDesc('max_reward');
-                break;
-            case 'most_reports':
-                $query->orderByDesc('reports_count');
-                break;
-            case 'recently_updated':
-                $query->orderByDesc('updated_at');
-                break;
-            default:
-                $query->orderByDesc('created_at');
-                break;
+
+        if ($request->filled('search')) {
+            $query->where('title', 'LIKE', '%' . $request->search . '%');
         }
-    
-        $programs = $query->paginate(6);
-    
+
+        $sort = $validSorts[$request->input('sort', 'newest')] ?? 'created_at';
+        $query->orderByDesc($sort);
+
+        $programs = $query->paginate(6)->appends($request->only(['status', 'sort', 'search']));
+
         return view('pages.entreprise.programs', compact('programs'));
     }
-    
-    
 
+    // Store new program
+    public function create(ProgramRequest $request)
+    {
+        try {
+            Program::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'min_reward' => $request->min_reward,
+                'max_reward' => $request->max_reward,
+                'user_id' => Auth::id(),
+                'status' => 'inactive', // default
+            ]);
 
-    //create
-    public function create(ProgramRequest $request){
-        Program::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'min_reward' => $request->min_reward,
-            'max_reward' => $request->max_reward,
-            'user_id' => Auth::id()
-        ]);
-        return back()->with('success', 'Program created successfully!');
-    }
-
-
-    //update
-    public function update(ProgramRequest $request, $id){
-        $program = Program::find($id);
-        $program->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'min_reward' => $request->min_reward,
-            'max_reward' => $request->max_reward,
-            'user_id' => Auth::id()
-        ]);
-
-        return back()->with('success', 'Program updated successfully!');
-    }
-
-
-    //change status
-    public function changeStatus($id){
-        $program = Program::find($id);
-
-        switch ($program->status) {
-            case 'en_attnte':
-                $program->status = 'actif';
-                break;
-            case 'actif':
-                $program->status = 'archive';
-                break;
-            case 'archive':
-                $program->status = 'en_attnte';
-                break;
+            Alert::toast('Program created successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to create program', 'error');
         }
 
-        $program->save();
-
-        return back()->with('success', 'Program status changed successfully!');
+        return back();
     }
 
+    // Update existing program
+    public function update(ProgramRequest $request, $id)
+    {
+        try {
+            $program = Program::findOrFail($id);
 
-    //delete
-    public function delete($id){
-        $program = Program::find($id);
-        if($program->status === 'rejete'){
+            $program->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'min_reward' => $request->min_reward,
+                'max_reward' => $request->max_reward,
+            ]);
 
-            $program->status = 'accepte';
-        }elseif($program->status === 'accepte'){
-            $program->status = 'rejete';
+            Alert::toast('Program updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update program', 'error');
         }
-        $program->save();
-    
-        return back()->with('success', 'Program rejected successfully!');
+
+        return back();
     }
 
-    
+    // Toggle status between active and inactive
+    public function changeStatus($id)
+    {
+        try {
+            $program = Program::findOrFail($id);
+
+            $program->status = $program->status === 'active' ? 'inactive' : 'active';
+            $program->save();
+
+            Alert::toast('Program status updated!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update status', 'error');
+        }
+
+        return back();
+    }
+
+    // Delete program
+    public function delete($id)
+    {
+        try {
+            $program = Program::findOrFail($id);
+            $program->delete();
+
+            Alert::toast('Program deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to delete program', 'error');
+        }
+
+        return back();
+    }
 }

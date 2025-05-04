@@ -4,95 +4,105 @@ namespace App\Http\Controllers\hunters;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\Program;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\hunter\ReportRequest;
 
 class ReportController extends Controller
 {
-
-    //index
-
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::user();
-        $reports = $user->reports()->latest()->get();
-    
-        return view('pages.hunter.reports', compact('reports'));
-    }
-    
+        try {
+            $user = Auth::user();
+            $reports = $user->reports()
+                ->with('program')
+                ->latest()
+                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+                ->when($request->filled('severity'), fn($q) => $q->where('severity', $request->severity))
+                ->paginate(6)
+                ->withQueryString();
 
-
-    
-    public function store(Request $request, $id)
-{
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'type' => 'required|in:SQL Injection,XSS,CSRF,RCE,Other',
-        'target' => 'required|string|max:255',
-        'steps' => 'required|string',
-        'impact' => 'required|string',
-        'poc' => 'required|file|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime', 
-        'severity' => 'required|in:Low,Medium,High,Critical',
-    ]);
-
-    $uploadPath = public_path('uploads/');
-
-    if (!File::exists($uploadPath)) {
-        File::makeDirectory($uploadPath, 0755, true);
+            return view('pages.hunter.reports-index', compact('reports'));
+        } catch (\Exception $e) {
+            Alert::toast('Failed to load reports: ' . $e->getMessage(), 'error');
+            return back();
+        }
     }
 
-    $file = $request->file('poc');
-    $filename = time() . '_' . $file->getClientOriginalName();
-    $file->move($uploadPath, $filename);
+    public function store(ReportRequest $request, $id)
+    {
+        try {
+            $program = Program::findOrFail($id);
 
-    $data = [
-        'title' => $validated['title'],
-        'type' => $validated['type'],
-        'target' => $validated['target'],
-        'steps' => $validated['steps'],
-        'impact' => $validated['impact'],
-        'severity' => $validated['severity'],
-        'user_id' => Auth::id(),
-        'program_id' => $id,
-        'poc' => $filename,
-    ];
+            $file = $request->file('poc');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $filename, 'public');
 
-    Report::create($data);
+            $data = [
+                'title' => $request->title,
+                'type' => $request->type,
+                'target' => $request->target,
+                'steps' => $request->steps,
+                'impact' => $request->impact,
+                'severity' => $request->severity,
+                'user_id' => Auth::id(),
+                'program_id' => $program->id,
+                'poc' => $path,
+            ];
 
-    return back()->with('success', 'Report created successfully!');
-}
+            Report::create($data);
 
+            Alert::toast('Report created successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to create report: ' . $e->getMessage(), 'error');
+        }
 
-    //update
-    public function updateStatus(Request $request, $id){
+        return back();
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
         $request->validate([
             'status' => 'required|string|in:open,closed,pending',
         ]);
 
-        $report = Report::find($id);
-        $report->update([
-            'status' => $request->status,
-        ]);
+        try {
+            $report = Report::findOrFail($id);
+            $report->update([
+                'status' => $request->status,
+            ]);
 
-        return back()->with('success', 'Report status updated successfully!');
+            Alert::toast('Report status updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update report status: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
     }
 
-
-    //delete
     public function destroy(Report $report)
     {
         try {
             $report->delete();
-            return back()->with('success', 'Report deleted successfully!');
+            Alert::toast('Report deleted successfully!', 'success');
         } catch (\Exception $e) {
-            return back()->with('error', 'An error occurred while deleting the report.');
+            Alert::toast('Failed to delete report: ' . $e->getMessage(), 'error');
         }
+
+        return back();
     }
 
-    public function showSubmitForm($id){
-        return view('pages.hunter.submitReport' ,compact('id'));
+    public function showSubmitForm($id)
+    {
+        try {
+            $program = Program::findOrFail($id);
+            return view('pages.hunter.report-submit', compact('id'));
+        } catch (\Exception $e) {
+            Alert::toast('Failed to load submit form: ' . $e->getMessage(), 'error');
+            return back();
+        }
     }
-    
 }

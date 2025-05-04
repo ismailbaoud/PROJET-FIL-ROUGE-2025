@@ -6,72 +6,83 @@ use Illuminate\Http\Request;
 use App\Models\Scope;
 use App\Models\Program;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ScopeController extends Controller
 {
-
-    //create
-    public function create(Program $program){
-        return view('scopes.create', compact('program'));
+    public function create(Program $program)
+    {
+        return view('pages.entreprise.scopes.create', compact('program'));
     }
 
-
-    //store
-    public function store(Request $request, $programId){
+    public function store(Request $request, Program $program)
+    {
         $request->validate([
             'target' => 'required|string',
-            'target_type' => 'required|in:web,mobile,api,other',
-            'type' => 'required|in:in,out',
-            'instructions' => 'nullable|string',
-        ]);
-    
-        $program = Program::find($programId);
-    
-
-        $scope = new Scope();
-        $scope->target = $request->input('target');
-        $scope->target_type = $request->input('target_type');
-        $scope->type = $request->input('type');
-        $scope->instructions = $request->input('instructions');
-        $scope->program_id = $program->id;
-        $scope->save();
-    
-        return back()->with('success', 'Scope added successfully!');
-    }
-    
-    
-    // edit form
-    public function edit(Scope $scope){
-        $program = $scope->program; // Get the related program
-        return view('scopes.edit', compact('scope', 'program'));
-    }
-
-
-    // Update
-    public function update(Request $request, Scope $scope){
-        $request->validate([
-            'target' => 'required|string',
-            'type' => 'required|in:in,out',
+            'target_type' => 'required|string',
+            'type' => 'required|string|in:in,out',
             'instructions' => 'required|string',
         ]);
 
-        $scope->update([
-            'target' => $request->target,
-            'type' => $request->type,
-            'instructions' => $request->instructions,
+        try {
+            Scope::create([
+                'target' => $request->target,
+                'target_type' => $request->target_type,
+                'type' => $request->type,
+                'instructions' => $request->instructions,
+                'program_id' => $program->id,
+            ]);
+
+            Alert::toast('Scope added successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to add scope: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
+    }
+
+    public function edit(Scope $scope)
+    {
+        $scope = Scope::with('program')->findOrFail($scope->id);
+        $program = $scope->program;
+
+        return view('pages.entreprise.scopes.edit', compact('scope', 'program'));
+    }
+
+    public function update(Request $request, Scope $scope)
+    {
+        $request->validate([
+            'target' => 'required|string',
+            'target_type' => 'required|string',
+            'type' => 'required|string|in:in,out',
+            'instructions' => 'required|string',
         ]);
 
-        return redirect()->route('programs.show', $scope->program_id)->with('success', 'Scope updated successfully.');
+        try {
+            $scope->update([
+                'target' => $request->target,
+                'target_type' => $request->target_type,
+                'type' => $request->type,
+                'instructions' => $request->instructions,
+            ]);
+
+            Alert::toast('Scope updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update scope: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
     }
 
+    public function destroy(Scope $scope)
+    {
+        try {
+            $scope->delete();
+            Alert::toast('Scope deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to delete scope: ' . $e->getMessage(), 'error');
+        }
 
-    // delete
-    public function destroy(Scope $scope){
-        $programId = $scope->program_id;
-        $scope->delete();
-
-        return back()->with('success', 'Scope deleted successfully.');
+        return back();
     }
-
-    
 }

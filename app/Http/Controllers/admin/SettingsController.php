@@ -6,31 +6,38 @@ use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('pages.admin/settings');
+        try {
+            return view('pages.admin.settings.index');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to load settings: ' . $e->getMessage(), 'error');
+            return back();
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,User $user)
+    public function update(Request $request, User $user)
     {
-        $user->update(['userName'=> $request->userName,'email'=> $request->email]);
+        $request->validate([
+            'userName' => 'required|string|max:255|unique:users,userName,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        try {
+            $user->update([
+                'userName' => $request->userName,
+                'email' => $request->email,
+            ]);
+
+            Alert::toast('User updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update user: ' . $e->getMessage(), 'error');
+        }
+
         return back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Profile $profile)
-    {
-        //
     }
 }

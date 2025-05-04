@@ -7,43 +7,75 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class SettingsController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user()->load('profile');
+        $profile = $user->profile;
 
-   //index
-   public function index(){
-      $user = Auth::user();
-      $profile = $user->profile;
-      return view('pages.entreprise/settings', compact('user', 'profile'));
-   }
+        return view('pages.entreprise.settings', compact('user', 'profile'));
+    }
 
-   public function update(Request $request){
-      $user = Auth::user();
-      $profile = $user->profile;
+    public function update(Request $request)
+    {
+        $request->validate([
+            'userName' => 'required|string|max:255',
+            'companyName' => 'required|string|max:255',
+            'companyUrl' => 'nullable|url|max:255',
+            'country' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+        ]);
 
-      $user->update([
-         'userName' => $request->userName
-      ]);
+        try {
+            $user = Auth::user();
+            $profile = $user->profile;
 
-      $profile->update([
-         'companyName' => $request->companyName,
-         'companyUrl' => $request->companyUrl,
-         'country' => $request->country,
-         'state' => $request->state
-      ]);
-      return back();
-   }
-   
-   public function delete() {
-      $user = Auth::user();
-  
-      Auth::logout();
-  
-      $user->delete();
-  
-      return redirect()->route('home');
-  }
-  
+            if (!$profile) {
+                throw new \Exception('Profile not found');
+            }
+
+            $user->update([
+                'userName' => $request->userName,
+            ]);
+
+            $profile->update([
+                'companyName' => $request->companyName,
+                'companyUrl' => $request->companyUrl,
+                'country' => $request->country,
+                'state' => $request->state,
+            ]);
+
+            Alert::toast('Profile updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to update profile: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
+    }
+
+    public function delete()
+    {
+        try {
+            $user = Auth::user();
+
+            if (!$user) {
+                throw new \Exception('User not found');
+            }
+
+            DB::transaction(function () use ($user) {
+                Auth::logout();
+                $user->delete();
+            });
+
+            Alert::toast('Account deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Alert::toast('Failed to delete account: ' . $e->getMessage(), 'error');
+        }
+
+        return redirect()->route('home');
+    }
 }
