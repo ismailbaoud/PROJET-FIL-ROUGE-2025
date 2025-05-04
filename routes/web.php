@@ -30,21 +30,23 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
 
 //main routes (home & auth)
 
-    Route::view('/', 'pages.home')->name('home');
-    Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter'])->name('showRegisterHunter');
-    Route::post('/register', [AuthController::class , 'HunterRegister'])->name('hunterRegister');
-    Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise'])->name('showRegisterentreprise');
+Route::view('/', 'pages.home')->name('home');
+Route::get('/register_hunter', [AuthController::class , 'showRegisterHunter'])->name('showRegisterHunter');
+Route::post('/register', [AuthController::class , 'HunterRegister'])->name('hunterRegister');
+Route::get('/register_entreprise', [AuthController::class , 'showRegisterentreprise'])->name('showRegisterentreprise');
     Route::post('/EntrepriseRegister', [AuthController::class , 'EntrepriseRegister'])->name('entrepriseRegister');
     Route::get('/loginPage', [AuthController::class , 'showLogin'])->name('showLogin');
     Route::post('/login', [AuthController::class , 'Login'])->name('login');
     Route::post('/logout', [AuthController::class , 'logout'])->name('logout');
     Route::get('/auth/github', [AuthController::class, 'redirectToGitHub'])->name('auth.github');
     Route::get('/auth/github/callback', [AuthController::class, 'handleGitHubCallback']);
-
+    Route::get('/report/details/{id}', [ReportEntreprise::class, 'show'])->name('hunter_report_details');
+    
 
 //end
 
 
+Route::group(['middleware' => 'checkEntrepriseRole'], function () {
 
 //entreprise 
 
@@ -80,10 +82,10 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
 
     Route::get('tr/transactions', [entropriseTransactions::class, 'index'])->name('entrepriseTransactions');
 
-
+});
     
 //end
-
+Route::group(['middleware' => 'checkHunterRole'], function () {
 //hunter
     
     //dashboard
@@ -93,11 +95,9 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
     Route::get('/ht/programs', [hunterPrograms::class, 'index'])->name('programs');
     Route::post('/programs/{id}/join', [hunterPrograms::class, 'joinProgram'])->name('programs.join');
     Route::get('/ht/myprograms', [hunterPrograms::class, 'joinedPrograms']);
-    Route::get('/ht/program_details/{id}', [hunterPrograms::class, 'show'])->name('programDetails');
-
+    
     //reports
     Route::get('/ht/reports', [ReportHunter::class, 'index'])->name('hunter_report_index');
-    Route::get('/report/details/{id}', [ReportEntreprise::class, 'show'])->name('hunter_report_details');
     Route::get('/ht/report/submit/{id}', [ReportHunter::class, 'showSubmitForm'])->name('hunter_report_submit');
     Route::post('/ht/report/store/{id}', [ReportHunter::class, 'store'])->name('hunter_report_store');
     Route::delete('/ht/report/{report}/delete', [ReportHunter::class, 'destroy'])->name('hunter_report_delete');
@@ -107,13 +107,15 @@ use App\Http\Controllers\admin\SettingsController as adminSettings;
     
     //settings
     Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
-    Route::post('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
+    Route::patch('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
     Route::patch('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
     Route::post('/hunter/upload-avatar', [hunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
-
-    //end
     
+    //end
+});
 
+Route::get('/ht/program_details/{id}', [hunterPrograms::class, 'show'])->name('programDetails');
+Route::group(['middleware' => 'checkAdmineRole'], function () {
 
 // administration 
 Route::get('/dm/dashboard', [adminDashboard::class , 'index'])->name('adminDashboard');
@@ -133,3 +135,4 @@ Route::get('/dm/transactions', [adminTransactions::class , 'index']);
 
 Route::get('/dm/settings', [adminSettings::class , 'index']);
 Route::get('/dm/settings/{user}', [adminSettings::class , 'update'])->name('adminSettingsUpdate');
+});
