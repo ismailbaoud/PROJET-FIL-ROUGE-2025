@@ -22,34 +22,16 @@ class UserManagementController extends Controller
 
             $totalUsers = User::count();
             $activeUsers = User::where('status', 'active')->count();
-            $suspendedUsers = User::where('status', 'suspended')->count();
+            $suspendedUsers = User::where('status', 'suspand')->count();
             $newUsersThisMonth = User::whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
 
-            return view('pages.admin.users.index', compact('users', 'totalUsers', 'activeUsers', 'suspendedUsers', 'newUsersThisMonth'));
+            return view('pages.admin.user_management', compact('users', 'totalUsers', 'activeUsers', 'suspendedUsers', 'newUsersThisMonth'));
         } catch (\Exception $e) {
             Alert::toast('Failed to load users: ' . $e->getMessage(), 'error');
             return back();
         }
-    }
-
-    public function changeStatus(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|string|in:active,suspended,en_attente',
-        ]);
-
-        try {
-            $user = User::findOrFail($id);
-            $user->update(['status' => $request->status]);
-
-            Alert::toast('User status updated successfully!', 'success');
-        } catch (\Exception $e) {
-            Alert::toast('Failed to update user status: ' . $e->getMessage(), 'error');
-        }
-
-        return back();
     }
 
     public function destroy(User $user)
@@ -58,7 +40,7 @@ class UserManagementController extends Controller
             $user->delete();
             Alert::toast('User deleted successfully!', 'success');
         } catch (\Exception $e) {
-            Alert::toast('Failed to delete user: ' . $e->getMessage(), 'error');
+            Alert::toast('Failed to delete User: ' . $e->getMessage(), 'error');
         }
 
         return back();

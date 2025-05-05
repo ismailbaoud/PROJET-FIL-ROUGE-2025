@@ -19,7 +19,7 @@ class ReportController extends Controller
                 ->paginate(6)
                 ->withQueryString();
 
-            return view('pages.admin.reports.index', compact('reports'));
+            return view('pages.admin.reports', compact('reports'));
         } catch (\Exception $e) {
             Alert::toast('Failed to load reports: ' . $e->getMessage(), 'error');
             return back();

@@ -13,13 +13,17 @@ class ProgramController extends Controller
     {
         try {
             $programs = Program::with('users')
-                ->withSum('reports as total_rewards', 'reward')
-                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
-                ->orderByDesc('created_at')
-                ->paginate(6)
-                ->withQueryString();
+            ->join('reports', 'programs.id', '=', 'reports.program_id')
+            ->select('programs.*')
+            ->selectRaw('SUM(reports.reward) as total_rewards')
+            ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+            ->groupBy('programs.id')
+            ->orderByDesc('programs.created_at')
+            ->paginate(6)
+            ->withQueryString();
+        
 
-            return view('pages.admin.programs.index', compact('programs'));
+            return view('pages.admin.programs', compact('programs'));
         } catch (\Exception $e) {
             Alert::toast('Failed to load programs: ' . $e->getMessage(), 'error');
             return back();
@@ -29,7 +33,7 @@ class ProgramController extends Controller
     public function changeStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|in:accepte,pending,rejected',
+            'status' => 'required|string|in:active,inactive',
         ]);
 
         try {

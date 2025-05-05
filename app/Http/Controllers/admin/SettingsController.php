@@ -13,7 +13,7 @@ class SettingsController extends Controller
     public function index()
     {
         try {
-            return view('pages.admin.settings.index');
+            return view('pages.admin.settings');
         } catch (\Exception $e) {
             Alert::toast('Failed to load settings: ' . $e->getMessage(), 'error');
             return back();
@@ -23,13 +23,13 @@ class SettingsController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'userName' => 'required|string|max:255|unique:users,userName,' . $user->id,
+            'userName' => 'required|string|max:255' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
         try {
             $user->update([
-                'userName' => $request->userName,
+                'username' => $request->userName,
                 'email' => $request->email,
             ]);
 

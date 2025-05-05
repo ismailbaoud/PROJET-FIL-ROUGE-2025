@@ -19,7 +19,7 @@ class TransactionController extends Controller
                 ->paginate(6)
                 ->withQueryString();
 
-            return view('pages.admin.transactions.index', compact('transactions'));
+            return view('pages.admin.transactions', compact('transactions'));
         } catch (\Exception $e) {
             Alert::toast('Failed to load transactions: ' . $e->getMessage(), 'error');
             return back();
