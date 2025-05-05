@@ -24,7 +24,7 @@
                                     </label>
                                     <input type="text" id="userName" name="userName"
                                            class="mt-1 p-2 border border-gray-600 rounded-lg w-full md:w-1/2 bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                                           value="{{ Auth::user()->userName }}" />
+                                           value="{{ Auth::user()->username }}" />
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-400 flex items-center gap-2">

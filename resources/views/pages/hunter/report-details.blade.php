@@ -16,7 +16,7 @@
         @endif
 
         <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-            <div class="max-w-4xl mx-auto">
+            <div class="w-[100%] mx-auto">
                 <div class="w-full flex justify-center items-center">
                     @if (auth()->user()->role === 'entreprise')
                         <a href="{{ route('entreprise_reward_index', $report->id) }}"

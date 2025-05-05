@@ -18,7 +18,7 @@
                     @if (Auth::id() === $user->id && Auth::user()->role === 'hunter')
                         <form action="{{ route('hunter_upload_avatar') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2">
                             @csrf
-                            <input type="file" id="content_visual" name="content_vusial" accept="image/*"
+                            <input type="file" id="content_visual" name="content_visual" accept="image/*"
                                    class="text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700">
                             @error('content_visual')
                                 <p class="text-sm text-red-400 mt-1">{{ $message }}</p>
@@ -44,11 +44,11 @@
                             <div class="space-y-4">
                                 <div>
                                     <label for="username" class="block text-sm font-medium text-gray-300">Username</label>
-                                    <input type="text" id="username" name="userName"
-                                           value="{{ old('userName', $user->userName) }}"
+                                    <input type="text" id="username" name="username"
+                                           value="{{ old('userName', $user->username) }}"
                                            class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                                            required>
-                                    @error('userName')
+                                    @error('username')
                                         <p class="text-sm text-red-400 mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -102,7 +102,7 @@
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-300">Username</label>
-                                <p class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 bg-gray-700 text-white">{{ $user->userName ?? 'N/A' }}</p>
+                                <p class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 bg-gray-700 text-white">{{ $user->username ?? 'N/A' }}</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-300">Email</label>

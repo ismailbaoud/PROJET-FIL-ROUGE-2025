@@ -2,25 +2,25 @@
     <div>
         <label class="block text-sm font-medium text-gray-700">Title</label>
         <input type="text" name="title" required 
-               class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+               class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Description</label>
         <textarea name="description" rows="4" required
-                 class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"></textarea>
+                 class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"></textarea>
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Type</label>
         <input type="text" name="type" required placeholder="e.g. SQL Injection, XSS..."
-               class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+               class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
     </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Severity</label>
         <select name="severity" required 
-                class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
             <option value="">Select severity</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -31,14 +31,13 @@
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Program</label>
-        <select name="program_id" id="" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+        <select name="program_id" id="" class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
             <option value="#">select program</option>
             @foreach ($programs as $program)
             <option value="{{$program->id}}">{{$program->title}}</option>
             @endforeach
         </select>
     </div>
-        
 
     <div class="flex justify-end pt-2">
         <button type="submit" 

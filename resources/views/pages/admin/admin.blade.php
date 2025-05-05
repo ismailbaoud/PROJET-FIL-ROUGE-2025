@@ -15,7 +15,6 @@
                                 Active Users
                             </div>
                             <div class="text-3xl font-semibold text-white mb-2">{{$activeUsers}}</div>
-                            <div class="text-sm text-blue-400">+12% new today</div>
                         </div>
                         <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-600">
                             <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
@@ -23,15 +22,13 @@
                                 Total Programs
                             </div>
                             <div class="text-3xl font-semibold text-white mb-2">{{$totalPrograms}}</div>
-                            <div class="text-sm text-blue-400">+3 new today</div>
                         </div>
                         <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-600">
                             <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
                                 <i class="fas fa-dollar-sign text-blue-400"></i>
                                 Total Payouts
                             </div>
-                            <div class="text-3xl font-semibold text-white mb-2">${{$totalPayounts}}</div>
-                            <div class="text-sm text-gray-400">+2 new today</div>
+                            <div class="text-3xl font-semibold text-white mb-2">${{$totalPayouts}}</div>
                         </div>
                         <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-600">
                             <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
@@ -39,7 +36,6 @@
                                 Total Reports
                             </div>
                             <div class="text-3xl font-semibold text-white mb-2">{{$totalReports}}</div>
-                            <div class="text-sm text-red-400">+3 new today</div>
                         </div>
                     </div>
 
@@ -56,7 +52,7 @@
                                             <div class="text-white font-medium">{{ $report->type }}</div>
                                             <div class="text-gray-400 text-sm">{{ $report->title }}</div>
                                         </div>
-                                        <div class="text-gray-400 text-sm">Reported By {{ $report->user->userName }}</div>
+                                        <div class="text-gray-400 text-sm">Reported By {{ $report->user->username }}</div>
                                         <div class="text-gray-400 text-sm">{{ $report->created_at }}</div>
                                         <div class="text-blue-400 text-sm">{{ $report->status }}</div>
                                     </div>
@@ -91,7 +87,7 @@
                             <div class="space-y-4">
                                 @foreach($hunters as $hunter)
                                     <div class="flex items-center justify-between border border-gray-600 rounded-lg p-6 bg-gray-700/50">
-                                        <div class="text-white font-medium">{{ $hunter->userName }}</div>
+                                        <div class="text-white font-medium">{{ $hunter->username }}</div>
                                         <div>
                                             <div class="text-gray-400 text-sm">Registered on {{ $hunter->created_at }}</div>
                                         </div>
@@ -109,7 +105,7 @@
                             <div class="space-y-4">
                                 @foreach ($entreprises as $entreprise)
                                     <div class="flex items-center justify-between border border-gray-600 rounded-lg p-6 bg-gray-700/50">
-                                        <div class="text-white font-medium">{{ $entreprise->userName }}</div>
+                                        <div class="text-white font-medium">{{ $entreprise->username }}</div>
                                         <div>
                                             <div class="text-gray-400 text-sm">Registered on {{ $entreprise->created_at }}</div>
                                         </div>

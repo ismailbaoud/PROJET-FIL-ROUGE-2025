@@ -12,7 +12,7 @@
             @include('partials.entreprise.header')
     @endif
             <main class="flex-1 overflow-auto p-8 bg-gradient-to-br from-gray-900 to-gray-700">
-                <div class="max-w-7xl mx-auto space-y-8">
+                <div class="w-[100%] mx-auto space-y-8">
                     <!-- Program Header -->
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-6 bg-gray-800 rounded-xl shadow-sm border border-gray-700">
                         <div class="flex flex-col space-y-3">
@@ -143,7 +143,7 @@
                                                 Scope Management
                                             </h2>
                                         </div>
-                                        <button onclick="toggleForm('createForm')" class="px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center gap-2 text-sm shadow-sm hover:shadow-md">
+                                        <button onclick="toggleForm('createForm')" class="px-2 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center gap-2 text-sm shadow-sm hover:shadow-md">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                             </svg>

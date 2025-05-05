@@ -94,11 +94,7 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-right text-xs font-medium text-gray-200 uppercase tracking-wider">
-                                        Change Status
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-right text-xs font-medium text-gray-200 uppercase tracking-wider">
-                                        Actions
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
@@ -136,8 +132,8 @@
                                             {{ $user->updated_at }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <div class="flex justify-end space-x-2">
-                                                <form action="{{ route('updateUser', $user->id) }}" method="POST"
+                                            {{-- <div class="flex justify-end space-x-2"> --}}
+                                                {{-- <form action="{{ route('updateUser', $user->id) }}" method="POST"
                                                     id="updateStatus-{{ $user->id }}">
                                                     @csrf
                                                     @method('PATCH')
@@ -145,25 +141,25 @@
                                                         class="p-1 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
                                                         <option value="active" {{ $user->status === 'active' ? 'selected' : '' }}>
                                                             Active</option>
-                                                        <option value="panding" {{ $user->status === 'panding' ? 'selected' : '' }}>
-                                                            Panding</option>
                                                         <option value="suspand" {{ $user->status === 'suspand' ? 'selected' : '' }}>
-                                                            Soft Suspend</option>
+                                                            suspand</option>
                                                     </select>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="{{ route('deleteUser', $user->id) }}"
+                                                </form> --}}
+
+                                            <a href="{{ route('deleteUser', $user) }}"
                                                 class="flex items-center gap-1 px-2 py-1 text-sm font-semibold text-red-400 hover:text-red-300 transition-all duration-300">
-                                                <i class="fas fa-ban"></i>
-                                                
-                                            </a>
+                                                 <i class="fas fa-ban"></i>
+                                                 delete
+                                             </a>
+                                            {{-- </div> --}}
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-8">
+                        {{ $users->appends(request()->query())->links() }}
                     </div>
                 </div>
             </main>

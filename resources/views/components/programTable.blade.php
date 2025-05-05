@@ -1,16 +1,16 @@
-<div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-    <table class="min-w-full divide-y divide-gray-200">
+<div class="bg-white border border-gray-600 rounded-xl shadow-sm overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-600">
         <thead class="bg-gray-50">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Program Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reward Range</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reports</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Updated</th>
-                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Program Name</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Status</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Reward Range</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Reports</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Last Updated</th>
+                <th class="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase">Actions</th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="bg-white divide-y divide-gray-600">
             @foreach ($programs as $program)
                 @php
                     $colors = [

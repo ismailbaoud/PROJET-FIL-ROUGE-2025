@@ -6,7 +6,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             @include('partials.hunter.header')
             <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-                <div class="max-w-7xl mx-auto">
+                <div class="w-[100%] mx-auto">
                     <!-- Welcome Card -->
                     <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-600 p-6 mb-8 flex items-center">
                         <div class="relative">

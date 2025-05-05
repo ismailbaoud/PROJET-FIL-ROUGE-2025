@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('main')
-    <div class="flex h-screen bg-gradient-to-b from-gray-800 to-gray-900">
+    <div class="flex h-screen  bg-gradient-to-b from-gray-800 to-gray-900">
         @include('partials.entreprise.sidebar')
         <div class="flex-1 flex flex-col overflow-hidden">
             @include('partials.entreprise.header')
-            <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-                <div class="max-w-7xl mx-auto">
+            <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 ">
+                <div class="w-[100%] mx-auto">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                         <div>
                             <h1 class="text-2xl font-bold text-white flex items-center gap-2">

@@ -8,7 +8,7 @@
         @include('partials.hunter.header')
         
         <main class="flex-1 overflow-auto p-6 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-            <div class="max-w-7xl mx-auto">
+            <div class="w-[100%] mx-auto">
                 <!-- Header -->
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
                     <div>

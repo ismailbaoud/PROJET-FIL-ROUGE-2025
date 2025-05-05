@@ -62,7 +62,6 @@
                                         </select>
                                     </div>
                             
-                                    <!-- Sort By -->
                                     <div class="relative">
                                         <select name="sort" id="sortBy" onchange="document.getElementById('filterForm').submit();"
                                             class="appearance-none pl-4 pr-10 py-2.5 bg-gray-700 border border-gray-600 rounded-lg text-sm text-gray-200">
@@ -72,7 +71,6 @@
                                         </select>
                                     </div>
                             
-                                    <!-- Search Input -->
                                     <div class="relative w-full md:w-64">
                                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search programs..."
                                             class="w-full pl-10 pr-4 py-2.5 border border-gray-600 rounded-lg bg-gray-700 text-gray-200 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition-all duration-300"
@@ -175,7 +173,6 @@
                         @endif
                     </div>
 
-                    <!-- Pagination -->
                     <div class="mt-10">
                         {{ $programs->appends(request()->query())->links() }}
                     </div>
@@ -186,7 +183,8 @@
     <script src="{{ asset('js/entreprises/program.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('#createProgramForm'); // or use the form ID if needed
+    const form = document.querySelector('#createProgramForm');
+    
 
     form.addEventListener('submit', function (e) {
         let hasError = false;

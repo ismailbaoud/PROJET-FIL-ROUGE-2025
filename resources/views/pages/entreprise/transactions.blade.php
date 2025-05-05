@@ -6,7 +6,7 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         @include('partials.entreprise.header')
         <main class="flex-1 p-6 overflow-auto bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-            <div class="max-w-7xl mx-auto">
+            <div class="W-[100%] mx-auto">
                 <div class="p-6 min-h-screen">
                     <h1 class="text-3xl font-bold text-white mb-8 flex items-center gap-2">
                         <i class="fas fa-exchange-alt text-blue-400"></i> Transaction Management

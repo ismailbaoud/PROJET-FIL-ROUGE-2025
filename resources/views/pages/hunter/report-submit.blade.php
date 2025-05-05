@@ -8,7 +8,7 @@
         @include('partials.hunter.header')
 
         <main class="flex-1 overflow-auto p-8 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-            <div class="max-w-5xl mx-auto">
+            <div class="w-[100%] mx-auto">
                 <div class="flex items-center gap-4 mb-8">
                     <div class="bg-red-600 p-2 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

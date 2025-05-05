@@ -3,21 +3,19 @@
     <div>
         <label for="name" class="block text-sm font-medium text-gray-700">Program Name</label>
         <input type="text" name="title" id="name"
-            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+            class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
         @error('title')
             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
         @enderror
-
     </div>
 
     <div>
         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
         <textarea name="description" id="description" rows="4"
-            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"></textarea>
+            class="mt-1 block w-full border border-gray-600 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"></textarea>
         @error('description')
             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
         @enderror
-
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -28,11 +26,10 @@
                     <span class="text-gray-500">$</span>
                 </div>
                 <input type="number" name="min_reward" id="min_reward"
-                    class="block w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                    class="block w-full pl-7 pr-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
                 @error('min_reward')
                     <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                 @enderror
-
             </div>
         </div>
 
@@ -43,11 +40,10 @@
                     <span class="text-gray-500">$</span>
                 </div>
                 <input type="number" name="max_reward" id="max_reward"
-                    class="block w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
+                    class="block w-full pl-7 pr-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500">
                 @error('max_reward')
                     <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                 @enderror
-
             </div>
         </div>
     </div>
@@ -71,4 +67,3 @@
         });
     </script>
 @endif
-

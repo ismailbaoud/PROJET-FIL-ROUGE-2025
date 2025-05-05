@@ -8,7 +8,7 @@
         @include('partials.hunter.header')
         
         <main class="flex-1 overflow-auto p-6  bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700">
-            <div class="max-w-7xl mx-auto">
+            <div class="w-[100%] mx-auto">
                 <!-- Header -->
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
                     <div>
@@ -45,13 +45,13 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold mr-3">
-                                            <img src="{{ asset('storage/' . $profile->content_vusial) }}" alt="" class="h-full w-full rounded-full object-cover">
+                                            <img src="{{ asset('storage/' . $profile->content_visual) }}" alt="" class="h-full w-full rounded-full object-cover">
                                         </div>
-                                        <div class="text-sm font-medium text-white">{{ $profile->user->userName }}</div>
+                                        <div class="text-sm font-medium text-white">{{ $profile->user->username }}</div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-white font-semibold">
-                                    {{ $profile->points }}
+                                    {{ $profile->pointes }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                     {{ $profile->country }}
