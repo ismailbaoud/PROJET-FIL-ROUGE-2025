@@ -25,9 +25,9 @@ class RewardController extends Controller
     public function submitReward(Request $request, Report $report)
     {
         $request->validate([
-            'reward_type' => 'required|string|in:pointes,bounty',
-            'pointe_amount' => 'required_if:reward_type,pointes|min:1',
-            'bounty_amount' => 'min:1',
+            'reward_type' => 'string|in:pointes,bounty',
+            'pointe_amount' => '',
+            'bounty_amount' => '',
         ]);
 
         try {

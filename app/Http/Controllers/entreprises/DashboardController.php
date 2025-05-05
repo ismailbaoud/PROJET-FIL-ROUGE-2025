@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -14,7 +15,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         try {
-            $programs = Program::with('user')
+            $programs = Program::with('users')
                 ->where('user_id', Auth::id())
                 ->latest()
                 ->when($request->filled('program_name'), fn($q) => $q->where('name', 'LIKE', '%' . $request->program_name . '%'))

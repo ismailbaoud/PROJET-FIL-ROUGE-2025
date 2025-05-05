@@ -33,7 +33,7 @@ class ReportController extends Controller
     public function show($id)
     {
         $report = Report::with(['user', 'program'])->findOrFail($id);
-        return view('pages.hunter.reportDetails', compact('report'));
+        return view('pages.hunter.report-details', compact('report'));
     }
 
     // Update report status
