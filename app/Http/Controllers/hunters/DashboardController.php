@@ -16,11 +16,15 @@ class DashboardController extends Controller
     {
         try {
             $programs = Program::with('entreprise')
-                ->where('status', 'accepte')
-                ->latest()
-                ->when($request->filled('program_name'), fn($q) => $q->where('name', 'LIKE', '%' . $request->program_name . '%'))
-                ->paginate(2)
-                ->withQueryString();
+            ->withCount('reports')
+            ->where('status', 'accepte')
+            ->latest()
+            ->when($request->filled('program_name'), fn($q) => 
+                $q->where('name', 'LIKE', '%' . $request->program_name . '%')
+            )
+            ->paginate(2)
+            ->withQueryString();
+        
 
             $reports = Report::with(['user', 'program'])
                 ->where('user_id', Auth::id())
@@ -33,8 +37,8 @@ class DashboardController extends Controller
                     return $report;
                 });
 
-            $totalReports = Report::count();
-            $validatedReports = Report::where('status', 'resolved')->count();
+            $totalReports = Report::where('user_id', Auth::Id())->count();
+            $validatedReports = Report::where('status', 'resolved')->where('user_id', Auth::Id())->count();
 
             return view('pages.hunter/hunter', compact('programs', 'reports', 'totalReports', 'validatedReports'));
         } catch (\Exception $e) {

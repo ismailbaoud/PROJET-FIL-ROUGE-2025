@@ -23,9 +23,9 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                            <input type="text" id="username" name="userName"
+                            <input type="text" id="username" name="username"
                                 class="w-full px-3 py-3 border border-gray-300 bg-gray-50 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                                @error('userName')
+                                @error('username')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                             </div>

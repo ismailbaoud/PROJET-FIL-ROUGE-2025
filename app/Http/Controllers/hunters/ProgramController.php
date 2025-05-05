@@ -19,20 +19,22 @@ class ProgramController extends Controller
 
         try {
             $programs = Program::with('entreprise')
-                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
-                ->when($request->filled('sort'), function ($q) use ($request) {
-                    if ($request->sort === 'highest_bounty') {
-                        $q->orderByDesc('max_reward');
-                    } elseif ($request->sort === 'most_reports') {
-                        $q->orderByDesc('reports_count');
-                    } elseif ($request->sort === 'recently_updated') {
-                        $q->orderByDesc('updated_at');
-                    } else {
-                        $q->orderByDesc('created_at');
-                    }
-                }, fn($q) => $q->orderByDesc('created_at'))
-                ->paginate(6)
-                ->withQueryString();
+    ->withCount('reports')
+    ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+    ->when($request->filled('sort'), function ($q) use ($request) {
+        if ($request->sort === 'highest_bounty') {
+            $q->orderByDesc('max_reward');
+        } elseif ($request->sort === 'most_reports') {
+            $q->orderByDesc('reports_count'); 
+        } elseif ($request->sort === 'recently_updated') {
+            $q->orderByDesc('updated_at');
+        } else {
+            $q->orderByDesc('created_at');
+        }
+    }, fn($q) => $q->orderByDesc('created_at'))
+    ->paginate(6)
+    ->withQueryString();
+
 
             return view('pages.hunter.programs-index', compact('programs'));
         } catch (\Exception $e) {
