@@ -39,12 +39,12 @@ class SettingsController extends Controller
             }
 
             $user->update([
-                'userName' => $request->userName,
+                'username' => $request->username,
             ]);
 
             $profile->update([
-                'companyName' => $request->companyName,
-                'companyUrl' => $request->companyUrl,
+                'companyname' => $request->companyname,
+                'companyurl' => $request->companyurl,
                 'country' => $request->country,
                 'state' => $request->state,
             ]);

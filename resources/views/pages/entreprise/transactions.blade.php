@@ -44,8 +44,8 @@
                                 @foreach ($transactions as $transaction)
                                     <tr class="hover:bg-gray-700/50 transition-all duration-300 text-center">
                                         <td class="py-4 px-6 font-medium text-white">{{ $transaction->id }}</td>
-                                        <td class="py-4 px-6 text-gray-200">{{ $transaction->fromUser->userName }}</td>
-                                        <td class="py-4 px-6 text-gray-200">{{ $transaction->toUser->userName }}</td>
+                                        <td class="py-4 px-6 text-gray-200">{{ $transaction->fromUser->username }}</td>
+                                        <td class="py-4 px-6 text-gray-200">{{ $transaction->toUser->username }}</td>
                                         <td class="py-4 px-6 text-gray-200">{{ $transaction->report->title }}</td>
                                         <td class="py-4 px-6 text-gray-200">{{ $transaction->program->title }}</td>
                                         <td class="py-4 px-6 text-blue-400 font-bold">$ {{ $transaction->amount }}</td>

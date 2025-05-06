@@ -8,16 +8,24 @@ use App\Models\Report;
 use App\Models\Program;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller {
     public function index(Request $request)
     {
         try {
             $activeUsers =User::count();
+            
             $totalReports = Report::count();
+
             $totalPrograms = Program::count();
-            $totalPayouts = User::join('profiles', 'users.id', '=', 'profiles.user_id')
-            ->sum('profiles.rewards');
+
+            $totalPayouts = User::select('users.username', DB::raw('SUM(reports.reward) as total_reward'))
+            ->join('programs', 'programs.user_id', '=', 'users.id')
+            ->join('reports', 'reports.program_id', '=', 'programs.id')
+            ->groupBy('users.username')
+            ->get();
+
             $reports = Report::with(['user', 'program'])
                 ->latest()
                 ->paginate(2)

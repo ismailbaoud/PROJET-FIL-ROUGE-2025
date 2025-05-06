@@ -13,15 +13,14 @@ class ProgramController extends Controller
     {
         try {
             $programs = Program::with('users')
-            ->join('reports', 'programs.id', '=', 'reports.program_id')
+            ->leftJoin('reports', 'programs.id', '=', 'reports.program_id')
             ->select('programs.*')
-            ->selectRaw('SUM(reports.reward) as total_rewards')
-            ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
+            ->selectRaw('COALESCE(SUM(reports.reward), 0) as total_rewards')
+            ->when($request->filled('status'), fn($q) => $q->where('programs.status', $request->status))
             ->groupBy('programs.id')
             ->orderByDesc('programs.created_at')
             ->paginate(6)
-            ->withQueryString();
-        
+            ->withQueryString();        
 
             return view('pages.admin.programs', compact('programs'));
         } catch (\Exception $e) {

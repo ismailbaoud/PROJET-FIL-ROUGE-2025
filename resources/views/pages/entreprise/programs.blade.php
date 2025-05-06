@@ -216,11 +216,28 @@
                                                             d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </button>
+                                                <form action="{{ route('entreprise_program_updateStatus', $program->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('patch')
+                                                    @if ($program->status === 'active')
+                                                        <button class="text-red-400 hover:text-red-300">
+                                                            <i class="fas fa-ban text-lg"></i>
+                                                        </button>
+                                                    @elseif ($program->status === 'inactive')
+                                                        <button class="text-blue-400 hover:text-blue-300">
+                                                            <i class="fas fa-check-circle text-lg"></i>
+                                                        </button>
+                                                    @else
+                                                        <button class="text-yellow-400 hover:text-yellow-300">
+                                                            <i class="fas fa-hourglass-half text-lg"></i>
+                                                        </button>
+                                                    @endif
+                                                </form>
                                             </div>
                                         </div>
 
                                         <div id="updateForm-{{ $program->id }}"
-                                            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                                            class="fixed inset-0 bg-black hidden bg-opacity-50 flex items-center justify-center z-50 p-4">
                                             <div
                                                 class="bg-gray-800 rounded-2xl w-full max-w-2xl border border-gray-600 overflow-hidden shadow-lg mx-auto">
                                                 <div
@@ -235,12 +252,13 @@
                                                                 stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                                         </svg>
                                                     </button>
+                                                    
                                                 </div>
                                                 <form id="updateProgramForm-{{ $program->id }}"
                                                     action="{{ route('entreprise_program_edit', $program->id) }}"
-                                                    method="POST" class="p-6 space-y-5">
+                                                    method="POST" class="p-6 space-y-5 ">
                                                     @csrf
-                                                    @method('PUT')
+
                                                     <div class="space-y-4">
                                                         <div>
                                                             <label for="title-{{ $program->id }}"
@@ -397,7 +415,6 @@
                 });
             }
 
-            // Validation for update forms
             document.querySelectorAll('form[id^="updateProgramForm-"]').forEach(form => {
                 form.addEventListener('submit', function(e) {
                     let hasError = false;

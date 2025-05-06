@@ -253,11 +253,11 @@
                                             @foreach ($inScope as $scope)
                                                 <tr class="hover:bg-gray-700 transition-colors duration-150">
                                                     <td class="px-6 py-4">
-                                                        <a href="{{ $scope->target }}"
+                                                        <a href="https://{{ $scope->target }}" target="_blank" rel="noopener noreferrer"
                                                             class="text-blue-400 hover:underline flex items-center gap-1">
-                                                            {{ $scope->target }}
+                                                            https://{{ $scope->target }}
                                                         </a>
-                                                    </td>
+                                                    </td>                                                    
                                                     <td class="px-6 py-4">
                                                         <span
                                                             class="px-2 py-1 text-xs font-medium bg-blue-600 text-white rounded-full">

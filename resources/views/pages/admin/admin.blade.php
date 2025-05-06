@@ -28,7 +28,7 @@
                                 <i class="fas fa-dollar-sign text-blue-400"></i>
                                 Total Payouts
                             </div>
-                            <div class="text-3xl font-semibold text-white mb-2">${{$totalPayouts}}</div>
+                            <div class="text-3xl font-semibold text-white mb-2">${{$totalPayouts->first()->total_reward }}</div>
                         </div>
                         <div class="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-600">
                             <div class="text-sm text-gray-400 mb-2 flex items-center gap-2">
