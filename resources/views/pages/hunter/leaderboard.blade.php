@@ -45,7 +45,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold mr-3">
-                                            <img src="{{ asset('storage/' . $profile->content_visual) }}" alt="" class="h-full w-full rounded-full object-cover">
+                                            <img src="{{ asset('storage/'.$profile->content_vusial) }}" alt="" class="h-full w-full rounded-full object-cover">
                                         </div>
                                         <div class="text-sm font-medium text-white">{{ $profile->user->username }}</div>
                                     </div>
@@ -69,6 +69,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-8">
+                    {{ $profiles->appends(request()->query())->links() }}
                 </div>
             </div>
         </main>

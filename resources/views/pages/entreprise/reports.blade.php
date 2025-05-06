@@ -143,7 +143,7 @@
                             <div class="flex justify-between">
                                 <div>
                                     <p class="text-sm font-medium text-gray-400">Total Bounties</p>
-                                    <p class="mt-1 text-2xl font-bold text-white">$ {{ $profile->rewards }}</p>
+                                    <p class="mt-1 text-2xl font-bold text-white">$ {{ $amounts->first()->total_reward }}</p>
                                 </div>
                                 <div class="h-10 w-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

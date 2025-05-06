@@ -14,20 +14,17 @@ class UserManagementController extends Controller
     {
         try {
             $users = User::with('profile')
-                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
                 ->when($request->filled('role'), fn($q) => $q->where('role', $request->role))
                 ->latest()
                 ->paginate(6)
                 ->withQueryString();
 
             $totalUsers = User::count();
-            $activeUsers = User::where('status', 'active')->count();
-            $suspendedUsers = User::where('status', 'suspand')->count();
             $newUsersThisMonth = User::whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year)
                 ->count();
 
-            return view('pages.admin.user_management', compact('users', 'totalUsers', 'activeUsers', 'suspendedUsers', 'newUsersThisMonth'));
+            return view('pages.admin.user_management', compact('users', 'totalUsers', 'newUsersThisMonth'));
         } catch (\Exception $e) {
             Alert::toast('Failed to load users: ' . $e->getMessage(), 'error');
             return back();

@@ -23,9 +23,9 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'userName' => 'required|string|max:255',
-            'companyName' => 'required|string|max:255',
-            'companyUrl' => 'nullable|url|max:255',
+            'username' => 'required|string|max:255',
+            'companyname' => 'required|string|max:255',
+            'companyurl' => 'nullable|url|max:255',
             'country' => 'nullable|string|max:255',
             'state' => 'nullable|string|max:255',
         ]);

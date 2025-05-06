@@ -18,14 +18,14 @@ class AuthController extends Controller
     // Show hunter registration form
     public function showRegisterHunter()
     {
-        return view('auth.register_hunter');
+        return view('auth.register-hunter');
     }
 
     // Handle hunter registration
     public function HunterRegister(Request $request)
     {
         $data = $request->validate([
-            'userName' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|string|min:8',
@@ -35,7 +35,7 @@ class AuthController extends Controller
     
         if ($data['password'] === $data['password_confirmation']) {
             $user = User::create([
-                'userName' => $data['userName'],
+                'username' => $data['username'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'role' => 'hunter',
@@ -47,7 +47,7 @@ class AuthController extends Controller
                 'state' => $data['state'],
                 'user_id' => $user->id
             ]);
-    
+
             return $this->showLogin();
         }
     
@@ -60,37 +60,37 @@ class AuthController extends Controller
     // Show entreprise registration form
     public function showRegisterEntreprise()
     {
-        return view('auth.register_entreprise');
+        return view('auth.register-entreprise');
     }
 
     // Handle entreprise registration
     public function EntrepriseRegister(Request $request)
     {
         $data = $request->validate([
-            'fullName' => 'required|string|max:255',
-            'businessEmail' => 'required|email',
+            'fullname' => 'required|string|max:255',
+            'businessemail' => 'required|email',
             'password' => 'required|string|min:8',
-            'companyName' => 'required|string|max:255',
-            'companyUrl' => 'nullable|url',
+            'companyname' => 'required|string|max:255',
+            'companyurl' => 'required|url',
             'country' => 'required|string|max:255',
             'state' => 'required|string|max:255',
         ]);
 
 
-        if (User::where('email', $data['businessEmail'])->exists()) {
-            return redirect()->back()->with('error', 'The email address is already in use. Please use a different email.');
+        if (User::where('email', $data['businessemail'])->exists()) {
+            return back()->with('error', 'The email address is already in use. Please use a different email.');
         }
 
         $user = User::create([
-            'userName' => $data['fullName'],
-            'email' => $data['businessEmail'],
+            'username' => $data['fullname'],
+            'email' => $data['businessemail'],
             'password' => Hash::make($data['password']),
             'role' => 'entreprise'
         ]);
 
         Profile::create([
-            'companyName' => $data['companyName'],
-            'companyUrl' => $data['companyUrl'],
+            'companyname' => $data['companyname'],
+            'companyurl' => $data['companyurl'],
             'country' => $data['country'],
             'state' => $data['state'],
             'user_id' => $user->id
@@ -169,7 +169,7 @@ class AuthController extends Controller
         $user = User::firstOrCreate(
             ['email' => $primaryEmail],
             [
-                'userName' => $userInfo['login'],
+                'username' => $userInfo['login'],
                 'password' => Hash::make(uniqid()),
                 'role' => 'hunter' 
             ]

@@ -18,15 +18,18 @@ class LeaderboardController extends Controller
         try {
             $sortField = $request->input('filter', 'pointes');
 
-            $profiles = Profile::with('user')
-                ->whereHas('user', fn($query) => $query->where('role', 'hunter'))
-                ->orderByDesc($sortField)
-                ->paginate(6)
-                ->withQueryString()
-                ->through(function ($profile, $index) {
-                    $profile->rank = $index + 1;
-                    return $profile;
-                });
+            $pagination = Profile::with('user')
+            ->whereHas('user', fn($query) => $query->where('role', 'hunter'))
+            ->orderByDesc($sortField)
+            ->paginate(6)
+            ->withQueryString();
+        
+        $profiles = $pagination->through(function ($profile, $index) use ($pagination) {
+            $profile->rank = $pagination->firstItem() + $index;
+            return $profile;
+        });
+         
+        
 
             return view('pages.hunter.leaderboard', compact('profiles', 'sortField'));
         } catch (\Exception $e) {

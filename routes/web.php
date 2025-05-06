@@ -58,6 +58,8 @@ Route::group(['middleware' => 'checkEntrepriseRole'], function () {
     Route::post('/tr/programs/create', [entrepriseProgram::class, 'create'])->name('createProgram');
     Route::post('/tr/programs/{id}/update', [entrepriseProgram::class, 'update'])->name('entreprise_program_edit');
     Route::delete('/tr/programs/{id}/delete', [entrepriseProgram::class, 'delete'])->name('entreprise_program_delete');
+    Route::patch('/dm/programs/{id}/update/status', [entrepriseProgram::class , 'changeStatus'])->name('entreprise_program_updateStatus');
+
     
     //scope
     Route::get('/programs/{program}/scopes/create', [ScopeController::class, 'create'])->name('scopes.create');
@@ -106,13 +108,13 @@ Route::group(['middleware' => 'checkHunterRole'], function () {
     Route::get('/ht/leaderboard', [LeaderboardController::class , 'index'])->name('leaderBoard');
     
     //settings
-    Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
     Route::patch('/ht/settings/update', [hunterSettingsController::class, 'update'])->name('hunter_settings_update');
     Route::patch('/ht/settings/payment/info', [hunterSettingsController::class, 'storeOrUpdatePaymentInfo'])->name('hunter_settings_payment');
     Route::post('/hunter/upload-avatar', [hunterSettingsController::class, 'uploadAvatar'])->name('hunter_upload_avatar');
     
     //end
 });
+Route::get('/ht/settings/{id}', [hunterSettingsController::class, 'index'])->name('hunter.profile');
 
 Route::get('/ht/program_details/{id}', [hunterPrograms::class, 'show'])->name('programDetails');
 Route::group(['middleware' => 'checkAdmineRole'], function () {
@@ -122,11 +124,11 @@ Route::get('/dm/dashboard', [adminDashboard::class , 'index'])->name('adminDashb
 
 Route::get('/dm/users', [adminUserManagement::class , 'index']);
 Route::patch('/dm/users/{id}/update', [adminUserManagement::class , 'changeStatus'])->name('updateUser');
-Route::get('/dm/users/{id}/delete', [adminUserManagement::class , 'destroy'])->name('deleteUser');
+Route::get('/dm/users/{user}/delete', [adminUserManagement::class , 'destroy'])->name('deleteUser');
 
 Route::get('/dm/programs', [adminPrograms::class , 'index']);
 Route::patch('/dm/programs/{id}/update', [adminPrograms::class , 'changeStatus'])->name('updateProgram');
-Route::get('/dm/programs/{id}/delete', [adminPrograms::class , 'destroy'])->name('deleteProgram');
+Route::get('/dm/programs/{program}/delete', [adminPrograms::class , 'destroy'])->name('deleteProgram');
 
 Route::get('/dm/reports', [adminReports::class, 'index']);
 Route::get('/dm/reports/{report}/delete', [adminReports::class , 'destroy'])->name('deleteReport');

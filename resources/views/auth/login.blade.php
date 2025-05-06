@@ -21,11 +21,6 @@
                     <input id="password" type="password" name="password"
                         class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
                 </div>
-
-                <div class="flex justify-end">
-                    <a href="#" class="text-sm text-blue-500 hover:underline">Forgot Password?</a>
-                </div>
-
                 <button type="submit"
                     class="w-full rounded-md bg-black py-2 px-4 text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2">
                     Log In

@@ -53,7 +53,7 @@
                         </div>
                         <div class="bg-gray-800 rounded-xl shadow-lg border border-gray-600 p-5 hover:shadow-md transition-all duration-300">
                             <div class="text-gray-400 text-sm font-medium mb-2">Global Rank</div>
-                            <div class="text-3xl font-bold text-white">#42</div>
+                            <div class="text-3xl font-bold text-white">#{{ $userRank }}</div>
                             <div class="mt-2 flex items-center text-xs text-blue-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />

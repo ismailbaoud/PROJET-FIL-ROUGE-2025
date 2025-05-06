@@ -4,11 +4,13 @@ namespace App\Http\Controllers\entreprises;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ReportStatusChanged;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -24,9 +26,14 @@ class ReportController extends Controller
             ->paginate(6)
             ->withQueryString();
 
-        $profile = Auth::user()->profile;
+        $amounts =  User::select('users.username', DB::raw('SUM(reports.reward) as total_reward'))
+        ->join('programs', 'programs.user_id', '=', 'users.id')
+        ->join('reports', 'reports.program_id', '=', 'programs.id')
+        ->where('users.id', Auth::id())
+        ->groupBy('users.username')
+        ->get();
 
-        return view('pages.entreprise.reports', compact('reports', 'profile'));
+        return view('pages.entreprise.reports', compact('reports', 'amounts'));
     }
 
     // Show single report

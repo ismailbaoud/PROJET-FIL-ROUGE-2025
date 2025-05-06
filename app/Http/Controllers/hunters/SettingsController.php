@@ -13,10 +13,10 @@ use App\Http\Requests\hunter\SettingsRequest;
 
 class SettingsController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         try {
-            $user = Auth::user()->load(['profile', 'paymentInfo']);
+            $user = User::find($id)->load(['profile', 'paymentInfo']);
             $profile = $user->profile;
             $paymentInfo = $user->paymentInfo;
 
@@ -87,7 +87,7 @@ class SettingsController extends Controller
     public function uploadAvatar(Request $request)
     {
         $request->validate([
-            'content_visual' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content_vusial' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         try {
@@ -98,9 +98,9 @@ class SettingsController extends Controller
                 throw new \Exception('Profile not found');
             }
 
-            $path = $request->file('content_visual')->store('avatars', 'public');
+            $path = $request->file('content_vusial')->store('avatars', 'public');
             $profile->update([
-                'content_visual' => $path,
+                'content_vusial' => $path,
             ]);
 
             Alert::toast('Profile image updated successfully!', 'success');

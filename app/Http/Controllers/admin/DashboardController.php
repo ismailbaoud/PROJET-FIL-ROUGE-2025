@@ -9,38 +9,33 @@ use App\Models\Program;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class DashboardController extends Controller
-{
+class DashboardController extends Controller {
     public function index(Request $request)
     {
         try {
-            $activeUsers = User::where('status', 'active')->count();
+            $activeUsers =User::count();
             $totalReports = Report::count();
             $totalPrograms = Program::count();
             $totalPayouts = User::join('profiles', 'users.id', '=', 'profiles.user_id')
             ->sum('profiles.rewards');
             $reports = Report::with(['user', 'program'])
                 ->latest()
-                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
                 ->paginate(2)
                 ->withQueryString();
 
             $programs = Program::with('users')
                 ->latest()
-                ->when($request->filled('status'), fn($q) => $q->where('status', $request->status))
                 ->paginate(2)
                 ->withQueryString();
 
             $hunters = User::with('profile')
                 ->where('role', 'hunter')
-                ->where('status', 'active')
                 ->latest()
                 ->paginate(2)
                 ->withQueryString();
 
             $entreprises = User::with('profile')
                 ->where('role', 'entreprise')
-                ->where('status', 'active')
                 ->latest()
                 ->paginate(2)
                 ->withQueryString();

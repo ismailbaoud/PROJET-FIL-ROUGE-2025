@@ -18,14 +18,14 @@
                     @if (Auth::id() === $user->id && Auth::user()->role === 'hunter')
                         <form action="{{ route('hunter_upload_avatar') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2">
                             @csrf
-                            <input type="file" id="content_visual" name="content_visual" accept="image/*"
+                            <input type="file" id="content_visual" name="content_vusial" accept="image/*"
                                    class="text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700">
-                            @error('content_visual')
+                            @error('content_vusial')
                                 <p class="text-sm text-red-400 mt-1">{{ $message }}</p>
                             @enderror
                             <button type="submit"
                                     class="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
-                                    @if ($errors->has('content_visual')) disabled @endif>
+                                    @if ($errors->has('content_vusial')) disabled @endif>
                                 Upload Image
                             </button>
                         </form>
@@ -169,6 +169,7 @@
                         </button>
                     </form>
                 @endif
+                
             </div>
         </main>
     </div>

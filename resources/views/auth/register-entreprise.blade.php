@@ -29,18 +29,18 @@
 
                     <div class="space-y-2">
                         <label for="companyName" class="block text-gray-700">Company Name</label>
-                        <input id="companyName" name="companyName" type="text"
+                        <input id="companyName" name="companyname" type="text"
                             class="w-full h-12 px-3 bg-white rounded-md border border-black focus:outline-none focus:ring-1 focus:ring-gray-500" />
-                        @error('companyName')
+                        @error('companyname')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="space-y-2">
                         <label for="accountUrl" class="block text-gray-700">Account URL</label>
-                        <input id="accountUrl" name="companyUrl" type="text"
+                        <input id="accountUrl" name="companyurl" type="text"
                             class="w-full h-12 px-3 bg-white rounded-md border border-black focus:outline-none focus:ring-1 focus:ring-gray-500" />
-                            @error('companyUrl')
+                            @error('companyurl')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                         </div>
@@ -70,18 +70,18 @@
 
                     <div class="space-y-2">
                         <label for="fullName" class="block text-gray-700">Full Name</label>
-                        <input id="fullName" name="fullName" type="text"
+                        <input id="fullName" name="fullname" type="text"
                             class="w-full h-12 px-3 bg-white rounded-md border border-black focus:outline-none focus:ring-1 focus:ring-gray-500" />
-                            @error('fullName')
+                            @error('fullname')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                         </div>
 
                     <div class="space-y-2">
                         <label for="businessEmail" class="block text-gray-700">Business Email</label>
-                        <input id="businessEmail" name="businessEmail" type="email"
+                        <input id="businessEmail" name="businessemail" type="email"
                             class="w-full h-12 bg-white px-3 rounded-md border border-black focus:outline-none focus:ring-1 focus:ring-gray-500" />
-                            @error('businessEmail')
+                            @error('businessemail')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                         </div>

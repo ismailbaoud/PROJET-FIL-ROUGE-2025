@@ -35,6 +35,7 @@ class ProgramController extends Controller
 
         $programs = $query->paginate(6)->appends($request->only(['status', 'sort', 'search']));
 
+
         return view('pages.entreprise.programs', compact('programs'));
     }
 
@@ -48,7 +49,7 @@ class ProgramController extends Controller
                 'min_reward' => $request->min_reward,
                 'max_reward' => $request->max_reward,
                 'user_id' => Auth::id(),
-                'status' => 'inactive', // default
+                'status' => 'inactive',
             ]);
 
             Alert::toast('Program created successfully!', 'success');

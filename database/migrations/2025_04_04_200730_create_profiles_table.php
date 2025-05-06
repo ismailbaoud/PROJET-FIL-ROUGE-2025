@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
         $table->id();
-        $table->string('companyName')->nullable();
-        $table->string('companyUrl')->nullable();
+        $table->string('companyname')->nullable();
+        $table->string('companyurl')->nullable();
         $table->text('country');
         $table->text('content_vusial')->default('avatars/hunter.jpeg');
         $table->string('state');

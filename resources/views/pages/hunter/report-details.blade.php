@@ -79,7 +79,7 @@
                         <h2 class="text-lg font-semibold text-white mb-2">Proof of Concept</h2>
                         @if (Str::endsWith($report->poc, ['.mp4', '.webm', '.ogg']))
                             <video controls class="w-full rounded-lg">
-                                <source src="{{ asset('uploads/' . $report->poc) }}" type="video/mp4">
+                                <source src="{{ asset('storage/' . $report->poc) }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         @else
